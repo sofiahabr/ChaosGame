@@ -9,6 +9,12 @@ public class Vector2D {
     this.x1 = x1;
   }
 
+  public void setX0(double newX0){
+    this.x0 = newX0;
+  }
+  public void setX1(double newX1){
+    this.x1 = newX1;
+  }
   public double getX0(){
     return x0;
   }
