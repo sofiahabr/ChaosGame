@@ -16,6 +16,7 @@ public class Vector2D {
    */
   private double x1;
 
+
   /**
    * Constructs a Vector2D with the specified components.
    *
@@ -43,6 +44,26 @@ public class Vector2D {
   public double getX1(){
     return x1;
   }
+
+  /**
+   * Sets the x0 component of the vector.
+   *
+   * @param newX0 is the new value of the component
+   */
+  public void setX0(double newX0){
+    this.x0 = newX0;
+  }
+
+  /**
+   * Sets the x1 component of the vector.
+   *
+   * @param newX1 is the new value of the component
+   */
+
+  public void setX1(double newX1) {
+    this.x1 = newX1;
+  }
+
   /**
    * Adds another Vector2D to this vector and returns the result as a new Vector2D.
    *
