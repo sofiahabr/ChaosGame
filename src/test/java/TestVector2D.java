@@ -10,8 +10,11 @@ public class TestVector2D {
     Vector2D testVector = new Vector2D(1, 2);
 
     @Test
-    public void testGetXReturnCorrect() {
+    public void testGetX0ReturnCorrect() {
       assertEquals(1, testVector.getX0());
+    }
+    @Test
+    public void testGetX1ReturnCorrect() {
       assertEquals(2, testVector.getX1());
     }
   }
@@ -21,10 +24,13 @@ public class TestVector2D {
     Vector2D testVector = new Vector2D(0, 0);
 
     @Test
-    public void testSetXReturnCorrect() {
+    public void testSetX0ReturnCorrect() {
       testVector.setX0(1);
-      testVector.setX1(2);
       assertEquals(1, testVector.getX0());
+    }
+    @Test
+    public void testSetX1ReturnCorrect() {
+      testVector.setX1(2);
       assertEquals(2, testVector.getX1());
     }
   }
