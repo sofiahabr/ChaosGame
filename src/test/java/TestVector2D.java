@@ -95,6 +95,16 @@ public class TestVector2D {
    */
   @Nested
   class MultiplyTest {
+    Vector2D testVector = new Vector2D(1, 2);
 
+    /**
+     * Test for multiply method
+     */
+    @Test
+    public void testMultiply(){
+      int scale = 2;
+      assertEquals(2.0, testVector.multiply(scale).getX0());
+      assertEquals(4.0, testVector.multiply(scale).getX1());
+    }
   }
 }
