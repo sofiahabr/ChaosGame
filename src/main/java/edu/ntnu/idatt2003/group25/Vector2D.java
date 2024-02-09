@@ -88,4 +88,18 @@ public class Vector2D {
 
     return new Vector2D(newX0, newX1);
   }
+
+  /**
+   * Multiplies the vector to a scale.
+   *
+   * @param scale The number the Vector2D will be multiplied with.
+   * @return A new Vector2D multiplied to scale.
+   */
+
+  public Vector2D multiply(double scale){
+    double newX0 = x0 * scale;
+    double newX1 = x1 * scale;
+
+    return new Vector2D(newX0, newX1);
+  }
 }
