@@ -96,7 +96,7 @@ public class Vector2D {
    * @return A new Vector2D multiplied to scale.
    */
 
-  public Vector2D multiply(double scale){
+  public Vector2D scale(double scale){
     double newX0 = x0 * scale;
     double newX1 = x1 * scale;
 
