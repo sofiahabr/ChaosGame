@@ -103,8 +103,8 @@ public class TestVector2D {
     @Test
     public void testMultiply(){
       int scale = 2;
-      assertEquals(2.0, testVector.multiply(scale).getX0());
-      assertEquals(4.0, testVector.multiply(scale).getX1());
+      assertEquals(2.0, testVector.scale(scale).getX0());
+      assertEquals(4.0, testVector.scale(scale).getX1());
     }
   }
 }
