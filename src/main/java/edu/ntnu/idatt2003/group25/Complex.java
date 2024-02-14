@@ -19,5 +19,19 @@ public class Complex extends Vector2D {
     return new Complex(newRealPart, newImaginaryPart);
   }
 
+  /**
+   * Subtracts another Vector from this Complex number and returns the result as a new Complex number.
+   *
+   * @param other The Vector2D to be subtracted.
+   * @return A new Vector2D representing the difference between this vector and the specified vector.
+   */
+  @Override
+  public Complex subtract(Vector2D other){
+    double newX0 = getX0() - other.getX0();
+    double newX1 = getX1() - other.getX1();
+
+    return new Complex(newX0, newX1);
+  }
+
 
 }
