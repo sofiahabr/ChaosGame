@@ -102,4 +102,21 @@ public class Vector2D {
 
     return new Vector2D(newX0, newX1);
   }
+
+  /**
+   * Rounds the elements in a vector to 3 decimal points.
+   *
+   * @return A new Vector2D rounded to 3 decimals.
+   */
+
+  public Vector2D round() {
+
+    // Math.round will only round to whole numbers, so we multiply it with 1000,
+    // and then divide it with 1000 to get 3 decimals
+
+    double newX0 = Math.round(x0 * 1000);
+    double newX1 = Math.round(x1 * 1000);
+
+    return new Vector2D(newX0/1000, newX1/1000);
+  }
 }
