@@ -79,5 +79,13 @@ public class ChaosCanvas {
   public int getWidth() {
     return width;
   }
+
+  public Vector2D getMaxCoords() {
+    return maxCoords;
+  }
+
+  public Vector2D getMinCoords() {
+    return minCoords;
+  }
 }
 
