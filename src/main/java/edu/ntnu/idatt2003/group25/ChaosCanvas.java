@@ -71,4 +71,13 @@ public class ChaosCanvas {
     }
     this.canvas = newCanvas;
   }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public int getWidth() {
+    return width;
+  }
 }
+
