@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2003.group25;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ChaosGame {
@@ -19,12 +21,21 @@ public class ChaosGame {
   }
 
   public void runSteps(int steps) {
+    List<Vector2D> list = new ArrayList<>();
     for(int i = 0; i < steps; i++ ) {
-      Vector2D randomPoint = new Vector2D(random.nextInt(), random.nextInt());
+      int dice = random.nextInt(6);
+      Vector2D randomPoint = new Vector2D(dice, dice);
+      // TODO: samme ? (1,1)
       Vector2D transformedPoint = description.getTransforms().getFirst().transform(randomPoint);
       // TODO: velge transformasjon
 
-      currentPoint.add(transformedPoint);
+      if (transformedPoint.getX1() < canvas.getMaxCoords().getX1() &&
+          transformedPoint.getX0() < canvas.getMaxCoords().getX0() ) {
+
+        System.out.println(currentPoint.add(transformedPoint));
+        canvas.putPixel(currentPoint.add(transformedPoint));
+        this.currentPoint = currentPoint.add(transformedPoint);
+      }
     }
   }
 
