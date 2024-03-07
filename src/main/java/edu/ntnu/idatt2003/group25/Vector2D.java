@@ -119,4 +119,9 @@ public class Vector2D {
 
     return new Vector2D(newX0/1000, newX1/1000);
   }
+
+  @Override
+  public String toString() {
+    return "(" + x0 + ", " + x1 + ")";
+  }
 }
