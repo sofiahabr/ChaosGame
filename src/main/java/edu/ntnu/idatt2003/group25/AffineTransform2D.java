@@ -25,6 +25,14 @@ public class AffineTransform2D implements Transform2D {
     this.vector = vector;
   }
 
+  public Matrix2x2 getMatrix() {
+    return matrix;
+  }
+
+  public Vector2D getVector() {
+    return vector;
+  }
+
   /**
    * Affine transforms a vector.
    *
