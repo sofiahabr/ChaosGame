@@ -4,9 +4,9 @@ import java.util.List;
 
 public class ChaosGameDescription {
 
-  Vector2D minCoords;
-  Vector2D maxCoords;
-  List<Transform2D> transforms;
+  private  Vector2D minCoords;
+  private Vector2D maxCoords;
+  private List<Transform2D> transforms;
 
   public ChaosGameDescription(List<Transform2D> transforms, Vector2D minCoords, Vector2D maxCoords) {
     this.transforms = transforms;
