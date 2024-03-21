@@ -21,22 +21,36 @@ public class ChaosGame {
   }
 
   public void runSteps(int steps) {
-    List<Vector2D> list = new ArrayList<>();
+    List<Transform2D> list = description.getTransforms();
     for(int i = 0; i < steps; i++ ) {
-      int dice = random.nextInt(6);
-      Vector2D randomPoint = new Vector2D(dice, dice);
-      // TODO: samme ? (1,1)
-      Vector2D transformedPoint = description.getTransforms().getFirst().transform(randomPoint);
-      // TODO: velge transformasjon
+      Transform2D transform2D = list.get(random.nextInt(list.size()));
+      Vector2D newPoint = transform2D.transform(currentPoint);
 
-      if (transformedPoint.getX1() < canvas.getMaxCoords().getX1() &&
-          transformedPoint.getX0() < canvas.getMaxCoords().getX0() ) {
+      canvas.putPixel(newPoint);
+      this.currentPoint = newPoint;
 
-        System.out.println(currentPoint.add(transformedPoint));
-        canvas.putPixel(currentPoint.add(transformedPoint));
-        this.currentPoint = currentPoint.add(transformedPoint);
+      System.out.println(currentPoint);
+
+//      double randomX0 = canvas.getMinCoords().getX0() + random.nextDouble() * (canvas.getMaxCoords().getX0() - canvas.getMinCoords().getX0());
+//      double randomX1 = canvas.getMinCoords().getX1() + random.nextDouble() * (canvas.getMaxCoords().getX1() - canvas.getMinCoords().getX1());
+//      Vector2D randomPoint = new Vector2D(randomX0, randomX1);
+//
+//
+//      Vector2D transformedPoint = description.getTransforms().get(0).transform(randomPoint);
+//
+//      System.out.println(randomPoint);
+//      System.out.println(transformedPoint);
+//      Vector2D newPoint = currentPoint.add(transformedPoint);
+//      System.out.println(newPoint);
+//      if (newPoint.getX1() < canvas.getMaxCoords().getX1() &&
+//          newPoint.getX0() < canvas.getMaxCoords().getX0() &&
+//          newPoint.getX0() > canvas.getMinCoords().getX0() &&
+//          newPoint.getX1() > canvas.getMinCoords().getX1()) {
+//
+//        System.out.println(newPoint);
+//        canvas.putPixel(newPoint);
+//        list.add(newPoint);
+//        this.currentPoint = newPoint;
       }
     }
   }
-
-}
