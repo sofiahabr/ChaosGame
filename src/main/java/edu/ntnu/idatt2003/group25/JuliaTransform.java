@@ -13,4 +13,8 @@ public class JuliaTransform implements Transform2D{
     Complex newComplex = point.subtract(otherPoint);
     return newComplex.sqrt().scale(sign);
   }
+  @Override
+  public String toString() {
+    return point.toString();
+  }
 }
