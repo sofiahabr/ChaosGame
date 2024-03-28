@@ -51,4 +51,10 @@ public class Matrix2x2 {
   public void setA11(double a11) {
     this.a11 = a11;
   }
+
+  @Override
+  public String toString() {
+    return a00 + ", " + a01 + ", " + a10 + ", " + a11;
+  }
 }
+
