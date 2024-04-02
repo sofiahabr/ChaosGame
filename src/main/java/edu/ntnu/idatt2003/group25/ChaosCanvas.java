@@ -20,12 +20,13 @@ public class ChaosCanvas {
 
   public int getPixel(Vector2D point) {
     Vector2D coordsVector = transformCoordsToIndices.transform(point);
-    int coordX0 = (int) coordsVector.getX0();
-    int coordX1 = (int) coordsVector.getX1();
+    int coordWidth = (int) coordsVector.getX0();
+    int coordHeight = (int) coordsVector.getX1();
 
-    if (coordX0 < maxCoords.getX0() && coordX0 > minCoords.getX0() && coordX1 > minCoords.getX1() && coordX1 <
-        maxCoords.getX1()) {
-      return canvas[coordX0][coordX1];
+
+    if (coordWidth < width && coordWidth > 0 && coordHeight > 0
+        && coordHeight < height) {
+      return canvas[coordWidth][coordHeight];
     }
     else {
       return -1; // default value for out of bounds
@@ -36,21 +37,19 @@ public class ChaosCanvas {
     int i = (int) thisPixel.getX0();
     int j = (int) thisPixel.getX1();
 
-    if (i < maxCoords.getX0() && i > minCoords.getX0() && j > minCoords.getX1() && j <
-        maxCoords.getX1()) {
-      if (canvas[i][j] == 0){
-        canvas[i][j] = 1;
-      } else {
-        canvas[i][j] = 0;
-      }
-    }
+//    System.out.println("");
+//    System.out.println("Punkt: " + point);
+//    System.out.println("Pixel : " + i + ", " + j);
 
+    if(i > 0 && i < height && j > 0 && j < width) {
+      canvas[i][j] = 1;
+    }
   }
   public int[][] getCanvasArray() {
     return canvas;
   }
 
-  public void fillAffineTransform() {
+  private void fillAffineTransform() {
     Matrix2x2 A = new Matrix2x2(
         0, (height-1)/ (minCoords.getX1() - maxCoords.getX1()),
         (width - 1)/(maxCoords.getX0() -minCoords.getX0()), 0);
