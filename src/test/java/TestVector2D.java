@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idatt2003.group25.Vector2D;
 import org.junit.jupiter.api.Nested;
@@ -66,7 +68,7 @@ public class TestVector2D {
      * Test for add method.
      */
     @Test
-    public void testAdd(){
+    void testAdd(){
       assertEquals(5.0, testVector.add(testVector2).getX0());
       assertEquals(3.0, testVector.add(testVector2).getX1());
     }
@@ -101,10 +103,23 @@ public class TestVector2D {
      * Test for multiply method
      */
     @Test
-    public void testMultiply(){
+    void testMultiply(){
       int scale = 2;
       assertEquals(2.0, testVector.scale(scale).getX0());
       assertEquals(4.0, testVector.scale(scale).getX1());
+    }
+    @Test
+    void testEqualsReturnsTrue() {
+      Vector2D vectorOriginal = new Vector2D(1,2);
+      Vector2D duplicateVector = new Vector2D(1,2);
+      assertTrue(vectorOriginal.isEqual(duplicateVector));
+    }
+
+    @Test
+    void testEqualsReturnFalse() {
+      Vector2D vectorOriginal = new Vector2D(1,2);
+      Vector2D notDuplicateVector = new Vector2D(0,3);
+      assertFalse(vectorOriginal.isEqual(notDuplicateVector));
     }
   }
 }
