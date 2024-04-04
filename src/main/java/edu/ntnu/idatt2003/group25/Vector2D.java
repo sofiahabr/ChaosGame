@@ -124,4 +124,16 @@ public class Vector2D {
   public String toString() {
     return "(" + x0 + ", " + x1 + ")";
   }
+
+  public boolean isEqual(Vector2D vector2) {
+
+    double vector1X0 = this.getX0();
+    double vector1X1 = this.getX1();
+
+    double vector2X0 = vector2.getX0();
+    double vector2X1 = vector2.getX1();
+
+    return vector1X0 == vector2X0 && vector1X1 == vector2X1;
+  }
 }
+
