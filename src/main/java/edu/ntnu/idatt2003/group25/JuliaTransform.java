@@ -10,7 +10,9 @@ public class JuliaTransform implements Transform2D{
   }
   @Override
   public Vector2D transform(Vector2D otherPoint) {
-    Complex newComplex = point.subtract(otherPoint);
+    Complex newPoint = new Complex(otherPoint.getX0(), otherPoint.getX1());
+
+    Complex newComplex = newPoint.subtract(point);
     return newComplex.sqrt().scale(sign);
   }
   @Override
