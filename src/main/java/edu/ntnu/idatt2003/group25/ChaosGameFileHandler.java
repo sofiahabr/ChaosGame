@@ -52,8 +52,10 @@ public class ChaosGameFileHandler extends ChaosGameDescription{
           double x1 = Double.parseDouble(c[1]);
 
           Complex complex = new Complex(x0, x1);
-          JuliaTransform julia = new JuliaTransform(complex, 1);
-          transforms.add(julia);
+          JuliaTransform juliaPos = new JuliaTransform(complex, 1);
+          JuliaTransform juliaNeg = new JuliaTransform(complex, -1);
+          transforms.add(juliaPos);
+          transforms.add(juliaNeg);
           break;
 
         case ("Affine2D "):
