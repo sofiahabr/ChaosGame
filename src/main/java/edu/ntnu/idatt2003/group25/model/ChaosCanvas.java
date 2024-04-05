@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
 public class ChaosCanvas {
   private int[][] canvas;

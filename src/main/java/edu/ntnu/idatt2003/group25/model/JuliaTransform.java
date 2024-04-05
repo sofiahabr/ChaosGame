@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
-public class JuliaTransform implements Transform2D{
+public class JuliaTransform implements Transform2D {
   private final Complex point;
   private final int sign;
 

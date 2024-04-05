@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.ntnu.idatt2003.group25.Vector2D;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

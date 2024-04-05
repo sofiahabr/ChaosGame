@@ -1,10 +1,10 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
 import java.util.List;
 
 public class ChaosGameDescription {
 
-  private  Vector2D minCoords;
+  private Vector2D minCoords;
   private Vector2D maxCoords;
   private List<Transform2D> transforms;
 

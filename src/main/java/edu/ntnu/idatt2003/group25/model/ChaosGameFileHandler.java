@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ChaosGameFileHandler extends ChaosGameDescription{
+public class ChaosGameFileHandler extends ChaosGameDescription {
 
   public ChaosGameFileHandler(List<Transform2D> transforms, Vector2D minCoords,
       Vector2D maxCoords) {
@@ -137,6 +137,7 @@ public class ChaosGameFileHandler extends ChaosGameDescription{
       if (transformName.contains("JuliaTransform")) {
         instructions.add("Julia  # Type of transform");
         instructions.add(description.getMinCoords().toString() + " # Lower left");
+        System.out.println(description.getMinCoords().toString());
         instructions.add(description.getMaxCoords().toString() + " # Upper right");
 
         instructions.add(transform2D.toString() + " # Real and imaginary parts of the constant c");

@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
 /**
  * The Vector2D class represents a two-dimensional vector with components x0 and x1.

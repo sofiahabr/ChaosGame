@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

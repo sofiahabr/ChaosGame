@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import edu.ntnu.idatt2003.group25.Complex;
+import edu.ntnu.idatt2003.group25.model.Complex;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

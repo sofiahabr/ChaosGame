@@ -1,10 +1,10 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import edu.ntnu.idatt2003.group25.ChaosGameDescription;
-import edu.ntnu.idatt2003.group25.Complex;
-import edu.ntnu.idatt2003.group25.JuliaTransform;
-import edu.ntnu.idatt2003.group25.Transform2D;
-import edu.ntnu.idatt2003.group25.Vector2D;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
+import edu.ntnu.idatt2003.group25.model.Complex;
+import edu.ntnu.idatt2003.group25.model.JuliaTransform;
+import edu.ntnu.idatt2003.group25.model.Transform2D;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Nested;

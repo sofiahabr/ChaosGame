@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,5 +23,6 @@ public class Main {
     ChaosGame game = new ChaosGame(description, canvas.getWidth(), canvas.getHeight());
 
     game.runSteps(4);
+
   }
 }
