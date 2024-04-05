@@ -1,7 +1,7 @@
-package edu.ntnu.idatt2003.group25;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.ntnu.idatt2003.group25.ChaosCanvas;
+import edu.ntnu.idatt2003.group25.Vector2D;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

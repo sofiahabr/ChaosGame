@@ -1,7 +1,9 @@
-package edu.ntnu.idatt2003.group25;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import edu.ntnu.idatt2003.group25.ChaosGame;
+import edu.ntnu.idatt2003.group25.ChaosGameDescription;
+import edu.ntnu.idatt2003.group25.ChaosGameFileHandler;
+import edu.ntnu.idatt2003.group25.Vector2D;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
