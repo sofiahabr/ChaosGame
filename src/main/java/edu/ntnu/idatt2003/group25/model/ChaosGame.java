@@ -1,13 +1,15 @@
 package edu.ntnu.idatt2003.group25.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ChaosGame {
+public class ChaosGame implements ChaosGameSubject{
   private ChaosCanvas canvas;
   private ChaosGameDescription description;
   private Vector2D currentPoint;  // punktet den ved en hver tid befinner seg
   public Random random = new Random();
+  private List<ChaosGameObserver> observerList = new ArrayList<>();
 
   public ChaosGame(ChaosGameDescription description, int width, int height) {
     this.description = description;
@@ -28,28 +30,24 @@ public class ChaosGame {
       canvas.putPixel(newPoint);
       this.currentPoint = newPoint;
 
-      System.out.println(currentPoint);
-
-//      double randomX0 = canvas.getMinCoords().getX0() + random.nextDouble() * (canvas.getMaxCoords().getX0() - canvas.getMinCoords().getX0());
-//      double randomX1 = canvas.getMinCoords().getX1() + random.nextDouble() * (canvas.getMaxCoords().getX1() - canvas.getMinCoords().getX1());
-//      Vector2D randomPoint = new Vector2D(randomX0, randomX1);
-//
-//
-//      Vector2D transformedPoint = description.getTransforms().get(0).transform(randomPoint);
-//
-//      System.out.println(randomPoint);
-//      System.out.println(transformedPoint);
-//      Vector2D newPoint = currentPoint.add(transformedPoint);
-//      System.out.println(newPoint);
-//      if (newPoint.getX1() < canvas.getMaxCoords().getX1() &&
-//          newPoint.getX0() < canvas.getMaxCoords().getX0() &&
-//          newPoint.getX0() > canvas.getMinCoords().getX0() &&
-//          newPoint.getX1() > canvas.getMinCoords().getX1()) {
-//
-//        System.out.println(newPoint);
-//        canvas.putPixel(newPoint);
-//        list.add(newPoint);
-//        this.currentPoint = newPoint;
-      }
     }
   }
+
+  @Override
+  public void addObserver(ChaosGameObserver observer) {
+    observerList.add(observer);
+  }
+
+  @Override
+  public void removeObserver(ChaosGameObserver observer) {
+    observerList.remove(observer);
+  }
+
+  @Override
+  public void updateObserver() {
+    for (ChaosGameObserver observer : observerList) {
+      observer.gameChanged();
+    }
+  }
+}
+
