@@ -28,7 +28,7 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
       Scanner scanner = new Scanner(new File(path));
 
       String firstLine = scanner.nextLine();
-      String transformName = firstLine.split("#")[0];
+      String transformName = firstLine.split("(#)|( )")[0];
 
       String lineSplitIndicator = "(,)|(#)";
 
@@ -46,7 +46,7 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
 
       List<Transform2D> transforms = new ArrayList<>();
       switch (transformName) {
-        case ("Julia "):
+        case ("Julia"):
           String[] c = scanner.nextLine().split(lineSplitIndicator);
           double x0 = Double.parseDouble(c[0]);
           double x1 = Double.parseDouble(c[1]);
@@ -58,7 +58,7 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
           transforms.add(juliaNeg);
           break;
 
-        case ("Affine2D "):
+        case ("Affine2D"):
           while (scanner.hasNext()) {
             String[] line = scanner.nextLine().split(lineSplitIndicator);
             double a00 = Double.parseDouble(line[0]);
