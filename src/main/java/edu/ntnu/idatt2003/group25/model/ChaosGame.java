@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2003.group25.model;
 
+import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,6 +30,8 @@ public class ChaosGame implements ChaosGameSubject{
 
       canvas.putPixel(newPoint);
       this.currentPoint = newPoint;
+
+      updateObserver();
 
     }
   }

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
-import edu.ntnu.idatt2003.group25.model.Transform2D;
+import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

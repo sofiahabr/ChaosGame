@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.ntnu.idatt2003.group25.model.Complex;
-import edu.ntnu.idatt2003.group25.model.JuliaTransform;
+import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2003.group25.model;
 
+import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import java.util.List;
 
 public class ChaosGameDescription {
