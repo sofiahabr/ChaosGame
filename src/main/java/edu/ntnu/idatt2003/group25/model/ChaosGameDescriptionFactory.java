@@ -10,7 +10,7 @@ import javax.sound.midi.Soundbank;
  */
 public class ChaosGameDescriptionFactory {
 
-  static ChaosGameDescription createSierpinski() {
+  public static ChaosGameDescription createSierpinski() {
     List<Transform2D> transformations = new ArrayList<>();
     transformations.add(new AffineTransform2D(new Matrix2x2(0.5, 0, 0, 0.5),
         new Vector2D(0, 0)));
@@ -21,7 +21,7 @@ public class ChaosGameDescriptionFactory {
     return new ChaosGameDescription(transformations, new Vector2D(0, 0), new Vector2D(1, 1));
   }
 
-  static ChaosGameDescription createBarnsleyFern() {
+  public static ChaosGameDescription createBarnsleyFern() {
     List<Transform2D> transformations = new ArrayList<>();
     transformations.add(new AffineTransform2D(new Matrix2x2(0, 0, 0, 0.16),
         new Vector2D(0, 0)));
@@ -47,7 +47,7 @@ public class ChaosGameDescriptionFactory {
   }
 
   //TODO: Consider if Julia should have 1 or 2 transformations
-  static ChaosGameDescription createJuliaTransformation(Complex c) {
+  public static ChaosGameDescription createJuliaTransformation(Complex c) {
     List<Transform2D> transformation = new ArrayList<>();
     transformation.add(new JuliaTransform(c, 1));
     transformation.add(new JuliaTransform(c,-1));
