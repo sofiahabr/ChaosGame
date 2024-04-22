@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2003.group25.model;
 
-interface ChaosGameObserver {
+public interface ChaosGameObserver {
   void gameChanged();
 }
 interface ChaosGameSubject {
