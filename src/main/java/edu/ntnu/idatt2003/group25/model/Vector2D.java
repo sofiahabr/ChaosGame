@@ -122,7 +122,7 @@ public class Vector2D {
 
   @Override
   public String toString() {
-    return "(" + x0 + ", " + x1 + ")";
+    return x0 + ", " + x1;
   }
 
   public boolean isEqual(Vector2D vector2) {
