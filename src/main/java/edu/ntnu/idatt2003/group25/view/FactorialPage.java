@@ -68,12 +68,15 @@ public class FactorialPage {
     createSideBar();
 
     HBox topBox = new HBox(0);
-    topBox.getChildren().addAll(topBar,restartButton, playButton);
     borderPane.setTop(topBox);
   }
 
   public void playGame(){
-    chaosGame.runSteps(100000);
+    chaosGame.runSteps(steps);
+    draw();
+  }
+  public void clear() {
+    chaosGame.getCanvas().clear();
     draw();
   }
   public void setDescription(ChaosGameDescription newDescription) {
