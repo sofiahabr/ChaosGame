@@ -3,7 +3,8 @@ import static edu.ntnu.idatt2003.group25.model.Validation.verifyInt;
 import static edu.ntnu.idatt2003.group25.model.Validation.verifyPositiveInt;
 import static edu.ntnu.idatt2003.group25.model.Validation.verifyString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -56,7 +57,7 @@ public class TestValidation {
     void testVerifyDoubleReturnCorrect() {
       Object result = verifyDouble(intInput,dummy);
       assertEquals(100.00,result);
-      assertTrue(result instanceof Double);
+      assertInstanceOf(Double.class, result);
     }
     @Test
     void testVerifyDoubleReturnDummy() {
@@ -73,8 +74,8 @@ public class TestValidation {
     }
     @Test
     void testVerifyStringDoesntReturnEmpty() {
-      assertEquals(null,verifyString(""));
-      assertEquals(null,verifyString(" "));
+      assertNull(verifyString(""));
+      assertNull(verifyString(" "));
     }
   }
 }
