@@ -6,7 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class FactorialPageController {
+public class FactorialPageController extends Controller{
   FactorialPage factorialPage = new FactorialPage();
   public FactorialPageController() {
 
@@ -14,8 +14,6 @@ public class FactorialPageController {
   public static void clear() {
   }
   public void playGame(int steps){
-    factorialPage.getChaosGame().runSteps(steps);
-    draw(factorialPage.getChaosGame());
   }
   public void draw(ChaosGame chaosGame){
     int[][] canvas = chaosGame.getCanvas().getCanvasArray();
@@ -41,5 +39,10 @@ public class FactorialPageController {
       }
     }
     factorialPage.borderPane.setCenter(pixelCanvas);
+  }
+
+  @Override
+  public void gameChanged(String string) {
+
   }
 }
