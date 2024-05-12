@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2003.group25.model;
 
+import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
+
 /**
  * The ChaosCanvas create canvas/frame for the ChaosGame.
  */
