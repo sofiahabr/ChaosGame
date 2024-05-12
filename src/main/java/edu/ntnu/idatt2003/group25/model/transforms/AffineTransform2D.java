@@ -1,4 +1,7 @@
-package edu.ntnu.idatt2003.group25.model;
+package edu.ntnu.idatt2003.group25.model.transforms;
+
+import edu.ntnu.idatt2003.group25.model.Matrix2x2;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
 
 /**
  * The type Affine transform 2 d.

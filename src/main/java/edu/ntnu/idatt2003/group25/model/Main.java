@@ -1,5 +1,8 @@
 package edu.ntnu.idatt2003.group25.model;
 
+import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
+import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import java.util.ArrayList;
 import java.util.List;
 
