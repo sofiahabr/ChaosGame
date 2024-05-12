@@ -1,6 +1,12 @@
+checkstyle-idea.xml
 # Default ignored files
 /shelf/
 /workspace.xml
+/compiler.xml
+/encodings.xml
+/jarRepositories.xml
+/misc.xml
+/vcs.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
@@ -8,3 +14,4 @@
 /dataSources.local.xml
 # GitHub Copilot persisted chat sessions
 /copilot/chatSessions
+./shelf# GitHub Copilot persisted chat sessions
