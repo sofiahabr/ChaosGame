@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class MainView extends Application implements ChaosGameObserver {
+public class MainView extends Application  {
   static int height = 900;
   static int width = 1200;
   BorderPane mainPage = new BorderPane();
@@ -21,7 +21,7 @@ public class MainView extends Application implements ChaosGameObserver {
     topBar.setPadding(new Insets(40));
     topBar.setStyle("-fx-background-color: #708090");
 
-    mainPage.setCenter(initializePage.getInitPane());
+    mainPage.setCenter(initializePage.getPane());
     mainPage.setTop(topBar);
     Scene scene = new Scene(mainPage, width, height);
 
@@ -34,11 +34,6 @@ public class MainView extends Application implements ChaosGameObserver {
   }
   public static void main(String[] args) {
     launch(args);
-  }
-
-  @Override
-  public void gameChanged() {
-
   }
 }
 
