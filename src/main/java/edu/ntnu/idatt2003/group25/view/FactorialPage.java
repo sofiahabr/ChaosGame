@@ -25,108 +25,37 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-public class FactorialPage {
-  public BorderPane borderPane =  new BorderPane();
-//  ChaosGameDescription description = ChaosGameDescriptionFactory.createJuliaTransformation(new Complex(-0.74543, 0.11301));
-  ChaosGameDescription description = new ChaosGameDescription(new ArrayList<>(), new Vector2D(0,0), new Vector2D(0,0));
+public class FactorialPage extends View {
+  public BorderPane factorialPane = new BorderPane();
 
-  ChaosGame chaosGame = new ChaosGame(description, Math.round(MainView.width*0.6f), Math.round(MainView.height*0.6f));
-  int steps = 0;
-  public FactorialPage()  {
-    createLayout();
+  public FactorialPage(){
+    addObserver(new FactorialPageController());
+    setUp();
   }
-  public BorderPane factorialPane() {
-    return borderPane;
+  @Override
+  public  BorderPane getPane() {
+    return factorialPane;
   }
-  public void draw(){
-    int[][] canvas = chaosGame.getCanvas().getCanvasArray();
-    Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
-    GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
-    for (int i = 0; i < canvas.length; i++) {
-      for (int j = 0; j < canvas[i].length; j++) {
-        double number = canvas[i][j] / 10f;
-        if ((number) > 0) {
-          if ((number) < 1){
-            gc.setFill(Color.color(1,0,number));
-          }
-          else if ((number) < 2){
-            gc.setFill(Color.color(2 - number, 0,1));
-          }
-          else {
-            gc.setFill(Color.color(0,0,1));
-          }
-          gc.fillRect(j, i, 1, 1); // Draw a single pixel
-        }
-      }
-    }
-    borderPane.setCenter(pixelCanvas);
-  }
-
-  public void createLayout() {
-    borderPane.setStyle("-fx-background-color: white; ");
-
-    createSideBar();
-
-    HBox topBox = new HBox(0);
-    borderPane.setTop(topBox);
-  }
-
-  public void playGame(){
-    chaosGame.runSteps(steps);
-    draw();
-  }
-  public void clear() {
-    chaosGame.getCanvas().clear();
-    draw();
-  }
-  public void setDescription(ChaosGameDescription newDescription) {
-    this.description = newDescription;
-    this.chaosGame = new ChaosGame(newDescription, chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
-  }
-  public void setSteps(int newSteps) {
-    this.steps = newSteps;
-  }
-
-  private void createSideBar() {
+  @Override
+  public void setUp() {
     VBox sidebarMenu = new VBox(40);
+    sidebarMenu.setPadding(new Insets(60));
+
+    Text stepsLabel = new Text("Choose steps");
+    stepsLabel.setStyle("-fx-font-size: 14");
+
+    TextField steps = new TextField();
+    steps.setPromptText("Ex. 500...");
+    steps.setMinWidth(180);
+    steps.setMinHeight(40);
+    steps.setStyle("-fx-font-size: 12");
+
+    Button startButton = new Button("Start");
+    startButton.setOnAction(e-> {
+      updateObserver(steps.getText());
+    });
+
     sidebarMenu.setStyle("-fx-background-color: #D9D9D9; ");
-    sidebarMenu.setPadding(new Insets(20));
-
-    // Create choose steps area
-    Text chooseSteps = new Text("Choose steps");
-    chooseSteps.setStyle("-fx-font-size: 14; ");
-
-    TextField inputSteps = new TextField();
-    inputSteps.setPromptText(" Ex. 500...");
-    inputSteps.setMaxWidth(180);
-    inputSteps.setMinHeight(30);
-    inputSteps.setStyle("-fx-background-radius: 10");
-
-    VBox stepsArea = new VBox(10);
-    stepsArea.getChildren().addAll(chooseSteps, inputSteps);
-    stepsArea.setAlignment(Pos.CENTER);
-
-
-    // Create choose transforms area
-    Text chooseTransform = new Text("Choose transform");
-    chooseTransform.setStyle("-fx-font-size: 14");
-
-    ComboBox<String> transformDropDown = new ComboBox<>();
-    transformDropDown.setMinSize(180, 30);
-    transformDropDown.setStyle("-fx-background-color: white; -fx-background-radius: 10");
-
-    transformDropDown.getItems().addAll(
-        "Create Affine Transform", "Create Julia Transform", "Julia Transform",
-        "Sierpinski Triangle", "Barnsley Fern", "Read from file");
-
-    VBox transformsArea = new VBox(10);
-    transformsArea.getChildren().addAll(chooseTransform, transformDropDown);
-    transformsArea.setAlignment(Pos.CENTER);
-
-
-    // Create min/ max area
-    Text minTitle = new Text(" Min: ");
-    Text maxTitle = new Text(" Max: ");
 
     minTitle.setStyle("-fx-font-size: 14;");
     maxTitle.setStyle("-fx-font-size: 14;");
@@ -312,10 +241,8 @@ public class FactorialPage {
     inputBoxArea.getChildren().addAll(realBox, imaginaryBox);
 
     return new VBox(15, complexLabel, inputBoxArea);
-  }
-
-  private void setStepsAction(TextField textField) {
-    int steps = Integer.parseInt(textField.getText());
-    setSteps(steps);
+    sidebarMenu.getChildren().addAll(stepsLabel, steps, startButton);
+    sidebarMenu.setAlignment(Pos.TOP_CENTER);
+    factorialPane.setLeft(sidebarMenu);
   }
 }
