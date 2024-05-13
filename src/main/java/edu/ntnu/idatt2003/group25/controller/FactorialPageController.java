@@ -2,20 +2,22 @@ package edu.ntnu.idatt2003.group25.controller;
 
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
+import edu.ntnu.idatt2003.group25.view.MainView;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class FactorialPageController extends Controller{
-  FactorialPage factorialPage = new FactorialPage();
-  public FactorialPageController() {
+public class FactorialPageController extends Controller {
+  ChaosGame chaosGame =
+      new ChaosGame(MainView.description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
 
+  public FactorialPageController() {
   }
-  public static void clear() {
-  }
-  public void playGame(int steps){
-  }
-  public void draw(ChaosGame chaosGame){
+  @Override
+  public void gameChanged(String steps) {
+    int stepNr = Integer.parseInt(steps);
+    chaosGame.runSteps(stepNr);
+
     int[][] canvas = chaosGame.getCanvas().getCanvasArray();
 
     Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
@@ -38,11 +40,9 @@ public class FactorialPageController extends Controller{
         }
       }
     }
-    factorialPage.borderPane.setCenter(pixelCanvas);
-  }
+    FactorialPage factorialPage = new FactorialPage();
+    factorialPage.getPane().setCenter(gc.getCanvas());
 
-  @Override
-  public void gameChanged(String string) {
-
+    MainView.mainPage.setCenter(factorialPage.getPane());
   }
 }
