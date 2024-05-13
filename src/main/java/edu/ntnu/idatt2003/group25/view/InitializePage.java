@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2003.group25.view;
 
+import edu.ntnu.idatt2003.group25.controller.Controller;
+import edu.ntnu.idatt2003.group25.controller.InitializePageController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ public class InitializePage extends View {
   private BorderPane initPane = new BorderPane();
 
   public InitializePage(){
+    addObserver(new InitializePageController());
     setUp();
   }
 
@@ -33,17 +36,18 @@ public class InitializePage extends View {
 
     ComboBox<String> optionBox = new ComboBox<>();
     optionBox.getItems().addAll(
-        "Create new Transform", "Julia Transform",
+        "Create new Affine Transform","Create new Julia Transform", "Julia Transform",
         "Sierpinski Triangle", "Barnsley Fern", "Read from file");
 
     optionBox.setMinSize(180, 30);
     optionBox.setStyle("-fx-background-color: white");
-    optionBox.setOnAction(e-> {updateObserver(optionBox.getValue());});
 
     Button startButton  = new Button("Start Game");
     startButton.setStyle("-fx-font-size: 16; -fx-background-color: white; -fx-padding: 5 20; -fx-border-radius: 10");
 
-    VBox infoArea = new VBox(30, heading, subheading, optionBox, startButton);
+    startButton.setOnAction(e-> updateObserver(optionBox.getValue()));
+
+    VBox infoArea = new VBox(30, heading, subheading, optionBox, new VBox(), startButton);
     infoArea.setAlignment(Pos.TOP_CENTER);
     infoArea.setPadding(new Insets(40));
 
@@ -55,7 +59,7 @@ public class InitializePage extends View {
   }
 
   @Override
-  public Pane getPane() {
+  public BorderPane getPane() {
     return initPane;
   }
 
