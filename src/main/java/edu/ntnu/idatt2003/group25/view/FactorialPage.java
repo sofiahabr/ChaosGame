@@ -1,30 +1,42 @@
 package edu.ntnu.idatt2003.group25.view;
 
+import edu.ntnu.idatt2003.group25.model.Complex;
+import edu.ntnu.idatt2003.group25.model.Matrix2x2;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
+import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
+import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class FactorialPage {
+public class FactorialPage extends View {
+
   public BorderPane borderPane = new BorderPane();
   public VBox sidebarMenu;
 
-  public FactorialPage() { createLayout(); }
-  public BorderPane factorialPage() { return borderPane; }
+  public FactorialPage() { setUp(); }
 
-  public void createLayout() {
+  @Override
+  public void setUp() {
     borderPane.setStyle("-fx-background-color: white");
+
+
+    if(MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
+      juliaSidebar();
+    } else if (MainView.description.getTransforms().getFirst().getClass().getName().contains("AffineTransform2D")) {
+      affineSidebar();
+    }
 
     HBox topBox = new HBox(0);
     borderPane.setTop(topBox);
-    affineSidebar();
+
     borderPane.setLeft(sidebarMenu);
-
-
   }
   private void createSideBar() {
     sidebarMenu = new VBox(40);
@@ -168,4 +180,10 @@ public class FactorialPage {
 
     button.setStyle(buttonStyle + colorInit + widthInit);
   }
+
+  @Override
+  public BorderPane getPane() {
+    return borderPane;
+  }
+
 }
