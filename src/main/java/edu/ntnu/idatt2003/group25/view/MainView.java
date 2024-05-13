@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2003.group25.view;
-import edu.ntnu.idatt2003.group25.model.ChaosGameObserver;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,14 +9,16 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainView extends Application  {
-  static int height = 900;
-  static int width = 1200;
-  BorderPane mainPage = new BorderPane();
-  FactorialPage factorialPage = new FactorialPage();
+  public static int height = 900;
+  public static int width = 1200;
+  public static BorderPane mainPage = new BorderPane();
+  public static ChaosGameDescription description = ChaosGameDescriptionFactory.createBarnsleyFern();
+
+  public InitializePage initializePage = new InitializePage();
+
 
   @Override
   public void start(Stage stage)  {
-    InitializePage initializePage = new InitializePage();
 
     HBox topBar = new HBox();
     topBar.setPadding(new Insets(40));
