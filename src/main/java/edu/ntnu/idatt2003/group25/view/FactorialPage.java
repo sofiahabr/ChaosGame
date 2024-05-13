@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class FactorialPage {
-
   public BorderPane borderPane = new BorderPane();
   public VBox sidebarMenu;
 
@@ -20,13 +19,12 @@ public class FactorialPage {
   public void createLayout() {
     borderPane.setStyle("-fx-background-color: white");
 
-    createSideBar();
-    affineSidebar();
-
     HBox topBox = new HBox(0);
     borderPane.setTop(topBox);
-
+    affineSidebar();
     borderPane.setLeft(sidebarMenu);
+
+
   }
   private void createSideBar() {
     sidebarMenu = new VBox(40);
@@ -35,8 +33,6 @@ public class FactorialPage {
   }
 
   public VBox chooseStepsField() {
-
-    // Create choose steps area
     Text chooseSteps = new Text("Choose steps");
     chooseSteps.setStyle("-fx-font-size: 14; ");
 
@@ -62,14 +58,10 @@ public class FactorialPage {
     maxTitle.setStyle("-fx-font-size: 14;");
 
     TextField inputMax = new TextField();
-    inputMax.setMaxWidth(80);
-    inputMax.setMinHeight(30);
-    inputMax.setStyle("-fx-background-radius: 10");
+    inputFieldStyle(inputMax,"ex. 1");
 
     TextField inputMin = new TextField();
-    inputMin.setMaxWidth(80);
-    inputMin.setMinHeight(30);
-    inputMin.setStyle("-fx-background-radius: 10");
+    inputFieldStyle(inputMin,"ex. 0");
 
     VBox minBox = new VBox(10);
     VBox maxBox = new VBox(10);
@@ -85,40 +77,39 @@ public class FactorialPage {
   }
 
   private VBox gameButtons() {
-    String buttonStyle = "-fx-background-radius: 10; -fx-min-height: 30; "
-        + "-fx-text-fill: white; -fx-font-size: 12;";
 
     Button playButton = new Button("Play");
-    playButton.setStyle(buttonStyle + "-fx-background-color: black; -fx-min-width: 80; ");
+    addStyle(playButton,"green", 180);
 
     Button resetButton = new Button("Reset");
-    resetButton.setStyle(buttonStyle + "-fx-background-color: red; -fx-min-width: 80; ");
+    addStyle(resetButton,"red",80);
 
     Button saveButton = new Button("Save to file");
-    saveButton.setStyle(buttonStyle + "-fx-background-color: green; -fx-min-width: 180; ");
+    addStyle(saveButton, "black", 80);
 
     Button addTransformButton = new Button("Add transform");
-    addTransformButton.setStyle(buttonStyle + " -fx-background-color: red; -fx-min-width: 180");
+    addStyle(addTransformButton,"grey",180);
 
     HBox topButtonBox = new HBox(20);
-    topButtonBox.getChildren().addAll(playButton, resetButton);
+    topButtonBox.getChildren().addAll(saveButton, resetButton);
 
     VBox buttonBox = new VBox(30);
-    buttonBox.getChildren().addAll(addTransformButton, topButtonBox, saveButton);
+    buttonBox.getChildren().addAll(addTransformButton, topButtonBox, playButton);
     buttonBox.setAlignment(Pos.BASELINE_CENTER);
     buttonBox.setPadding(new Insets(0, 0, 100, 0));
 
     return buttonBox;
   }
 
-  public void JuliaSidebar() {
+  public void juliaSidebar() {
     createSideBar();
-    sidebarMenu.getChildren().addAll(chooseStepsField(),chooseMinMaxField(), createVector(),gameButtons());
+    sidebarMenu.getChildren().addAll(chooseStepsField(),chooseMinMaxField(),createVector(),gameButtons());
   }
 
   public void affineSidebar() {
     createSideBar();
-    sidebarMenu.getChildren().addAll(chooseStepsField(),chooseMinMaxField(), createVector(),createMatrix(), gameButtons());
+    sidebarMenu.getChildren().addAll(chooseStepsField(),chooseMinMaxField(), createVector(),
+        createMatrix(), gameButtons());
   }
 
   public VBox createVector() {
@@ -167,5 +158,14 @@ public class FactorialPage {
     inputField.setMaxWidth(80);
     inputField.setStyle("-fx-background-radius: 10");
     inputField.setPromptText(promptText);
+  }
+
+  public void addStyle(Button button, String color, int width) {
+    String buttonStyle = "-fx-background-radius: 10; -fx-min-height: 30; "
+        + "-fx-text-fill: white; -fx-font-size: 12;";
+    String colorInit = "-fx-background-color: " + color + ";" ;
+    String widthInit = "-fx-min-width: " + width + ";" ;
+
+    button.setStyle(buttonStyle + colorInit + widthInit);
   }
 }
