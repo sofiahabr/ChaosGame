@@ -28,5 +28,5 @@ public abstract class View implements ChaosGameSubject {
 
   public abstract Pane getPane();
   public abstract void setUp();
-
+  public abstract void update();
 }

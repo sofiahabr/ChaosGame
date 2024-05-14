@@ -62,6 +62,11 @@ public class InitializePage extends View {
   }
 
   @Override
+  public void update() {
+
+  }
+
+  @Override
   public BorderPane getPane() {
     return initPane;
   }

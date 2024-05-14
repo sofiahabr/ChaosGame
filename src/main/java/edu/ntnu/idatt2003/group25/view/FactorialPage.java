@@ -34,6 +34,7 @@ public class FactorialPage extends View {
 
   @Override
   public void setUp() {
+    update();
     borderPane.setStyle("-fx-background-color: white");
 
 
@@ -48,6 +49,12 @@ public class FactorialPage extends View {
 
     borderPane.setLeft(sidebarMenu);
   }
+
+  @Override
+  public void update() {
+    this.description = MainView.description;
+  }
+
   private void createSideBar() {
     sidebarMenu = new VBox(40);
     sidebarMenu.setStyle("-fx-background-color: #D9D9D9");
