@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2003.group25.model;
 
 public interface ChaosGameObserver {
-  void gameChanged(String string);
+  void gameChanged(String event, String info);
 }
 
 ///**
