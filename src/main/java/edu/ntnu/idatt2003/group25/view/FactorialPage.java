@@ -35,6 +35,12 @@ public class FactorialPage extends View {
   @Override
   public void setUp() {
     update();
+
+    TopBarMenu topBarMenu = new TopBarMenu(screenController);
+    topBarMenu.setUp();
+
+    borderPane.setTop(topBarMenu.getBox());
+
     borderPane.setStyle("-fx-background-color: white");
 
 
