@@ -58,6 +58,9 @@ public class FactorialPage extends View {
     stepsArea.getChildren().addAll(chooseSteps, inputSteps);
     stepsArea.setAlignment(Pos.CENTER);
 
+    // send to controller
+    inputSteps.setOnKeyTyped(e-> updateObserver("register steps", inputSteps.getText()));
+
     return stepsArea;
   }
   private HBox chooseMinMaxField() {
@@ -71,9 +74,12 @@ public class FactorialPage extends View {
 
     TextField inputMax = new TextField();
     inputFieldStyle(inputMax,"ex. 1");
+    inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", " + inputMax.getText()));
 
     TextField inputMin = new TextField();
     inputFieldStyle(inputMin,"ex. 0");
+    inputMax.setOnKeyTyped(e-> updateObserver("min input", inputMax.getText() + ", " + inputMax.getText()));
+
 
     VBox minBox = new VBox(10);
     VBox maxBox = new VBox(10);
@@ -92,15 +98,21 @@ public class FactorialPage extends View {
 
     Button playButton = new Button("Play");
     addStyle(playButton,"green", 180);
+    playButton.setOnAction(e-> updateObserver("button clicked", "play"));
 
     Button resetButton = new Button("Reset");
     addStyle(resetButton,"red",80);
+    resetButton.setOnAction(e-> updateObserver("button clicked", "reset"));
 
     Button saveButton = new Button("Save to file");
     addStyle(saveButton, "black", 80);
+    saveButton.setOnAction(e-> updateObserver("button clicked", "save"));
+
 
     Button addTransformButton = new Button("Add transform");
     addStyle(addTransformButton,"grey",180);
+    addTransformButton.setOnAction(e-> updateObserver("button clicked", "add"));
+
 
     HBox topButtonBox = new HBox(20);
     topButtonBox.getChildren().addAll(saveButton, resetButton);
@@ -133,6 +145,9 @@ public class FactorialPage extends View {
     TextField inputVector2 = new TextField();
     inputFieldStyle(inputVector2,"x1");
 
+    inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
+    inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
+
     HBox vectorInputs = new HBox(10);
     vectorInputs.getChildren().addAll(inputVector1,inputVector2);
 
@@ -154,6 +169,11 @@ public class FactorialPage extends View {
     inputFieldStyle(inputC,"c");
     TextField inputD = new TextField();
     inputFieldStyle(inputD,"d");
+    inputA.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
+    inputB.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
+    inputC.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
+    inputD.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
+
 
     HBox inputAB = new HBox(inputA,inputB);
     HBox inputCD = new HBox(inputC, inputD);

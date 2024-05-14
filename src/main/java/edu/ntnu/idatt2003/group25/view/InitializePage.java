@@ -45,7 +45,7 @@ public class InitializePage extends View {
     Button startButton  = new Button("Start Game");
     startButton.setStyle("-fx-font-size: 16; -fx-background-color: white; -fx-padding: 5 20; -fx-border-radius: 10");
 
-    startButton.setOnAction(e-> updateObserver(optionBox.getValue()));
+    startButton.setOnAction(e-> updateObserver("button clicked", optionBox.getValue()));
 
     VBox infoArea = new VBox(30, heading, subheading, optionBox, new VBox(), startButton);
     infoArea.setAlignment(Pos.TOP_CENTER);

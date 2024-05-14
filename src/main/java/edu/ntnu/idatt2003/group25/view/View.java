@@ -4,6 +4,7 @@ import edu.ntnu.idatt2003.group25.model.ChaosGameObserver;
 import edu.ntnu.idatt2003.group25.model.ChaosGameSubject;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public abstract class View implements ChaosGameSubject {
@@ -19,9 +20,9 @@ public abstract class View implements ChaosGameSubject {
   }
 
   @Override
-  public void updateObserver(String string) {
+  public void updateObserver(String event, String info) {
     for (ChaosGameObserver observer : observers){
-      observer.gameChanged(string);
+      observer.gameChanged(event, info);
     }
   }
 

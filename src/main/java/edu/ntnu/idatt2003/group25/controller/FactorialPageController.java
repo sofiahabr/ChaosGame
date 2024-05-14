@@ -14,13 +14,53 @@ public class FactorialPageController extends Controller {
   public FactorialPageController() {
   }
   @Override
-  public void gameChanged(String steps) {
-    int stepNr = Integer.parseInt(steps);
-    chaosGame.runSteps(stepNr);
+  public void gameChanged(String action, String info) {
+    switch (action) {
+      case "button clicked":
+        switch (info) {
+          case "play":
+            this.chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width * 0.7f),
+                Math.round(MainView.height * 0.7f));
+            chaosGame.runSteps(steps);
+            draw();
+            break;
+          case "add":
+            if (MainView.description.getTransforms().getFirst().getClass().getName()
+                .contains("Julia")) {
+              complex = new Complex(vector2D.getX0(), vector2D.getX1());
+              MainView.description.getTransforms().add(new JuliaTransform(complex, 1));
+            } else {
+              MainView.description.getTransforms().add(new AffineTransform2D(matrix, vector2D));
+            }
+            break;
+          case "reset":
+            clear();
+            break;
+          case "save":
+            ChaosGameFileHandler fileHandler =
+                new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0), new Vector2D(1, 1));
+            fileHandler.writeToFile(MainView.description, "src/main/resources/TestSave.txt");
+            break;
+        }
+      case "vector input":
+        vector2D = registerVector2D(info);
+        break;
+      case "min input":
+        min = registerVector2D(info);
+        break;
+      case "max input":
+        max = registerVector2D(info);
+        break;
+      case "steps input":
+        steps = registerInt(info);
+        break;
+      case "matrix input":
+        matrix = registerMatrix(info);
+    }
+  }
 
+  public void draw(){
     int[][] canvas = chaosGame.getCanvas().getCanvasArray();
-
-    Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
     GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
 
     for (int i = 0; i < canvas.length; i++) {
