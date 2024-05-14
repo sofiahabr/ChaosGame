@@ -1,8 +1,15 @@
 package edu.ntnu.idatt2003.group25.controller;
 
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
-import edu.ntnu.idatt2003.group25.view.FactorialPage;
+import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
+import edu.ntnu.idatt2003.group25.model.Complex;
+import edu.ntnu.idatt2003.group25.model.Matrix2x2;
+import edu.ntnu.idatt2003.group25.model.Validation;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
+import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
+import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import edu.ntnu.idatt2003.group25.view.MainView;
+import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -89,10 +96,26 @@ public class FactorialPageController extends Controller {
         }
       }
     }
-    FactorialPage factorialPage = new FactorialPage();
-    factorialPage.getPane().setCenter(gc.getCanvas());
     screenController.getScreenContent("factorial page").getPane().setCenter(pixelCanvas);
+  }
+  public void clear() {
+      GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
+      gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());
+  }
 
-    MainView.mainPage.setCenter(factorialPage.getPane());
+  public int registerInt(String input) {
+    System.out.println(steps);
+    return steps = Validation.verifyPositiveInt(input, 0);
+  }
+  public Vector2D registerVector2D(String info){
+    String[] values = info.split(",");
+    return new Vector2D(Validation.verifyDouble(values[0], 0), Validation.verifyDouble(values[0],0 ));
+
+  }
+  public Matrix2x2 registerMatrix(String info){
+    String[] values = info.split(",");
+    return new Matrix2x2(
+        Validation.verifyDouble(values[0],0), Validation.verifyDouble(values[1],0),
+        Validation.verifyDouble(values[2],0), Validation.verifyDouble(values[3],0));
   }
 }
