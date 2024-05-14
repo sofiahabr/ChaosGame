@@ -1,4 +1,5 @@
 package edu.ntnu.idatt2003.group25.view;
+import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import javafx.application.Application;
