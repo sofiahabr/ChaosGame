@@ -72,10 +72,7 @@ public class FactorialPage extends View {
     chooseSteps.setStyle("-fx-font-size: 14; ");
 
     TextField inputSteps = new TextField();
-    inputSteps.setPromptText(" Ex. 500...");
-    inputSteps.setMaxWidth(180);
-    inputSteps.setMinHeight(30);
-    inputSteps.setStyle("-fx-background-radius: 10");
+    inputFieldStyle(inputSteps, "Ex. 500...", 30, 180);
 
     VBox stepsArea = new VBox(10);
     stepsArea.getChildren().addAll(chooseSteps, inputSteps);
@@ -164,7 +161,7 @@ public class FactorialPage extends View {
     chooseVector.setStyle("-fx-font-size: 14; ");
 
     TextField inputVector1 = new TextField();
-    inputFieldStyle(inputVector1,"x0");
+    inputFieldStyle(inputVector1,"x0", 30, 80);
     TextField inputVector2 = new TextField();
     inputFieldStyle(inputVector2,"x1", 30, 80);
 
@@ -185,11 +182,11 @@ public class FactorialPage extends View {
     createMatrix.setStyle("-fx-font-size: 14");
 
     TextField inputA = new TextField();
-    inputFieldStyle(inputA,"a");
+    inputFieldStyle(inputA,"a", 30, 80);
     TextField inputB = new TextField();
-    inputFieldStyle(inputB,"b");
+    inputFieldStyle(inputB,"b", 30, 80);
     TextField inputC = new TextField();
-    inputFieldStyle(inputC,"c");
+    inputFieldStyle(inputC,"c", 30, 80);
     TextField inputD = new TextField();
     inputFieldStyle(inputD,"d", 30, 80);
 
@@ -209,10 +206,10 @@ public class FactorialPage extends View {
     return matrixArea;
   }
 
-  public void inputFieldStyle(TextField inputField, String promptText) {
-    inputField.setMinHeight(30);
-    inputField.setMaxWidth(80);
-    inputField.setStyle("-fx-background-radius: 10");
+  public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
+    inputField.setMinHeight(height);
+    inputField.setMaxWidth(width);
+    inputField.setStyle("-fx-background-radius: 10; -fx-font-size: 14");
     inputField.setPromptText(promptText);
   }
 
