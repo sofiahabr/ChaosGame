@@ -1,5 +1,9 @@
 package edu.ntnu.idatt2003.group25.view;
 
+import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
+import edu.ntnu.idatt2003.group25.controller.ScreenController;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.model.Complex;
 import edu.ntnu.idatt2003.group25.model.Matrix2x2;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
@@ -19,8 +23,14 @@ public class FactorialPage extends View {
 
   public BorderPane borderPane = new BorderPane();
   public VBox sidebarMenu;
-
-  public FactorialPage() { setUp(); }
+  public ScreenController screenController;
+  public ChaosGameDescription description;
+  FactorialPageController controller;
+  public FactorialPage(ScreenController screenController) {
+    this.controller = new FactorialPageController(screenController);
+    this.screenController = screenController;
+    addObserver(controller);
+    }
 
   @Override
   public void setUp() {
@@ -73,11 +83,11 @@ public class FactorialPage extends View {
     maxTitle.setStyle("-fx-font-size: 14;");
 
     TextField inputMax = new TextField();
-    inputFieldStyle(inputMax,"ex. 1");
+    inputFieldStyle(inputMax,"ex. 1", 30, 80);
     inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", " + inputMax.getText()));
 
     TextField inputMin = new TextField();
-    inputFieldStyle(inputMin,"ex. 0");
+    inputFieldStyle(inputMin,"ex. 0", 30, 80);
     inputMax.setOnKeyTyped(e-> updateObserver("min input", inputMax.getText() + ", " + inputMax.getText()));
 
 
@@ -143,7 +153,7 @@ public class FactorialPage extends View {
     TextField inputVector1 = new TextField();
     inputFieldStyle(inputVector1,"x0");
     TextField inputVector2 = new TextField();
-    inputFieldStyle(inputVector2,"x1");
+    inputFieldStyle(inputVector2,"x1", 30, 80);
 
     inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
     inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
@@ -168,7 +178,8 @@ public class FactorialPage extends View {
     TextField inputC = new TextField();
     inputFieldStyle(inputC,"c");
     TextField inputD = new TextField();
-    inputFieldStyle(inputD,"d");
+    inputFieldStyle(inputD,"d", 30, 80);
+
     inputA.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
     inputB.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
     inputC.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));

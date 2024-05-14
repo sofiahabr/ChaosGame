@@ -2,6 +2,7 @@ package edu.ntnu.idatt2003.group25.view;
 
 import edu.ntnu.idatt2003.group25.controller.Controller;
 import edu.ntnu.idatt2003.group25.controller.InitializePageController;
+import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,10 +15,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class InitializePage extends View {
+  ScreenController screenController;
   private BorderPane initPane = new BorderPane();
 
-  public InitializePage(){
-    addObserver(new InitializePageController());
+  public InitializePage(ScreenController screenController){
+    this.screenController = screenController;
+    addObserver(new InitializePageController(screenController));
     setUp();
   }
 

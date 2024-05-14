@@ -8,10 +8,19 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class FactorialPageController extends Controller {
-  ChaosGame chaosGame =
-      new ChaosGame(MainView.description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
+  ChaosGame chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width*0.7f), Math.round(MainView.height));
+  ScreenController screenController;
+  int steps = 0;
+  Vector2D min;
+  Vector2D max;
+  Vector2D vector2D;
+  Complex complex;
+  Matrix2x2 matrix;
+  Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
 
-  public FactorialPageController() {
+  public FactorialPageController(ScreenController screenController) {
+    this.screenController = screenController;
+
   }
   @Override
   public void gameChanged(String action, String info) {
@@ -82,6 +91,7 @@ public class FactorialPageController extends Controller {
     }
     FactorialPage factorialPage = new FactorialPage();
     factorialPage.getPane().setCenter(gc.getCanvas());
+    screenController.getScreenContent("factorial page").getPane().setCenter(pixelCanvas);
 
     MainView.mainPage.setCenter(factorialPage.getPane());
   }

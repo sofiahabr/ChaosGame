@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainView extends Application  {
@@ -14,20 +15,20 @@ public class MainView extends Application  {
   public static BorderPane mainPage = new BorderPane();
   public static ChaosGameDescription description = ChaosGameDescriptionFactory.createBarnsleyFern();
 
-  public InitializePage initializePage = new InitializePage();
+
+  public Scene scene = new Scene(new Pane(), width, height);
+  public ScreenController screenController = new ScreenController(scene);
+  public InitializePage initializePage = new InitializePage(screenController);
+  public FactorialPage factorialPage = new FactorialPage(screenController);
 
 
   @Override
   public void start(Stage stage)  {
 
-    HBox topBar = new HBox();
-    topBar.setPadding(new Insets(40));
-    topBar.setStyle("-fx-background-color: #708090");
+    screenController.addScreenContent(factorialPage, "factorial page");
+    screenController.addScreenContent(initializePage, "initialize page");
 
-    mainPage.setCenter(initializePage.getPane());
-    mainPage.setTop(topBar);
-    Scene scene = new Scene(mainPage, width, height);
-
+    screenController.gameChanged( "switch page","initialize page");
 
     stage.setTitle("Chaos Game");
     stage.setScene(scene);
