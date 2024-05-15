@@ -34,5 +34,17 @@ public class ChaosGame{
 
     }
   }
+  public int getHeight() {
+    return canvas.getHeight();
+  }
+  public int getWidth() {
+    return canvas.getWidth();
+  }
+  public void setHeight(int height) {
+    canvas.setHeight(height);
+  }
+  public void setWidth(int width) {
+    canvas.setWidth(width);
+  }
 }
 
