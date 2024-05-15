@@ -35,11 +35,11 @@ public class FactorialPage extends View {
   @Override
   public void setUp() {
     update();
-
-    TopBarMenu topBarMenu = new TopBarMenu(screenController);
-    topBarMenu.setUp();
-
-    borderPane.setTop(topBarMenu.getBox());
+//
+//    TopBarMenu topBarMenu = new TopBarMenu(screenController);
+//    topBarMenu.setUp();
+//
+//    borderPane.setTop(topBarMenu.getBox());
 
     borderPane.setStyle("-fx-background-color: white");
 
@@ -63,13 +63,16 @@ public class FactorialPage extends View {
 
   private void createSideBar() {
     sidebarMenu = new VBox(40);
-    sidebarMenu.setStyle("-fx-background-color: #D9D9D9");
+    sidebarMenu.getStyleClass().add("vbox");
+//    sidebarMenu.setStyle("-fx-background-color: #D9D9D9");
     sidebarMenu.setPadding(new Insets(20));
   }
 
   public VBox chooseStepsField() {
     Text chooseSteps = new Text("Choose steps");
-    chooseSteps.setStyle("-fx-font-size: 14; ");
+    chooseSteps.getStyleClass().add("heading");
+
+//    chooseSteps.setStyle("-fx-font-size: 14; ");
 
     TextField inputSteps = new TextField();
     inputFieldStyle(inputSteps, "Ex. 500...", 30, 180);
@@ -88,9 +91,12 @@ public class FactorialPage extends View {
     // Create min/ max area
     Text minTitle = new Text(" Min: ");
     Text maxTitle = new Text(" Max: ");
+    maxTitle.getStyleClass().add("heading");
+    minTitle.getStyleClass().add("heading");
 
-    minTitle.setStyle("-fx-font-size: 14;");
-    maxTitle.setStyle("-fx-font-size: 14;");
+
+//    minTitle.setStyle("-fx-font-size: 14;");
+//    maxTitle.setStyle("-fx-font-size: 14;");
 
     TextField inputMax = new TextField();
     inputFieldStyle(inputMax,"ex. 1", 30, 80);
@@ -139,8 +145,8 @@ public class FactorialPage extends View {
 
     VBox buttonBox = new VBox(30);
     buttonBox.getChildren().addAll(addTransformButton, topButtonBox, playButton);
-    buttonBox.setAlignment(Pos.BASELINE_CENTER);
-    buttonBox.setPadding(new Insets(0, 0, 100, 0));
+//    buttonBox.setAlignment(Pos.BASELINE_CENTER);
+    buttonBox.setAlignment(Pos.CENTER);
 
     return buttonBox;
   }
@@ -158,7 +164,9 @@ public class FactorialPage extends View {
 
   public VBox createVector() {
     Text chooseVector = new Text("Choose vector:");
-    chooseVector.setStyle("-fx-font-size: 14; ");
+    chooseVector.getStyleClass().add("heading");
+
+//    chooseVector.setStyle("-fx-font-size: 14; ");
 
     TextField inputVector1 = new TextField();
     inputFieldStyle(inputVector1,"x0", 30, 80);
@@ -168,7 +176,7 @@ public class FactorialPage extends View {
     inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
     inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
 
-    HBox vectorInputs = new HBox(10);
+    HBox vectorInputs = new HBox(20);
     vectorInputs.getChildren().addAll(inputVector1,inputVector2);
 
     VBox vectorArea = new VBox(10);
@@ -179,7 +187,8 @@ public class FactorialPage extends View {
 
   public VBox createMatrix() {
     Text createMatrix = new Text("Choose matrix:");
-    createMatrix.setStyle("-fx-font-size: 14");
+    createMatrix.getStyleClass().add("heading");
+//    createMatrix.setStyle("-fx-font-size: 14");
 
     TextField inputA = new TextField();
     inputFieldStyle(inputA,"a", 30, 80);
@@ -196,8 +205,8 @@ public class FactorialPage extends View {
     inputD.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
 
 
-    HBox inputAB = new HBox(inputA,inputB);
-    HBox inputCD = new HBox(inputC, inputD);
+    HBox inputAB = new HBox(20, inputA,inputB);
+    HBox inputCD = new HBox(20, inputC, inputD);
 
     VBox matrixArea = new VBox(10);
     matrixArea.getChildren().addAll(createMatrix,inputAB,inputCD);
@@ -209,17 +218,17 @@ public class FactorialPage extends View {
   public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);
-    inputField.setStyle("-fx-background-radius: 10; -fx-font-size: 14");
+//    inputField.setStyle("-fx-background-radius: 10; -fx-font-size: 14");
     inputField.setPromptText(promptText);
   }
 
   public void addStyle(Button button, String color, int width) {
-    String buttonStyle = "-fx-background-radius: 10; -fx-min-height: 30; "
-        + "-fx-text-fill: white; -fx-font-size: 12;";
+//    String buttonStyle = "-fx-background-radius: 10; -fx-min-height: 30; "
+//        + "-fx-text-fill: white; -fx-font-size: 12;";
     String colorInit = "-fx-background-color: " + color + ";" ;
     String widthInit = "-fx-min-width: " + width + ";" ;
 
-    button.setStyle(buttonStyle + colorInit + widthInit);
+    button.setStyle(colorInit + widthInit);
   }
 
   @Override
