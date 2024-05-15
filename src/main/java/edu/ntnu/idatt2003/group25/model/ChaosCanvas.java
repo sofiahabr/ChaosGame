@@ -7,8 +7,8 @@ import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
  */
 public class ChaosCanvas {
   private int[][] canvas;
-  private final int width;
-  private final int height;
+  private int width;
+  private int height;
   private final Vector2D minCoords;
   private final Vector2D maxCoords;
   private AffineTransform2D transformCoordsToIndices;
