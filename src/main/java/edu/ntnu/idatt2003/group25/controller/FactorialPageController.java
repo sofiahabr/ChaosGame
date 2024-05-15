@@ -67,7 +67,7 @@ public class FactorialPageController extends Controller {
       case "max input":
         max = registerVector2D(info);
         break;
-      case "steps input":
+      case "register steps":
         steps = registerInt(info);
         break;
       case "matrix input":
