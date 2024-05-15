@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2003.group25.view;
 
+import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.controller.ScreenSizeChange;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
@@ -18,7 +19,6 @@ public class MainLogic extends View{
   public ScreenController screenController = new ScreenController(scene);
   public InitializePage initializePage = new InitializePage(screenController);
   public FactorialPage factorialPage = new FactorialPage(screenController);
-  public ScreenSizeChange screenSizeChange = new ScreenSizeChange();
 
   public void start(Stage stage) {
     screenController.addScreenContent(factorialPage, "factorial page");
@@ -32,16 +32,18 @@ public class MainLogic extends View{
     stage.setMinWidth(800);
     stage.show();
 
-    addObserver(screenSizeChange);
+    FactorialPageController factorialPageController = new FactorialPageController(screenController);
+
+    addObserver(factorialPageController);
 
     scene.widthProperty().addListener((observable, oldValue, newValue)-> {
-      updateObserver(null, newValue.toString());
+      updateObserver("sceneChange", "0:" + newValue.toString());
       System.out.println("old width: " + oldValue.toString() + " new width: " +
           newValue.toString());
     });
 
     scene.heightProperty().addListener((observable, oldValue, newValue)-> {
-      updateObserver(newValue.toString(), null);
+      updateObserver("sceneChange", newValue.toString() + ":0");
       System.out.println("old: " + oldValue.toString() + " new: " + newValue.toString());
     });
   }
