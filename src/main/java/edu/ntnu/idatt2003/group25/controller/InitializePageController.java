@@ -9,6 +9,7 @@ import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
+import edu.ntnu.idatt2003.group25.view.MainLogic;
 import edu.ntnu.idatt2003.group25.view.MainView;
 import java.io.File;
 import java.util.ArrayList;
@@ -29,30 +30,30 @@ public class InitializePageController extends Controller{
         case "Create new Affine Transform":
           List<Transform2D> transforms = new ArrayList<>();
           transforms.add(new AffineTransform2D(new Matrix2x2(0,0,0,0), new Vector2D(0,0)));
-          MainView.description = new ChaosGameDescription(transforms, new Vector2D(0,0), new Vector2D(1,1));
+          MainLogic.description = new ChaosGameDescription(transforms, new Vector2D(0,0), new Vector2D(1,1));
           break;
         case "Create new Julia Transform":
           transforms = new ArrayList<>();
           transforms.add(new JuliaTransform(new Complex(0,0),1));
-          MainView.description.getTransforms().add(new JuliaTransform(new Complex(0, 0), 1));
+          MainLogic.description.getTransforms().add(new JuliaTransform(new Complex(0, 0), 1));
           break;
         case "Julia Transform":
           System.out.println("Julia");
-          MainView.description =
+          MainLogic.description =
               (ChaosGameDescriptionFactory.createJuliaTransformation(new Complex(-0.7, 0.1)));
           break;
         case "Sierpinski Triangle":
           System.out.println("Sierpinski");
-          MainView.description = ChaosGameDescriptionFactory.createSierpinski();
+          MainLogic.description = ChaosGameDescriptionFactory.createSierpinski();
           break;
         case "Barnsley Fern":
           System.out.println("Barnsley fern");
-          MainView.description = ChaosGameDescriptionFactory.createBarnsleyFern();
+          MainLogic.description = ChaosGameDescriptionFactory.createBarnsleyFern();
           break;
         case "Read from file":
           ChaosGameFileHandler fileHandler =
               new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0),
-                  new Vector2D(MainView.width * 0.7f, MainView.height * 0.7f));
+                  new Vector2D(MainLogic.width * 0.7f, MainLogic.height * 0.7f));
           FileChooser fileChooser = new FileChooser();
 //        fileChooser.getExtensionFilters().add(
 //            new FileChooser.ExtensionFilter(
@@ -60,7 +61,7 @@ public class InitializePageController extends Controller{
           File selectedFile = fileChooser.showOpenDialog(null);
           if (selectedFile != null) {
             try {
-              MainView.description = fileHandler.readFromFile(selectedFile.getPath());
+              MainLogic.description = fileHandler.readFromFile(selectedFile.getPath());
             } catch (Exception e) {
               e.printStackTrace();
             }
