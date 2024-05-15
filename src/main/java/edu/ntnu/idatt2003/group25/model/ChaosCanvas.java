@@ -136,5 +136,14 @@ public class ChaosCanvas {
   public Vector2D getMinCoords() {
     return minCoords;
   }
+
+  public void setHeight(int height) {
+    this.height = height;
+    fillAffineTransform();
+  }
+  public void setWidth(int width) {
+    this.width = width;
+    fillAffineTransform();
+  }
 }
 
