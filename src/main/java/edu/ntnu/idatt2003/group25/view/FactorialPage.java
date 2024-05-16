@@ -15,10 +15,9 @@ import javafx.scene.paint.Color;
 
 public class FactorialPage extends View {
 
-  public BorderPane borderPane = new BorderPane();
-  public VBox sidebarMenu;
+  private final BorderPane borderPane = new BorderPane();
   public ScreenController screenController;
-  public ChaosGameDescription description;
+  private ChaosGameDescription description;
   FactorialPageController controller;
   ChaosGame chaosGame;
   private Canvas pixelCanvas = new Canvas(MainView.width, MainView.height);
