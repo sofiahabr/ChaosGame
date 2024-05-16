@@ -43,4 +43,8 @@ public class ChaosGameDescriptionFactory {
     transformation.add(new JuliaTransform(c,-1));
     return new ChaosGameDescription(transformation, new Vector2D(-1.6, -1), new Vector2D(1.6, 1));
   }
+  public static ChaosGameDescription createEmpty() {
+    return new ChaosGameDescription(new ArrayList<>(),
+        new Vector2D(0, 0), new Vector2D(0,0));
+  }
 }
