@@ -9,22 +9,26 @@ import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
+import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import edu.ntnu.idatt2003.group25.view.MainView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.stage.FileChooser;
 
-public class InitializePageController extends Controller{
+public class InitializePageController extends Controller {
   ScreenController screenController;
-  public InitializePageController(ScreenController screenController){
+  FactorialPage factorialPage;
+
+  public InitializePageController(ScreenController screenController) {
     this.screenController = screenController;
   }
 
   @Override
   public void gameChanged(String event, String transformName) {
-    System.out.println(transformName);
-    if(event.equals("button clicked")){
+    ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
+    this.factorialPage = new FactorialPage(screenController);
+    if (event.equals("button clicked")) {
       switch (transformName) {
         case "Create new Affine Transform":
           List<Transform2D> transforms = new ArrayList<>();
