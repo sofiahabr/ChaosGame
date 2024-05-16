@@ -3,11 +3,17 @@ package edu.ntnu.idatt2003.group25.view;
 import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
-import edu.ntnu.idatt2003.group25.model.Validation;
+import java.util.HashMap;
+import java.util.Objects;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
+import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
+import edu.ntnu.idatt2003.group25.view.menus.SideMenu;
+import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,8 +26,11 @@ public class FactorialPage extends View {
   public ScreenController screenController;
   public ChaosGameDescription description;
   FactorialPageController controller;
+  HashMap<String,String> errorMap = new HashMap<>();
+  private Label stepsErrorLabel;
+
   public FactorialPage(ScreenController screenController) {
-    this.controller = new FactorialPageController(screenController);
+    this.controller = new FactorialPageController(screenController, this);
     this.screenController = screenController;
     addObserver(controller);
     }
@@ -44,9 +53,24 @@ public class FactorialPage extends View {
     borderPane.setLeft(sidebarMenu);
   }
 
-  @Override
+
   public void update() {
     this.description = MainView.description;
+
+    TopMenu topBarMenu = new TopMenu(screenController);
+    topBarMenu.setUp();
+
+
+    SideMenu console;
+    if(MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
+      console = new JuliaConsole(screenController);
+    } else {
+      console = new AffineConsole(screenController);
+}
+    console.setUp();
+
+    borderPane.setTop(topBarMenu.getMenu());
+    borderPane.setLeft(console.getMenu());
   }
 
   private void createSideBar() {
@@ -64,7 +88,24 @@ public class FactorialPage extends View {
     inputFieldStyle(inputSteps, "Ex. 500...", 30, 180);
 
     VBox stepsArea = new VBox(10);
-    stepsArea.getChildren().addAll(chooseSteps, inputSteps);
+
+    stepsErrorLabel = new Label();
+    stepsErrorLabel.getStyleClass().add("error");
+    updateStepsErrorLabel();
+
+
+//    Label stepsErrorLabel = new Label();
+//    stepsErrorLabel.getStyleClass().add("error");
+//    System.out.println(errorMap.get("InputSteps") + "- output");
+//    if (!Objects.equals(errorMap.get("InputSteps"), "")) {
+//      stepsErrorLabel.setText(errorMap.get("InputSteps"));
+//      System.out.println("Inside errormap != null");
+//
+//    } else {
+//      System.out.println("Inside errormap == null"); //den gikk ikke inn hit i loopen
+//      stepsErrorLabel.setText(" ");
+//    }
+    stepsArea.getChildren().addAll(chooseSteps, inputSteps, stepsErrorLabel);
     stepsArea.setAlignment(Pos.CENTER);
 
     // send to controller
@@ -210,18 +251,22 @@ public class FactorialPage extends View {
 
     button.setStyle(colorInit + widthInit);
   }
-  public String errorText(String input) {
-    int i = Validation.verifyInt(input,0);
-    if (i == 0)
-    {
-      return "please enter valid nr";
-    } else {
-      return null;
-    }
-  }
+
 
   @Override
   public BorderPane getPane() {
     return borderPane;
+  }
+  private void updateStepsErrorLabel() {
+    String errorMessage = errorMap.getOrDefault("InputSteps", "");
+    stepsErrorLabel.setText(errorMessage.isEmpty() ? " " : errorMessage);
+  }
+  public void showError(String placement, String message) {
+    errorMap.put(placement, message);
+    if ("InputSteps".equals(placement)) {
+      updateStepsErrorLabel();
+    }
+
+
   }
 }
