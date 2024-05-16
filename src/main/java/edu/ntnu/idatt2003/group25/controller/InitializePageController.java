@@ -34,24 +34,29 @@ public class InitializePageController extends Controller {
           List<Transform2D> transforms = new ArrayList<>();
           transforms.add(new AffineTransform2D(new Matrix2x2(0,0,0,0), new Vector2D(0,0)));
           MainView.description = new ChaosGameDescription(transforms, new Vector2D(0,0), new Vector2D(1,1));
+          factorialPage.setGameType("Affine Transform");
           break;
         case "Create new Julia Transform":
           transforms = new ArrayList<>();
           transforms.add(new JuliaTransform(new Complex(0,0),1));
           MainView.description.getTransforms().add(new JuliaTransform(new Complex(0, 0), 1));
           break;
+          factorialPage.setGameType("Julia Transform");
         case "Julia Transform":
           System.out.println("Julia");
           MainView.description =
               (ChaosGameDescriptionFactory.createJuliaTransformation(new Complex(-0.7, 0.1)));
+          factorialPage.setGameType("Julia Transform");
           break;
         case "Sierpinski Triangle":
           System.out.println("Sierpinski");
           MainView.description = ChaosGameDescriptionFactory.createSierpinski();
+          factorialPage.setGameType("Affine Transform");
           break;
         case "Barnsley Fern":
           System.out.println("Barnsley fern");
           MainView.description = ChaosGameDescriptionFactory.createBarnsleyFern();
+          factorialPage.setGameType("Affine Transform");
           break;
         case "Read from file":
           ChaosGameFileHandler fileHandler =
@@ -73,6 +78,35 @@ public class InitializePageController extends Controller {
       }
       screenController.getScreenContent("factorial page").setUp();
       screenController.gameChanged("switch page", "factorial page");
+          readFromFile();
+          if(factorialPage.getDescription().getTransforms().get(0) instanceof JuliaTransform){
+            factorialPage.setGameType("Julia Transform");
+          } else {
+            factorialPage.setGameType("Affine Transform");
+          }
+      }
+    }
+    screenController.getScreenContent("factorial page").setUp();
+    screenController.gameChanged("switch page", "factorial page");
+  }
+
+  public void readFromFile() {
+    factorialPage.setGameType("Julia Transform");
+    ChaosGameFileHandler fileHandler =
+        new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0),
+            new Vector2D(MainView.width * 0.7f, MainView.height * 0.7f));
+    FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter(
+                "files (*.txt)", "*.txt"));
+    File selectedFile = fileChooser.showOpenDialog(null);
+    if (selectedFile != null) {
+      try {
+        factorialPage.setDescription(fileHandler.readFromFile(selectedFile.getPath()));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
     }
   }
 }
