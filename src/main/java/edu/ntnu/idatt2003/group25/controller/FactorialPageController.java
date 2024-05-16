@@ -8,6 +8,7 @@ import edu.ntnu.idatt2003.group25.model.Validation;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import edu.ntnu.idatt2003.group25.view.MainView;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
@@ -24,9 +25,11 @@ public class FactorialPageController extends Controller {
   Complex complex;
   Matrix2x2 matrix;
   Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
+  FactorialPage factorialPage;
 
-  public FactorialPageController(ScreenController screenController) {
+  public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
+    this.factorialPage = factorialPage;
 
   }
   @Override
@@ -68,7 +71,14 @@ public class FactorialPageController extends Controller {
         max = registerVector2D(info);
         break;
       case "register steps":
-        steps = registerInt(info);
+        int input = registerInt(info);
+        if (input == 0) { //Default value
+          System.out.println("Inside error");
+          factorialPage.showError("InputSteps","Steps must be positive number");
+        } else {
+          factorialPage.showError("InputSteps", "");
+          steps = input;
+        }
         break;
       case "matrix input":
         matrix = registerMatrix(info);
