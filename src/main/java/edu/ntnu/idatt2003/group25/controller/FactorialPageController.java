@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2003.group25.controller;
 
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
 import edu.ntnu.idatt2003.group25.model.Complex;
 import edu.ntnu.idatt2003.group25.model.Matrix2x2;
@@ -8,25 +9,33 @@ import edu.ntnu.idatt2003.group25.model.Validation;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import edu.ntnu.idatt2003.group25.view.MainView;
+import java.io.File;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 
 public class FactorialPageController extends Controller {
-  ChaosGame chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width*0.7f), Math.round(MainView.height));
   ScreenController screenController;
+  FactorialPage factorialPage;
+  ChaosGame chaosGame;
   int steps = 0;
   Vector2D min;
   Vector2D max;
   Vector2D vector2D;
   Complex complex;
   Matrix2x2 matrix;
-  Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
-
-  public FactorialPageController(ScreenController screenController) {
+  Canvas pixelCanvas;
+  public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
+    this.factorialPage = factorialPage;
+    this.chaosGame = new ChaosGame(ChaosGameDescriptionFactory.createSierpinski(), Math.round(MainView.width*0.7f), Math.round(MainView.height));
+    this.pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
+
+
 
   }
   @Override
