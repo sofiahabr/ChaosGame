@@ -2,6 +2,7 @@ package edu.ntnu.idatt2003.group25.view.menus;
 
 import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
+import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,9 +13,10 @@ import javafx.scene.text.Text;
 
 public abstract class SideMenu extends Menu {
   public VBox sideMenu = new VBox(20);
-  public SideMenu(ScreenController screenController) {
+  FactorialPage factorialPage;
+  public SideMenu(ScreenController screenController, FactorialPage factorialPage) {
     super(screenController);
-    addObserver(new FactorialPageController(screenController));
+    addObserver(new FactorialPageController(screenController, factorialPage));
   }
   void createSideBar() {
     sideMenu = new VBox(40);
@@ -34,8 +36,6 @@ public abstract class SideMenu extends Menu {
   public VBox chooseStepsField() {
     Text chooseSteps = new Text("Choose steps");
     chooseSteps.getStyleClass().add("heading");
-
-//    chooseSteps.setStyle("-fx-font-size: 14; ");
 
     TextField inputSteps = new TextField();
     inputFieldStyle(inputSteps, "Ex. 500...", 30, 180);
@@ -59,20 +59,26 @@ public abstract class SideMenu extends Menu {
 
 
     TextField inputMax = new TextField();
-    inputFieldStyle(inputMax,"ex. 1", 30, 80);
+    inputFieldStyle(inputMax,"1", 30, 35);
 
     TextField inputMax2 = new TextField();
-    inputFieldStyle(inputMax2,"ex. 1", 30, 80);
+    inputFieldStyle(inputMax2,"1", 30, 35);
+
+    HBox maxArea = new HBox(5);
+    maxArea.getChildren().addAll(inputMax, inputMax2);
 
     inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
     inputMax2.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
 
 
     TextField inputMin = new TextField();
-    inputFieldStyle(inputMin,"ex. 0", 30, 80);
+    inputFieldStyle(inputMin,"0", 30, 35);
 
     TextField inputMin2 = new TextField();
-    inputFieldStyle(inputMin2,"ex. 0", 30, 80);
+    inputFieldStyle(inputMin2,"0", 30, 35);
+
+    HBox minArea = new HBox(5);
+    minArea.getChildren().addAll(inputMin, inputMin2);
 
     inputMin2.setOnKeyTyped(e-> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
     inputMin2.setOnKeyTyped(e-> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
@@ -81,8 +87,8 @@ public abstract class SideMenu extends Menu {
     VBox minBox = new VBox(10);
     VBox maxBox = new VBox(10);
 
-    minBox.getChildren().addAll(minTitle, inputMin);
-    maxBox.getChildren().addAll(maxTitle, inputMax);
+    minBox.getChildren().addAll(minTitle, minArea);
+    maxBox.getChildren().addAll(maxTitle, maxArea);
 
     HBox minMaxBox = new HBox(20);
     minMaxBox.getChildren().addAll(minBox, maxBox);
