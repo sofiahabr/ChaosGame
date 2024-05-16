@@ -34,5 +34,9 @@ public class ChaosGame{
 
     }
   }
+
+  public void setDescription(ChaosGameDescription description) {
+    this.description = description;
+  }
 }
 
