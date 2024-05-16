@@ -19,6 +19,7 @@ public class FactorialPage extends View {
   public ScreenController screenController;
   private ChaosGameDescription description;
   FactorialPageController controller;
+  private String gameType; // Julia or Affine
   ChaosGame chaosGame;
   private Canvas pixelCanvas = new Canvas(MainView.width, MainView.height);
 
@@ -36,7 +37,7 @@ public class FactorialPage extends View {
 
 
     SideMenu console;
-    if(MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
+    if (gameType.equals("Julia Transform")) {
       console = new JuliaConsole(screenController, this);
     } else {
       console = new AffineConsole(screenController, this);
