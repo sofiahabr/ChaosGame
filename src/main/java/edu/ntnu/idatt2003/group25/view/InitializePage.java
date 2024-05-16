@@ -1,17 +1,13 @@
 package edu.ntnu.idatt2003.group25.view;
 
-import edu.ntnu.idatt2003.group25.controller.Controller;
 import edu.ntnu.idatt2003.group25.controller.InitializePageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
+import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -29,18 +25,20 @@ public class InitializePage extends View {
 
   @Override
   public void setUp() {
-    initPane.setStyle("-fx-background-color: white; ");
+    TopMenu topMenu = new TopMenu(screenController);
+    topMenu.setUp();
+
+    initPane.setTop(topMenu.getMenu());
 
     StackPane infoBoxBackground = new StackPane();
     Rectangle box = new Rectangle(600, 400);
     box.getStyleClass().add("rectangle");
-//    box.setStyle("-fx-fill: #D9D9D9; -fx-border-width: 20; -fx-border-color: black; -fx-border-radius: 100;");
 
     Text heading = new Text("Chaos Game");
     heading.getStyleClass().add("heading");
     heading.setStyle("-fx-font-size: 30");
 
-        Text subheading = new Text("Choose an option:");
+    Text subheading = new Text("Choose an option:");
     subheading.getStyleClass().add("heading");
     subheading.setStyle("-fx-font-size: 20");
 
@@ -50,10 +48,8 @@ public class InitializePage extends View {
         "Sierpinski Triangle", "Barnsley Fern", "Read from file");
 
     optionBox.setMinSize(180, 30);
-//    optionBox.setStyle("-fx-background-color: white");
 
     Button startButton  = new Button("Start Game");
-//    startButton.setStyle("-fx-font-size: 16; -fx-background-color: white; -fx-padding: 5 20; -fx-border-radius: 10");
 
     startButton.setOnAction(e-> updateObserver("button clicked", optionBox.getValue()));
 
@@ -71,7 +67,6 @@ public class InitializePage extends View {
   @Override
   public void update() {
 
-  }
 
   @Override
   public BorderPane getPane() {
