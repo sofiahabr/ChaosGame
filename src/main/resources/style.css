@@ -42,6 +42,13 @@
     -fx-background-color: white;
     -fx-font-size: 14px;
 }
+.combo-box.error .text{
+    -fx-fill: red;
+}
+.combo-box.error {
+    -fx-border-color: red;
+    -fx-border-width: 3;
+}
 .text {
     -fx-font: 14px "Helvetica";
     /*-fx-font-weight: bold;*/
