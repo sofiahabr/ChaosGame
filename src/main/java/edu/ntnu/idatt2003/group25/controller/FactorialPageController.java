@@ -41,46 +41,12 @@ public class FactorialPageController extends Controller {
   @Override
   public void gameChanged(String action, String info) {
     switch (action) {
-      case "button clicked":
-        switch (info) {
-          case "play":
-            this.chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width * 0.7f),
-                Math.round(MainView.height * 0.7f));
-            chaosGame.runSteps(steps);
-            draw();
-            break;
-          case "add":
-            if (MainView.description.getTransforms().getFirst().getClass().getName()
-                .contains("Julia")) {
-              complex = new Complex(vector2D.getX0(), vector2D.getX1());
-              MainView.description.getTransforms().add(new JuliaTransform(complex, 1));
-            } else {
-              MainView.description.getTransforms().add(new AffineTransform2D(matrix, vector2D));
-            }
-            break;
-          case "reset":
-            clear();
-            break;
-          case "save":
-            ChaosGameFileHandler fileHandler =
-                new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0), new Vector2D(1, 1));
-            fileHandler.writeToFile(MainView.description, "src/main/resources/TestSave.txt");
-            break;
-        }
-      case "vector input":
-        vector2D = registerVector2D(info);
-        break;
-      case "min input":
-        min = registerVector2D(info);
-        break;
-      case "max input":
-        max = registerVector2D(info);
-        break;
-      case "register steps":
-        steps = registerInt(info);
-        break;
-      case "matrix input":
-        matrix = registerMatrix(info);
+      case "button clicked" -> buttonClicked(info);
+      case "vector input" -> vector2D = registerVector2D(info);
+      case "min input"-> min = registerVector2D(info);
+      case "max input"-> max = registerVector2D(info);
+      case "register steps" -> steps = registerInt(info);
+      case "matrix input" -> matrix = registerMatrix(info);
     }
   }
 
@@ -104,9 +70,10 @@ public class FactorialPageController extends Controller {
           gc.fillRect(j, i, 1, 1); // Draw a single pixel
         }
       }
+      factorialPage.getPane().setCenter(pixelCanvas);
     }
-    screenController.getScreenContent("factorial page").getPane().setCenter(pixelCanvas);
   }
+
   public void clear() {
       GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
       gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());
@@ -126,5 +93,42 @@ public class FactorialPageController extends Controller {
     return new Matrix2x2(
         Validation.verifyDouble(values[0],0), Validation.verifyDouble(values[1],0),
         Validation.verifyDouble(values[2],0), Validation.verifyDouble(values[3],0));
+  }
+  public void buttonClicked(String info){
+    switch (info) {
+      case "play"-> factorialPage.draw(steps);
+      case "add"-> addAction();
+      case "reset"-> resetAction();
+      case "save" -> saveAction();
+    }
+  }
+  private void addAction() {
+    if (factorialPage.getDescription().getTransforms().getFirst().getClass().getName()
+        .contains("Julia")) {
+      complex = new Complex(vector2D.getX0(), vector2D.getX1());
+      factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, 1));
+    } else {
+      factorialPage.getDescription().getTransforms().add(new AffineTransform2D(matrix, vector2D));
+    }
+  }
+  private void resetAction() {
+    factorialPage.reset();
+  }
+  private void saveAction() {
+    ChaosGameFileHandler fileHandler =
+        new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0),
+            new Vector2D(MainView.width * 0.7f, MainView.height * 0.7f));
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.getExtensionFilters().add(
+        new FileChooser.ExtensionFilter(
+            "files (*.txt)", "*.txt"));
+    File selectedFile = fileChooser.showOpenDialog(null);
+    if (selectedFile != null) {
+      try {
+        fileHandler.writeToFile(factorialPage.getDescription(), selectedFile.getPath());
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
 }
