@@ -3,16 +3,10 @@ package edu.ntnu.idatt2003.group25.view;
 import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
-import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
-import edu.ntnu.idatt2003.group25.model.Complex;
-import edu.ntnu.idatt2003.group25.model.Matrix2x2;
-import edu.ntnu.idatt2003.group25.model.Vector2D;
-import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
-import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.model.Validation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -35,16 +29,10 @@ public class FactorialPage extends View {
   @Override
   public void setUp() {
     update();
-//
-//    TopBarMenu topBarMenu = new TopBarMenu(screenController);
-//    topBarMenu.setUp();
-//
-//    borderPane.setTop(topBarMenu.getBox());
-
     borderPane.setStyle("-fx-background-color: white");
 
 
-    if(MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
+    if (MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
       juliaSidebar();
     } else if (MainView.description.getTransforms().getFirst().getClass().getName().contains("AffineTransform2D")) {
       affineSidebar();
@@ -64,7 +52,6 @@ public class FactorialPage extends View {
   private void createSideBar() {
     sidebarMenu = new VBox(40);
     sidebarMenu.getStyleClass().add("vbox");
-//    sidebarMenu.setStyle("-fx-background-color: #D9D9D9");
     sidebarMenu.setPadding(new Insets(20));
   }
 
@@ -72,7 +59,6 @@ public class FactorialPage extends View {
     Text chooseSteps = new Text("Choose steps");
     chooseSteps.getStyleClass().add("heading");
 
-//    chooseSteps.setStyle("-fx-font-size: 14; ");
 
     TextField inputSteps = new TextField();
     inputFieldStyle(inputSteps, "Ex. 500...", 30, 180);
@@ -82,7 +68,9 @@ public class FactorialPage extends View {
     stepsArea.setAlignment(Pos.CENTER);
 
     // send to controller
-    inputSteps.setOnKeyTyped(e-> updateObserver("register steps", inputSteps.getText()));
+    inputSteps.setOnKeyTyped(e-> {
+        updateObserver("register steps", inputSteps.getText());
+    });
 
     return stepsArea;
   }
@@ -94,17 +82,16 @@ public class FactorialPage extends View {
     maxTitle.getStyleClass().add("heading");
     minTitle.getStyleClass().add("heading");
 
-
-//    minTitle.setStyle("-fx-font-size: 14;");
-//    maxTitle.setStyle("-fx-font-size: 14;");
-
     TextField inputMax = new TextField();
     inputFieldStyle(inputMax,"ex. 1", 30, 80);
-    inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", " + inputMax.getText()));
+    inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", "
+        + inputMax.getText()));
+
 
     TextField inputMin = new TextField();
     inputFieldStyle(inputMin,"ex. 0", 30, 80);
-    inputMax.setOnKeyTyped(e-> updateObserver("min input", inputMax.getText() + ", " + inputMax.getText()));
+    inputMax.setOnKeyTyped(e-> updateObserver("min input", inputMax.getText() + ", "
+        + inputMax.getText()));
 
 
     VBox minBox = new VBox(10);
@@ -145,7 +132,6 @@ public class FactorialPage extends View {
 
     VBox buttonBox = new VBox(30);
     buttonBox.getChildren().addAll(addTransformButton, topButtonBox, playButton);
-//    buttonBox.setAlignment(Pos.BASELINE_CENTER);
     buttonBox.setAlignment(Pos.CENTER);
 
     return buttonBox;
@@ -165,8 +151,6 @@ public class FactorialPage extends View {
   public VBox createVector() {
     Text chooseVector = new Text("Choose vector:");
     chooseVector.getStyleClass().add("heading");
-
-//    chooseVector.setStyle("-fx-font-size: 14; ");
 
     TextField inputVector1 = new TextField();
     inputFieldStyle(inputVector1,"x0", 30, 80);
@@ -188,7 +172,6 @@ public class FactorialPage extends View {
   public VBox createMatrix() {
     Text createMatrix = new Text("Choose matrix:");
     createMatrix.getStyleClass().add("heading");
-//    createMatrix.setStyle("-fx-font-size: 14");
 
     TextField inputA = new TextField();
     inputFieldStyle(inputA,"a", 30, 80);
@@ -218,22 +201,27 @@ public class FactorialPage extends View {
   public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);
-//    inputField.setStyle("-fx-background-radius: 10; -fx-font-size: 14");
     inputField.setPromptText(promptText);
   }
 
   public void addStyle(Button button, String color, int width) {
-//    String buttonStyle = "-fx-background-radius: 10; -fx-min-height: 30; "
-//        + "-fx-text-fill: white; -fx-font-size: 12;";
     String colorInit = "-fx-background-color: " + color + ";" ;
     String widthInit = "-fx-min-width: " + width + ";" ;
 
     button.setStyle(colorInit + widthInit);
+  }
+  public String errorText(String input) {
+    int i = Validation.verifyInt(input,0);
+    if (i == 0)
+    {
+      return "please enter valid nr";
+    } else {
+      return null;
+    }
   }
 
   @Override
   public BorderPane getPane() {
     return borderPane;
   }
-
 }
