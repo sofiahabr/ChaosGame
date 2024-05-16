@@ -4,7 +4,6 @@ import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import java.util.HashMap;
-import java.util.Objects;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,6 +27,9 @@ public class FactorialPage extends View {
   FactorialPageController controller;
   HashMap<String,String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
+  private Label minMaxError;
+  private Label matrixErrorLabel;
+  private Label vectorErrorLabel;
 
   public FactorialPage(ScreenController screenController) {
     this.controller = new FactorialPageController(screenController, this);
@@ -62,7 +64,7 @@ public class FactorialPage extends View {
 
 
     SideMenu console;
-    if(MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
+    if (MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
       console = new JuliaConsole(screenController);
     } else {
       console = new AffineConsole(screenController);
@@ -91,7 +93,7 @@ public class FactorialPage extends View {
 
     stepsErrorLabel = new Label();
     stepsErrorLabel.getStyleClass().add("error");
-    updateStepsErrorLabel();
+    updateErrorLabel("InputSteps", stepsErrorLabel);
 
 
 //    Label stepsErrorLabel = new Label();
@@ -138,7 +140,11 @@ public class FactorialPage extends View {
     VBox minBox = new VBox(10);
     VBox maxBox = new VBox(10);
 
-    minBox.getChildren().addAll(minTitle, inputMin);
+    minMaxError = new Label();
+    minMaxError.getStyleClass().add("error");
+    updateErrorLabel("InputMinMax", minMaxError);
+
+    minBox.getChildren().addAll(minTitle, inputMin, minMaxError);
     maxBox.getChildren().addAll(maxTitle, inputMax);
 
     HBox minMaxBox = new HBox(20);
@@ -204,8 +210,12 @@ public class FactorialPage extends View {
     HBox vectorInputs = new HBox(20);
     vectorInputs.getChildren().addAll(inputVector1,inputVector2);
 
+    vectorErrorLabel = new Label();
+    vectorErrorLabel.getStyleClass().add("error");
+    updateErrorLabel("InputVector",vectorErrorLabel);
+
     VBox vectorArea = new VBox(10);
-    vectorArea.getChildren().addAll(chooseVector, vectorInputs);
+    vectorArea.getChildren().addAll(chooseVector, vectorInputs,vectorErrorLabel);
     vectorArea.setAlignment(Pos.CENTER);
     return vectorArea;
   }
@@ -228,12 +238,14 @@ public class FactorialPage extends View {
     inputC.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
     inputD.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
 
-
+    matrixErrorLabel = new Label();
+    matrixErrorLabel.getStyleClass().add("error");
+    updateErrorLabel("InputMatrix", matrixErrorLabel);
     HBox inputAB = new HBox(20, inputA,inputB);
     HBox inputCD = new HBox(20, inputC, inputD);
 
     VBox matrixArea = new VBox(10);
-    matrixArea.getChildren().addAll(createMatrix,inputAB,inputCD);
+    matrixArea.getChildren().addAll(createMatrix,inputAB,inputCD, matrixErrorLabel);
     matrixArea.setAlignment(Pos.CENTER);
 
     return matrixArea;
@@ -257,16 +269,25 @@ public class FactorialPage extends View {
   public BorderPane getPane() {
     return borderPane;
   }
-  private void updateStepsErrorLabel() {
-    String errorMessage = errorMap.getOrDefault("InputSteps", "");
-    stepsErrorLabel.setText(errorMessage.isEmpty() ? " " : errorMessage);
+  private void updateErrorLabel(String key, Label label) {
+    String errorMessage = errorMap.getOrDefault(key, "");
+    label.setText(errorMessage.isEmpty() ? " " : errorMessage);
   }
   public void showError(String placement, String message) {
     errorMap.put(placement, message);
-    if ("InputSteps".equals(placement)) {
-      updateStepsErrorLabel();
+    switch (placement) {
+      case "InputSteps":
+        updateErrorLabel("InputSteps", stepsErrorLabel);
+        break;
+      case "InputMinMax":
+        updateErrorLabel("InputMinMax", minMaxError);
+        break;
+      case "InputMatrix":
+        updateErrorLabel("InputMatrix", matrixErrorLabel);
+        break;
+      case "InputVector":
+        updateErrorLabel("InputVector", vectorErrorLabel);
+        break;
     }
-
-
   }
 }
