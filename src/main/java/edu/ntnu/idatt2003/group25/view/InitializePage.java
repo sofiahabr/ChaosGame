@@ -6,6 +6,8 @@ import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
@@ -55,7 +57,16 @@ public class InitializePage extends View {
     Button startButton  = new Button("Start Game");
 //    startButton.setStyle("-fx-font-size: 16; -fx-background-color: white; -fx-padding: 5 20; -fx-border-radius: 10");
 
-    startButton.setOnAction(e-> updateObserver("button clicked", optionBox.getValue()));
+    startButton.setOnAction(e-> {
+      if (optionBox.getValue() == null) {
+        optionBox.setPromptText("Please choose a transform");
+        optionBox.getStyleClass().add("error");
+      } else {
+        updateObserver("button clicked", optionBox.getValue());
+      }
+    });
+
+
 
     VBox infoArea = new VBox(30, heading, subheading, optionBox, new VBox(), startButton);
     infoArea.setAlignment(Pos.CENTER);
