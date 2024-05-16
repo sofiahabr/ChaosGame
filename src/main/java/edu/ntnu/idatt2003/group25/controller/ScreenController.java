@@ -24,7 +24,9 @@ public class ScreenController extends Controller{
 
   @Override
   public void gameChanged(String event, String screenName) {
-    scene.setRoot(getScreenContent(screenName).getPane());
+    if(screenContents.containsKey(screenName)){
+      scene.setRoot(getScreenContent(screenName).getPane());
+    }
   }
 
 }
