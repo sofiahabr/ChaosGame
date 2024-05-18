@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2003.group25.view.menus;
 
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
-import edu.ntnu.idatt2003.group25.view.menus.Menu;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,15 +26,20 @@ public class TopMenu extends Menu {
     backButton.setAlignment(Pos.CENTER);
 
     Button exitButton = new Button("Exit");
-    exitButton.setOnAction(e -> System.exit(0));
+    exitButton.setOnAction(e -> Platform.exit());
     exitButton.setAlignment(Pos.CENTER_RIGHT);
+
+    Button infoButton = new Button("i");
+
+    //TODO: drop down informasjon om spillet og hvordan det fungerer
+    // TODO: Ikoner for back, exit og info + spillnavn i midten
 
     HBox buffer = new HBox();
     HBox.setHgrow(buffer, Priority.ALWAYS);
 
     menu.setPrefHeight(60);
     menu.setPadding(new Insets(20));
-    menu.getChildren().addAll(backButton, buffer, exitButton);
+    menu.getChildren().addAll(backButton, buffer,infoButton, exitButton);
   }
 
   @Override
