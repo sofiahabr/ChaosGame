@@ -63,7 +63,7 @@ public abstract class SideMenu extends Menu {
     TextField inputMax2 = new TextField();
     inputFieldStyle(inputMax2,"1", 30, 35);
 
-    HBox maxArea = new HBox(5);
+    HBox maxArea = new HBox(10);
     maxArea.getChildren().addAll(inputMax, inputMax2);
 
     inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
@@ -76,7 +76,7 @@ public abstract class SideMenu extends Menu {
     TextField inputMin2 = new TextField();
     inputFieldStyle(inputMin2,"0", 30, 35);
 
-    HBox minArea = new HBox(5);
+    HBox minArea = new HBox(10);
     minArea.getChildren().addAll(inputMin, inputMin2);
 
     inputMin2.setOnKeyTyped(e-> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
