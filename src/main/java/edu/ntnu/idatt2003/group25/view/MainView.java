@@ -24,7 +24,7 @@ public class MainView extends Application  {
     screenController.addScreenContent(initializePage, "initialize page");
 
     screenController.gameChanged( "switch page","initialize page");
-    scene.getStylesheets().add("/style.css");
+    scene.getStylesheets().add("/style/style.css");
 
     stage.setTitle("Chaos Game");
     stage.setScene(scene);
