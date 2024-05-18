@@ -50,35 +50,6 @@ public class FactorialPageController extends Controller {
     }
   }
 
-  public void draw(){
-    int[][] canvas = chaosGame.getCanvas().getCanvasArray();
-    GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
-
-    for (int i = 0; i < canvas.length; i++) {
-      for (int j = 0; j < canvas[i].length; j++) {
-        double number = canvas[i][j] / 10f;
-        if ((number) > 0) {
-          if ((number) < 1){
-            gc.setFill(Color.color(1,0,number));
-          }
-          else if ((number) < 2){
-            gc.setFill(Color.color(2 - number, 0,1));
-          }
-          else {
-            gc.setFill(Color.color(0,0,1));
-          }
-          gc.fillRect(j, i, 1, 1); // Draw a single pixel
-        }
-      }
-      factorialPage.getPane().setCenter(pixelCanvas);
-    }
-  }
-
-  public void clear() {
-      GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
-      gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());
-  }
-
   public int registerInt(String input) {
     System.out.println(steps);
     return steps = Validation.verifyPositiveInt(input, 0);
