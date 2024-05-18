@@ -10,10 +10,13 @@ import edu.ntnu.idatt2003.group25.model.Validation;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import edu.ntnu.idatt2003.group25.view.MainView;
+import edu.ntnu.idatt2003.group25.view.menus.EditTransformsMenu;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.FileChooser;
 
@@ -27,6 +30,8 @@ public class FactorialPageController extends Controller {
   Vector2D vector2D = null;
   Complex complex = null;
   Matrix2x2 matrix = null;
+  List<Vector2D> vectorsInDescription = null;
+  List<Matrix2x2> matrixesInDescription = null;
   Canvas pixelCanvas;
   public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
@@ -77,11 +82,12 @@ public class FactorialPageController extends Controller {
     }
   }
   private void addAction() {
-    if (factorialPage.getDescription().getTransforms().getFirst().getClass().getName()
-        .contains("Julia")) {
+    if (factorialPage.getGameType().equals("Julia Transform")) {
       complex = new Complex(vector2D.getX0(), vector2D.getX1());
       factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, 1));
-    } else {
+
+
+    } else if (factorialPage.getGameType().equals("Affine Transform")){
       factorialPage.getDescription().getTransforms().add(new AffineTransform2D(matrix, vector2D));
     }
   }
