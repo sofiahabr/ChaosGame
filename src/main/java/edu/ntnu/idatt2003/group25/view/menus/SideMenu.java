@@ -142,7 +142,7 @@ public abstract class SideMenu extends Menu {
     inputFieldStyle(inputVector2,"x1", 30, 80);
 
     inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
-    inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
+    inputVector2.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
 
     HBox vectorInputs = new HBox(20);
     vectorInputs.getChildren().addAll(inputVector1,inputVector2);
