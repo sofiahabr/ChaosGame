@@ -15,6 +15,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * FactorialPageController function as the FactorialPage's controller class.
+ */
 public class FactorialPageController extends Controller {
   ChaosGame chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width*0.7f), MainView.height);
   ScreenController screenController;
@@ -26,15 +29,18 @@ public class FactorialPageController extends Controller {
   Matrix2x2 matrix;
   Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
   FactorialPage factorialPage;
-  String invalidPositiveNumber = "Please enter a positive number";
-  String invalidNumber = "Please enter a number";
+  String invalidPositiveNumber = "Please enter a positive number\n 0 -1000 000 000";
+  String invalidNumber = "Please enter numbers";
   int defaultValue = -9999;
 
-
+  /**
+   * The FactorialPageController takes in instances of ScreenController and FactorialPage.
+   * @param screenController
+   * @param factorialPage
+   */
   public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
     this.factorialPage = factorialPage;
-
   }
   @Override
   public void gameChanged(String action, String info) {
@@ -67,10 +73,16 @@ public class FactorialPageController extends Controller {
         }
       case "vector input":
         vector2D = registerVector2D(info);
-        if (vector2D == null || vector2D.getX0() == defaultValue || vector2D.getX1() == defaultValue) {
-          factorialPage.showError("InputVector",invalidNumber);
-        } else {
-          factorialPage.showError("InputVector","");
+        System.out.println(vector2D.toString());
+        boolean hasError = false;
+        if (vector2D.getX0() == defaultValue) {
+          factorialPage.showError("InputVector", invalidNumber);
+          hasError = true;
+        } if (vector2D.getX1() == defaultValue) {
+        factorialPage.showError("InputVector", invalidNumber);
+        hasError = true;
+      } if (!hasError) {
+          factorialPage.showError("InputVector"," ");
         }
         break;
       case "min input":
@@ -84,8 +96,10 @@ public class FactorialPageController extends Controller {
       case "max input":
         max = registerVector2D(info);
         if (max.getX0() == defaultValue || max.getX1() == defaultValue) {
-          factorialPage.showError("InputMinMax",invalidNumber);
-        } else {
+          factorialPage.showError("InputMinMax", invalidNumber);
+         factorialPage.showError("InputMinMax", invalidNumber);
+      }
+        else {
           factorialPage.showError("InputMinMax", " ");
         }
         break;
@@ -100,8 +114,8 @@ public class FactorialPageController extends Controller {
         break;
       case "matrix input":
         matrix = registerMatrix(info);
-        if (matrix.getA00() == defaultValue && matrix.getA01() == defaultValue &&
-            matrix.getA10() == defaultValue && matrix.getA11() == defaultValue) {
+        if (matrix.getA00() == defaultValue || matrix.getA01() == defaultValue ||
+            matrix.getA10() == defaultValue || matrix.getA11() == defaultValue) {
           factorialPage.showError("InputMatrix", invalidNumber);
         } else {
           factorialPage.showError("InputMatrix", "");
@@ -144,7 +158,7 @@ public class FactorialPageController extends Controller {
   }
   public Vector2D registerVector2D(String info){
     String[] values = info.split(",");
-    return new Vector2D(Validation.verifyDouble(values[0], defaultValue), Validation.verifyDouble(values[0],defaultValue));
+    return new Vector2D(Validation.verifyDouble(values[0], defaultValue), Validation.verifyDouble(values[1],defaultValue));
 
   }
   public Matrix2x2 registerMatrix(String info){
