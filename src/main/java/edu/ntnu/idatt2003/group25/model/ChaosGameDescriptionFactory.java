@@ -43,6 +43,27 @@ public class ChaosGameDescriptionFactory {
     transformation.add(new JuliaTransform(c,-1));
     return new ChaosGameDescription(transformation, new Vector2D(-1.6, -1), new Vector2D(1.6, 1));
   }
+  public static ChaosGameDescription createLevyDragon() {
+    List<Transform2D> transformations = new ArrayList<>();
+    transformations.add(new AffineTransform2D(new Matrix2x2(0.5, -0.5, 0.5, 0.5),
+        new Vector2D(0, 0)));
+    transformations.add(new AffineTransform2D(new Matrix2x2(0.5, 0.5, -0.5, 0.5),
+        new Vector2D(0.5, 0.5)));
+
+    return new ChaosGameDescription(transformations,
+        new Vector2D(-0.5, -0.5), new Vector2D(1.5, 1));
+  }
+  public static ChaosGameDescription createHeighwayDragon() {
+    List<Transform2D> transformations = new ArrayList<>();
+    transformations.add(new AffineTransform2D(new Matrix2x2(0.5, -0.5, 0.5, 0.5),
+        new Vector2D(0, 0)));
+    transformations.add(new AffineTransform2D(new Matrix2x2(-0.5, -0.5, 0.5, -0.5),
+        new Vector2D(1, 0)));
+
+    return new ChaosGameDescription(transformations,
+        new Vector2D(-0.5, -0.5), new Vector2D(1.25, 0.75));
+  }
+//  Add Koch snowflake?
   public static ChaosGameDescription createEmpty() {
     return new ChaosGameDescription(new ArrayList<>(),
         new Vector2D(0, 0), new Vector2D(0,0));
