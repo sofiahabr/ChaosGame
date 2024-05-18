@@ -13,7 +13,6 @@ import javafx.scene.text.Text;
 
 public abstract class SideMenu extends Menu {
   public VBox sideMenu = new VBox(20);
-  FactorialPage factorialPage;
   public SideMenu(ScreenController screenController, FactorialPage factorialPage) {
     super(screenController);
     addObserver(new FactorialPageController(screenController, factorialPage));
@@ -100,28 +99,33 @@ public abstract class SideMenu extends Menu {
   VBox gameButtons() {
 
     Button playButton = new Button("Play");
+    playButton.getStyleClass().add("button2");
     addStyle(playButton,"green", 180);
     playButton.setOnAction(e-> updateObserver("button clicked", "play"));
 
-    Button resetButton = new Button("Reset");
-    addStyle(resetButton,"red",80);
+    Button resetButton = new Button("Reset canvas");
+    resetButton.getStyleClass().add("button2");
+    addStyle(resetButton,"red",180);
     resetButton.setOnAction(e-> updateObserver("button clicked", "reset"));
 
     Button saveButton = new Button("Save to file");
-    addStyle(saveButton, "black", 80);
+    saveButton.getStyleClass().add("button2");
+    addStyle(saveButton, "black", 180);
     saveButton.setOnAction(e-> updateObserver("button clicked", "save"));
 
-
     Button addTransformButton = new Button("Add transform");
+    addTransformButton.getStyleClass().add("button2");
     addStyle(addTransformButton,"grey",180);
     addTransformButton.setOnAction(e-> updateObserver("button clicked", "add"));
 
+    Button applyEditsButton = new Button("Apply edits");
+    applyEditsButton.getStyleClass().add("button2");
+    addStyle(applyEditsButton,"blue",180);
+    applyEditsButton.setOnAction(e-> updateObserver("button clicked", "edit"));
 
-    HBox topButtonBox = new HBox(20);
-    topButtonBox.getChildren().addAll(saveButton, resetButton);
 
-    VBox buttonBox = new VBox(30);
-    buttonBox.getChildren().addAll(addTransformButton, topButtonBox, playButton);
+    VBox buttonBox = new VBox(10);
+    buttonBox.getChildren().addAll(addTransformButton, applyEditsButton, saveButton, resetButton, playButton);
     buttonBox.setAlignment(Pos.CENTER);
 
     return buttonBox;
