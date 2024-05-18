@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2003.group25.controller;
 
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
 import edu.ntnu.idatt2003.group25.model.Complex;
@@ -14,8 +15,6 @@ import edu.ntnu.idatt2003.group25.view.MainView;
 import java.io.File;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 public class FactorialPageController extends Controller {
@@ -23,11 +22,11 @@ public class FactorialPageController extends Controller {
   FactorialPage factorialPage;
   ChaosGame chaosGame;
   int steps = 0;
-  Vector2D min;
-  Vector2D max;
-  Vector2D vector2D;
-  Complex complex;
-  Matrix2x2 matrix;
+  Vector2D min = null;
+  Vector2D max = null;
+  Vector2D vector2D = null;
+  Complex complex = null;
+  Matrix2x2 matrix = null;
   Canvas pixelCanvas;
   public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
@@ -99,7 +98,7 @@ public class FactorialPageController extends Controller {
       try {
         fileHandler.writeToFile(factorialPage.getDescription(), selectedFile.getPath());
       } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("Error: " + e.getMessage());
       }
     }
   }
