@@ -29,4 +29,7 @@ public class JuliaTransform implements Transform2D {
   public void setComplex(Complex complex) {
     this.point = new Complex(complex.getX0(), complex.getX1());
   }
+  public Complex getComplex() {
+    return point;
+  }
 }
