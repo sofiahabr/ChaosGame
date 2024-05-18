@@ -71,6 +71,7 @@ public class FactorialPageController extends Controller {
       case "add"-> addAction();
       case "reset"-> resetAction();
       case "save" -> saveAction();
+      case "edit" -> editAction();
     }
   }
   private void addAction() {
@@ -101,5 +102,36 @@ public class FactorialPageController extends Controller {
         e.printStackTrace();
       }
     }
+  }
+
+  private void editAction() {
+    System.out.println("edit action");
+    ChaosGameDescription description = factorialPage.getDescription();
+
+    if(min != null) {
+      System.out.println("Min: " + min);
+      description.setMinCoords(min);
+    } if (max != null) {
+      System.out.println("Max: " + max);
+      description.setMaxCoords(max);
+    } if (vector2D != null) {
+      System.out.println("Vector: " + vector2D);
+      description.getTransforms().forEach(transform -> {
+        if (transform instanceof JuliaTransform) {
+          complex = new Complex(vector2D.getX0(), vector2D.getX1());
+          ((JuliaTransform) transform).setComplex(complex);
+        } else if (transform instanceof AffineTransform2D) {
+          ((AffineTransform2D) transform).setVector(vector2D);
+        }
+      });
+    } if (matrix != null) {
+      System.out.println(matrix);
+      description.getTransforms().forEach(transform -> {
+        if (transform instanceof AffineTransform2D) {
+          ((AffineTransform2D) transform).setMatrix(matrix);
+        }
+      });
+    }
+    factorialPage.setDescription(description);
   }
 }
