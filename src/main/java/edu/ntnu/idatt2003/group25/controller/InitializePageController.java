@@ -37,6 +37,7 @@ public class InitializePageController extends Controller {
         case "Create new Julia Transform":
           factorialPage.setGameType("Julia Transform");
           description = (ChaosGameDescriptionFactory.createEmpty());
+          break;
         case "Julia Transform":
           factorialPage.setGameType("Julia Transform");
           description = ChaosGameDescriptionFactory.createJuliaTransformation(new Complex(-0.7, 0.1));
