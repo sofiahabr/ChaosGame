@@ -49,6 +49,14 @@ public class InitializePageController extends Controller {
           factorialPage.setGameType("Affine Transform");
           description = (ChaosGameDescriptionFactory.createBarnsleyFern());
           break;
+        case "Lévy Dragon":
+          factorialPage.setGameType("Affine Transform");
+          description = ChaosGameDescriptionFactory.createLevyDragon();
+          break;
+        case "Heighway Dragon":
+          factorialPage.setGameType("Affine Transform");
+          description = ChaosGameDescriptionFactory.createHeighwayDragon();
+          break;
         case "Read from file":
           readFromFile();
           if(factorialPage.getDescription().getTransforms().get(0) instanceof JuliaTransform){

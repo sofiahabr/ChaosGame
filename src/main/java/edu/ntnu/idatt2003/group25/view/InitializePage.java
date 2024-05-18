@@ -45,7 +45,7 @@ public class InitializePage extends View {
     ComboBox<String> optionBox = new ComboBox<>();
     optionBox.getItems().addAll(
         "Create new Affine Transform","Create new Julia Transform", "Julia Transform",
-        "Sierpinski Triangle", "Barnsley Fern", "Read from file");
+        "Sierpinski Triangle", "Barnsley Fern","Lévy Dragon", "Heighway Dragon", "Read from file");
 
     optionBox.setMinSize(180, 30);
 
