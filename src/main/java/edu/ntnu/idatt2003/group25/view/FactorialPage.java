@@ -95,18 +95,6 @@ public class FactorialPage extends View {
     stepsErrorLabel.getStyleClass().add("error");
     updateErrorLabel("InputSteps", stepsErrorLabel);
 
-
-//    Label stepsErrorLabel = new Label();
-//    stepsErrorLabel.getStyleClass().add("error");
-//    System.out.println(errorMap.get("InputSteps") + "- output");
-//    if (!Objects.equals(errorMap.get("InputSteps"), "")) {
-//      stepsErrorLabel.setText(errorMap.get("InputSteps"));
-//      System.out.println("Inside errormap != null");
-//
-//    } else {
-//      System.out.println("Inside errormap == null"); //den gikk ikke inn hit i loopen
-//      stepsErrorLabel.setText(" ");
-//    }
     stepsArea.getChildren().addAll(chooseSteps, inputSteps, stepsErrorLabel);
     stepsArea.setAlignment(Pos.CENTER);
 
@@ -117,7 +105,7 @@ public class FactorialPage extends View {
 
     return stepsArea;
   }
-  private HBox chooseMinMaxField() {
+  private VBox chooseMinMaxField() {
 
     // Create min/ max area
     Text minTitle = new Text(" Min: ");
@@ -133,8 +121,8 @@ public class FactorialPage extends View {
 
     TextField inputMin = new TextField();
     inputFieldStyle(inputMin,"ex. 0", 30, 80);
-    inputMax.setOnKeyTyped(e-> updateObserver("min input", inputMax.getText() + ", "
-        + inputMax.getText()));
+    inputMin.setOnKeyTyped(e-> updateObserver("min input", inputMin.getText() + ", "
+        + inputMin.getText()));
 
 
     VBox minBox = new VBox(10);
@@ -144,14 +132,18 @@ public class FactorialPage extends View {
     minMaxError.getStyleClass().add("error");
     updateErrorLabel("InputMinMax", minMaxError);
 
-    minBox.getChildren().addAll(minTitle, inputMin, minMaxError);
+    minBox.getChildren().addAll(minTitle, inputMin);
     maxBox.getChildren().addAll(maxTitle, inputMax);
 
     HBox minMaxBox = new HBox(20);
     minMaxBox.getChildren().addAll(minBox, maxBox);
     minMaxBox.setAlignment(Pos.CENTER);
 
-    return minMaxBox;
+    VBox minMaxArea = new VBox(10);
+    minMaxArea.getChildren().addAll(minMaxBox, minMaxError);
+    minMaxArea.setAlignment(Pos.CENTER);
+
+    return minMaxArea;
   }
 
   private VBox gameButtons() {
@@ -199,16 +191,16 @@ public class FactorialPage extends View {
     Text chooseVector = new Text("Choose vector:");
     chooseVector.getStyleClass().add("heading");
 
-    TextField inputVector1 = new TextField();
-    inputFieldStyle(inputVector1,"x0", 30, 80);
-    TextField inputVector2 = new TextField();
-    inputFieldStyle(inputVector2,"x1", 30, 80);
+    TextField inputVectorX0 = new TextField();
+    inputFieldStyle(inputVectorX0,"x0", 30, 80);
+    TextField inputVectorX1 = new TextField();
+    inputFieldStyle(inputVectorX1,"x1", 30, 80);
 
-    inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
-    inputVector1.setOnKeyTyped(e-> updateObserver("vector input", inputVector1.getText() + ", " + inputVector2.getText()));
+    inputVectorX0.setOnKeyTyped(e-> updateObserver("vector input", inputVectorX0.getText() + ", " + inputVectorX1.getText()));
+    inputVectorX1.setOnKeyTyped(e-> updateObserver("vector input", inputVectorX0.getText() + ", " + inputVectorX1.getText()));
 
     HBox vectorInputs = new HBox(20);
-    vectorInputs.getChildren().addAll(inputVector1,inputVector2);
+    vectorInputs.getChildren().addAll(inputVectorX0,inputVectorX1);
 
     vectorErrorLabel = new Label();
     vectorErrorLabel.getStyleClass().add("error");
