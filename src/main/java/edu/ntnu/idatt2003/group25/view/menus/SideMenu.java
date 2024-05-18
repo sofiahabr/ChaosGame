@@ -118,7 +118,7 @@ public abstract class SideMenu extends Menu {
     addStyle(addTransformButton,"grey",180);
     addTransformButton.setOnAction(e-> updateObserver("button clicked", "add"));
 
-    Button applyEditsButton = new Button("Apply edits");
+    Button applyEditsButton = new Button("Edit transformation");
     applyEditsButton.getStyleClass().add("button2");
     addStyle(applyEditsButton,"blue",180);
     applyEditsButton.setOnAction(e-> updateObserver("button clicked", "edit"));
@@ -181,18 +181,4 @@ public abstract class SideMenu extends Menu {
 
     return matrixArea;
   }
-
-  public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
-    inputField.setMinHeight(height);
-    inputField.setMaxWidth(width);
-    inputField.setPromptText(promptText);
-  }
-
-  public void addStyle(Button button, String color, int width) {
-    String colorInit = "-fx-background-color: " + color + ";" ;
-    String widthInit = "-fx-min-width: " + width + ";" ;
-
-    button.setStyle(colorInit + widthInit);
-  }
-
 }
