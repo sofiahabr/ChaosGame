@@ -36,7 +36,7 @@ public class InitializePage extends View {
 
     Text heading = new Text("Chaos Game");
     heading.getStyleClass().add("heading");
-    heading.setStyle("-fx-font-size: 30");
+    heading.setStyle("-fx-font-size: 40");
 
     Text subheading = new Text("Choose an option:");
     subheading.getStyleClass().add("heading");
