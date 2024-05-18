@@ -26,4 +26,16 @@ public class ChaosGameDescription {
   public Vector2D getMinCoords() {
     return minCoords;
   }
+
+  public void setMinCoords(Vector2D minCoords) {
+    this.minCoords = minCoords;
+  }
+
+  public void setMaxCoords(Vector2D maxCoords) {
+    this.maxCoords = maxCoords;
+  }
+
+  public void setTransforms(List<Transform2D> transforms) {
+    this.transforms = transforms;
+  }
 }
