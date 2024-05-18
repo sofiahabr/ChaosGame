@@ -7,7 +7,7 @@ import edu.ntnu.idatt2003.group25.model.Vector2D;
  * The JuliaTransform class represents Julia transformations and implements the transform2D interface.
  */
 public class JuliaTransform implements Transform2D {
-  private final Complex point;
+  private Complex point;
   private final int sign;
 
   public JuliaTransform(Complex point, int sign){
@@ -24,5 +24,9 @@ public class JuliaTransform implements Transform2D {
   @Override
   public String toString() {
     return point.toString();
+  }
+
+  public void setComplex(Complex complex) {
+    this.point = new Complex(complex.getX0(), complex.getX1());
   }
 }
