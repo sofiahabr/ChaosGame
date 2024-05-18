@@ -4,6 +4,7 @@ import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
 import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
 import edu.ntnu.idatt2003.group25.view.menus.SideMenu;
@@ -17,11 +18,11 @@ public class FactorialPage extends View {
 
   private final BorderPane borderPane = new BorderPane();
   public ScreenController screenController;
-  private ChaosGameDescription description;
-  FactorialPageController controller;
+  private ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
+  private FactorialPageController controller;
   private String gameType; // Julia or Affine
-  ChaosGame chaosGame;
-  private Canvas pixelCanvas = new Canvas(MainView.width, MainView.height);
+  private ChaosGame chaosGame = new ChaosGame(description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
+  private Canvas pixelCanvas = new Canvas(MainView.width*0.7, MainView.height*0.7);
 
   public FactorialPage(ScreenController screenController) {
     this.controller = new FactorialPageController(screenController, this);
@@ -55,7 +56,6 @@ public class FactorialPage extends View {
 
   public void draw(int steps) {
 
-    chaosGame.setDescription(description);
     Canvas pixelCanvas =
         new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
 
@@ -97,8 +97,8 @@ public class FactorialPage extends View {
     this.gameType = gameType;
   }
   public void setDescription(ChaosGameDescription description) {
-    System.out.println("im here");
     this.description = description;
+    chaosGame = new ChaosGame(description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
 
   }
 }
