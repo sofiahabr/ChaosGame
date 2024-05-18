@@ -46,6 +46,9 @@ public class FactorialPageController extends Controller {
       case "max input"-> max = registerVector2D(info);
       case "register steps" -> steps = registerInt(info);
       case "matrix input" -> matrix = registerMatrix(info);
+      case "save matrix" -> matrixesInDescription = saveMatrix(info);
+      case "save vectors" -> vectorsInDescription = saveVectors(info);
+      case "edit description" -> editDescription(info);
     }
   }
 
@@ -70,7 +73,7 @@ public class FactorialPageController extends Controller {
       case "add"-> addAction();
       case "reset"-> resetAction();
       case "save" -> saveAction();
-      case "edit" -> editAction();
+      case "edit" -> new EditTransformsMenu(screenController, factorialPage);
     }
   }
   private void addAction() {
@@ -103,34 +106,49 @@ public class FactorialPageController extends Controller {
     }
   }
 
-  private void editAction() {
-    System.out.println("edit action");
-    ChaosGameDescription description = factorialPage.getDescription();
+  private List<Vector2D> saveVectors(String info) {
+    System.out.println("Vectors: " + info);
+    String[] vectorNumbers = info.split(",");
+    List<Vector2D> vectorList = new ArrayList<>();
 
-    if(min != null) {
-      System.out.println("Min: " + min);
-      description.setMinCoords(min);
-    } if (max != null) {
-      System.out.println("Max: " + max);
-      description.setMaxCoords(max);
-    } if (vector2D != null) {
-      System.out.println("Vector: " + vector2D);
-      description.getTransforms().forEach(transform -> {
-        if (transform instanceof JuliaTransform) {
-          complex = new Complex(vector2D.getX0(), vector2D.getX1());
-          ((JuliaTransform) transform).setComplex(complex);
-        } else if (transform instanceof AffineTransform2D) {
-          ((AffineTransform2D) transform).setVector(vector2D);
-        }
-      });
-    } if (matrix != null) {
-      System.out.println(matrix);
-      description.getTransforms().forEach(transform -> {
-        if (transform instanceof AffineTransform2D) {
-          ((AffineTransform2D) transform).setMatrix(matrix);
-        }
-      });
+    for (int i = 0; i < vectorNumbers.length-2;) {
+      vectorList.add(new Vector2D(Validation.verifyDouble(vectorNumbers[i], 0) ,
+          Validation.verifyDouble(vectorNumbers[i + 1], 0)));
+      i += 2;
     }
-    factorialPage.setDescription(description);
+    return vectorList;
+  }
+  private List<Matrix2x2> saveMatrix(String info) {
+    String[] matrixNumbers = info.split(",");
+    List<Matrix2x2> matrixList = new ArrayList<>();
+
+    for (int i = 0; i < matrixNumbers.length - 4;) {
+      matrixList.add(new Matrix2x2(Validation.verifyDouble(matrixNumbers[i], 0) ,
+          Validation.verifyDouble(matrixNumbers[i + 1], 0),
+          Validation.verifyDouble(matrixNumbers[i + 2], 0),
+          Validation.verifyDouble(matrixNumbers[i + 3], 0)));
+      i += 4;
+    }
+    return matrixList;
+  }
+  private void editDescription(String info) {
+    System.out.println("Min and max: " + info);
+    String[] minMax = info.split(",");
+
+    List<Transform2D> transforms = new ArrayList<>();
+    if(factorialPage.getGameType().equals("Affine Transform") && matrixesInDescription.size() == vectorsInDescription.size()) {
+      for(int i = 0; i < matrixesInDescription.size(); i++) {
+        transforms.add(new AffineTransform2D(matrixesInDescription.get(i), vectorsInDescription.get(i)));
+      }
+    }
+    if(factorialPage.getGameType().equals("Julia Transform")) {
+      for(int i = 0; i < vectorsInDescription.size(); i++) {
+        transforms.add(new JuliaTransform(new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()),1));
+        transforms.add(new JuliaTransform(new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()),-1));
+      }
+    }
+    factorialPage.setDescription(new ChaosGameDescription(transforms,
+        new Vector2D(Validation.verifyDouble(minMax[0], 0), Validation.verifyDouble(minMax[1], 0)),
+        new Vector2D(Validation.verifyDouble(minMax[2], 0), Validation.verifyDouble(minMax[3], 0))));
   }
 }
