@@ -34,7 +34,7 @@ public class FactorialPageController extends Controller {
   Complex complex = null;
   Matrix2x2 matrix = null;
   Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
-  String invalidPositiveNumber = "Please enter a positive number\n 0 -1000 000 000";
+  String invalidPositiveNumber = "Please enter a positive \nnumber 0 -1000 000 000";
   String invalidNumber = "Please enter numbers";
   int defaultValue = -9999;
 
