@@ -37,7 +37,7 @@ public class FactorialPage extends View {
     topBarMenu.setUp();
 
 
-    SideMenu console;
+    Menu console;
     if (gameType.equals("Julia Transform")) {
       console = new JuliaConsole(screenController, this);
     } else {
