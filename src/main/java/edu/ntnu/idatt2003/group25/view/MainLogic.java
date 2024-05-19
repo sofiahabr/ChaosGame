@@ -7,12 +7,12 @@ import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainLogic extends View{
-  public static int height = 700;
-  public static int width = 1200;
-  public static BorderPane mainPage = new BorderPane();
+  public static int height = (int) Math.round(Screen.getPrimary().getBounds().getHeight()*0.8f);
+  public static int width = (int) Math.round(Screen.getPrimary().getBounds().getWidth()*0.8f);
   public static ChaosGameDescription description = ChaosGameDescriptionFactory.createBarnsleyFern();
   public Scene scene = new Scene(new Pane(), width, height);
   public ScreenController screenController = new ScreenController(scene);
