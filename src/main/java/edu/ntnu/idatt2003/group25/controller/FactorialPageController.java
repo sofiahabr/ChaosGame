@@ -138,19 +138,7 @@ public class FactorialPageController extends Controller {
           factorialPage.showError("InputMatrix", "");
         }
         break;
-      case "sceneChange":
-        String[] newValue = info.split(":");
-        double providedHeight = Validation.verifyDouble(newValue[0],0);
-        if (providedHeight > 0) {
-          this.height = (int) providedHeight;
-        }
-        double providedWidth = Validation.verifyDouble(newValue[1],0);
-        if (providedWidth > 0) {
-          this.width = (int) providedWidth;
-        }
-        this.pixelCanvas = new Canvas(width, height);
-        this.chaosGame = new ChaosGame(MainLogic.description, width, height);
-        break;
+
     }
   }
 
@@ -195,16 +183,6 @@ public class FactorialPageController extends Controller {
     return new Matrix2x2(
         Validation.verifyDouble(values[0],defaultValue), Validation.verifyDouble(values[1],defaultValue),
         Validation.verifyDouble(values[2],defaultValue), Validation.verifyDouble(values[3],defaultValue));
-  }
-  public void updateChaosGame(ChaosGame chaosGame, int width, int height) {
-    chaosGame.setWidth(width);
-    chaosGame.setHeight(height);
-  }
-  public void updateChaosCanvas(int width, int height) {
-    this.pixelCanvas = new Canvas(width, height);
-
-    //this.pixelCanvas.setHeight(height);
-    //this.pixelCanvas.setWidth(width);
   }
   public void buttonClicked(String info){
     switch (info) {
