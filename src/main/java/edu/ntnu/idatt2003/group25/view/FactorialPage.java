@@ -4,30 +4,35 @@ import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
+import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
+import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
+import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
+import edu.ntnu.idatt2003.group25.view.menus.Menu;
 import java.util.HashMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class FactorialPage extends View {
 
   private final BorderPane borderPane = new BorderPane();
+  private VBox sidebarMenu;
   public ScreenController screenController;
   private ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
   private FactorialPageController controller;
   private String gameType; // Julia or Affine
-  private ChaosGame chaosGame = new ChaosGame(description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
-  private Canvas pixelCanvas = new Canvas(MainView.width*0.7, MainView.height*0.7);
+  private ChaosGame chaosGame = new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
+  private Canvas pixelCanvas = new Canvas(MainLogic.width*0.7, MainLogic.height*0.7);
 
-  public ChaosGameDescription description;
-  FactorialPageController controller;
   HashMap<String,String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
   private Label minMaxError;
@@ -42,28 +47,18 @@ public class FactorialPage extends View {
 
   @Override
   public void setUp() {
-
-    if(MainLogic.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
-      juliaSidebar();
-    } else if (MainLogic.description.getTransforms().getFirst().getClass().getName().contains("AffineTransform2D")) {
-      affineSidebar();
-    }
-
     HBox topBox = new HBox(0);
     borderPane.setTop(topBox);
 
     Menu console;
     if (gameType.equals("Julia Transform")) {
-      console = new JuliaConsole(screenController, this);
+      juliaSidebar();
     } else {
-      console = new AffineConsole(screenController, this);
+      affineSidebar();
     }
-    console.setUp();
-    borderPane.setLeft(sidebarMenu);
-  }
 
-    borderPane.setTop(topBarMenu.getMenu());
-    borderPane.setLeft(console.getMenu());
+    borderPane.setLeft(sidebarMenu);
+//    borderPane.setTop(topBarMenu.getMenu());
   }
 
   @Override
@@ -324,7 +319,7 @@ public class FactorialPage extends View {
   }
   public void setDescription(ChaosGameDescription description) {
     this.description = description;
-    chaosGame = new ChaosGame(description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
+    chaosGame = new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
 
   }
 }
