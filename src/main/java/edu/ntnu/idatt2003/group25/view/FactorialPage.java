@@ -129,7 +129,7 @@ public class FactorialPage extends View {
     HBox minArea = new HBox(10);
     minArea.getChildren().addAll(inputMin, inputMin2);
 
-    inputMin2.setOnKeyTyped(
+    inputMin.setOnKeyTyped(
         e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
     inputMin2.setOnKeyTyped(
         e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
