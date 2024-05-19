@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test;
 
 class TestChaosGameFileHandler {
 
-  private String path = "src/test/java/TestAffine2D";
-  private List<Transform2D> transform2DList = new ArrayList<>();
-  private Vector2D vectorMin = new Vector2D(1,1);
-  private Vector2D vectorMax = new Vector2D(10,10);
-  private ChaosGameDescription description = new ChaosGameDescription(transform2DList,vectorMin,vectorMax);
+  private final String path = "src/test/java/TestAffine2D";
+  private final List<Transform2D> transform2DList = new ArrayList<>();
+  private final Vector2D vectorMin = new Vector2D(1,1);
+  private final Vector2D vectorMax = new Vector2D(10,10);
+  private final ChaosGameDescription description = new ChaosGameDescription(transform2DList,vectorMin,vectorMax);
   ChaosGameFileHandler fileHandler = new ChaosGameFileHandler(transform2DList,vectorMin,vectorMax);
 
   @Test
@@ -41,9 +41,14 @@ class TestChaosGameFileHandler {
   class testInstructionsForFile {
     @Test
     void testAffine2DValuesAreInArray() throws FileNotFoundException {
-      fileHandler.readFromFile(path);
-      List<String> instruction = fileHandler.instructionForFile(description);
-      assertEquals("Affine2D ", instruction.get(0));
+      ChaosGameDescription readDescription = fileHandler.readFromFile(path);
+      List<String> instruction = fileHandler.instructionForFile(readDescription);
+      System.out.println("Instructions: "+ instruction);
+      assertEquals("Affine2D # Type of transform", instruction.get(0));
+      assertEquals("0.0, 0.0 # Lower left", instruction.get(1));
+      assertEquals("1.0, 1.0 # Upper right", instruction.get(2));
+      assertEquals("0.5, 0.0, 0.0, 0.5 , 0.0, 0.0 # 1 transform (a00, a01, a10, a11, b0, b1)",
+          instruction.get(3));
     }
   }
 }
