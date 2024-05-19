@@ -61,75 +61,50 @@ public class FactorialPageController extends Controller {
   @Override
   public void gameChanged(String action, String info) {
     switch (action) {
-      case "button clicked":
-        switch (info) {
-          case "play":
-            this.chaosGame = new ChaosGame(MainLogic.description,
-                Math.round(MainLogic.width * 0.7f),
-                Math.round(MainLogic.height * 0.7f));
-            chaosGame.runSteps(steps);
-            draw();
-            break;
-          case "add":
-            if (MainLogic.description.getTransforms().getFirst().getClass().getName()
-                .contains("Julia")) {
-              complex = new Complex(vector2D.getX0(), vector2D.getX1());
-              MainLogic.description.getTransforms().add(new JuliaTransform(complex, 1));
-            } else {
-              MainLogic.description.getTransforms().add(new AffineTransform2D(matrix, vector2D));
-            }
-            break;
-          case "reset":
-            clear();
-            break;
-          case "save":
-            ChaosGameFileHandler fileHandler =
-                new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0), new Vector2D(1, 1));
-            fileHandler.writeToFile(MainLogic.description, "src/main/resources/TestSave.txt");
-            break;
-        }
-      case "vector input":
+      case "button clicked" -> buttonClicked(info);
+      case "vector input" -> {
         vector2D = registerVector2D(info);
         System.out.println(vector2D.toString());
         boolean hasError = false;
         if (vector2D.getX0() == defaultValue) {
           factorialPage.showError("InputVector", invalidNumber);
           hasError = true;
-        } if (vector2D.getX1() == defaultValue) {
-        factorialPage.showError("InputVector", invalidNumber);
-        hasError = true;
-      } if (!hasError) {
-          factorialPage.showError("InputVector"," ");
         }
-        break;
-      case "min input":
+        if (vector2D.getX1() == defaultValue) {
+          factorialPage.showError("InputVector", invalidNumber);
+          hasError = true;
+        }
+        if (!hasError) {
+          factorialPage.showError("InputVector", " ");
+        }
+      }
+      case "min input" -> {
         min = registerVector2D(info);
         if (min.getX0() == defaultValue || min.getX1() == defaultValue) {
-          factorialPage.showError("InputMinMax",invalidNumber);
+          factorialPage.showError("InputMinMax", invalidNumber);
         } else {
           factorialPage.showError("InputMinMax", " ");
         }
-        break;
-      case "max input":
+      }
+      case "max input" -> {
         max = registerVector2D(info);
         if (max.getX0() == defaultValue || max.getX1() == defaultValue) {
           factorialPage.showError("InputMinMax", invalidNumber);
-         factorialPage.showError("InputMinMax", invalidNumber);
-      }
-        else {
+          factorialPage.showError("InputMinMax", invalidNumber);
+        } else {
           factorialPage.showError("InputMinMax", " ");
         }
-        break;
-      case "register steps":
+      }
+      case "register steps" -> {
         int input = registerInt(info);
         if (input == 0) { //Default value
-          factorialPage.showError("InputSteps",invalidPositiveNumber);
+          factorialPage.showError("InputSteps", invalidPositiveNumber);
         } else {
           factorialPage.showError("InputSteps", "");
           steps = input;
         }
-        break;
-      case "matrix input":
+      }
+      case "matrix input" -> {
         matrix = registerMatrix(info);
         if (matrix.getA00() == defaultValue || matrix.getA01() == defaultValue ||
             matrix.getA10() == defaultValue || matrix.getA11() == defaultValue) {
@@ -137,14 +112,14 @@ public class FactorialPageController extends Controller {
         } else {
           factorialPage.showError("InputMatrix", "");
         }
-        break;
-      case "sceneChange":
+      }
+      case "sceneChange" -> {
         String[] newValue = info.split(":");
-        double providedHeight = Validation.verifyDouble(newValue[0],0);
+        double providedHeight = Validation.verifyDouble(newValue[0], 0);
         if (providedHeight > 0) {
           this.height = (int) providedHeight;
         }
-        double providedWidth = Validation.verifyDouble(newValue[1],0);
+        double providedWidth = Validation.verifyDouble(newValue[1], 0);
         if (providedWidth > 0) {
           this.width = (int) providedWidth;
         }
