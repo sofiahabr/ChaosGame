@@ -83,15 +83,6 @@ public class FactorialPage extends View {
     borderPane.setLeft(sidebarMenu);
     borderPane.setCenter(pixelCanvas);
   }
-
-  @Override
-  public void update() {
-    this.description = MainLogic.description;
-    chaosGame = new ChaosGame(description, Math.round(MainLogic.width * 0.7f),
-        Math.round(MainLogic.height * 0.7f));
-//    initilizeCanvas();
-  }
-
   private void createSideBar() {
     sidebarMenu = new VBox(10);
     sidebarMenu.getStyleClass().add("vbox");
