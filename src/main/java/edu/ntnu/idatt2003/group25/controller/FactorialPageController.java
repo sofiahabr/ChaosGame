@@ -142,7 +142,7 @@ public class FactorialPageController extends Controller {
     }
   }
 
-  public void draw(){
+  public void draw() {
     int[][] canvas = chaosGame.getCanvas().getCanvasArray();
     GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
     for (int i = 0; i < canvas.length; i++) {
@@ -152,7 +152,7 @@ public class FactorialPageController extends Controller {
           if ((number) < 1){
             gc.setFill(Color.color(1,0,number));
           }
-          else if ((number) < 2){
+          else if ((number) < 2) {
             gc.setFill(Color.color(2 - number, 0,1));
           }
           else {

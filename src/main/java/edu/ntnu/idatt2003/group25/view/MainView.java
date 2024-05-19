@@ -10,19 +10,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class MainView extends Application  {
+public class MainView extends Application {
 
-private final MainLogic mainLogic = new MainLogic();
+  private final MainLogic mainLogic = new MainLogic();
 
   @Override
-  public void start(Stage stage)  {
+  public void start(Stage stage) {
     mainLogic.start(stage);
-
-    screenController.gameChanged( "switch page","initialize page");
-    scene.getStylesheets().add("/style.css");
-
-  public static void main(String[] args) {
-    launch(args);
   }
-}
+
+    public static void main (String[]args){
+      launch(args);
+    }
+  }
+
 

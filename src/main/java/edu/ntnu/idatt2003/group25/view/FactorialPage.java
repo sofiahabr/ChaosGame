@@ -11,10 +11,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
-import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
-import edu.ntnu.idatt2003.group25.view.menus.SideMenu;
-import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -228,6 +224,7 @@ public class FactorialPage extends View {
     return matrixArea;
   }
 
+  private void handleSceneChange(String info) {}
   public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);

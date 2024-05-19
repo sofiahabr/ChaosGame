@@ -2,7 +2,6 @@ package edu.ntnu.idatt2003.group25.view;
 
 import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
-import edu.ntnu.idatt2003.group25.controller.ScreenSizeChange;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import javafx.scene.Scene;
@@ -25,6 +24,9 @@ public class MainLogic extends View{
     screenController.addScreenContent(initializePage, "initialize page");
 
     screenController.gameChanged("switch page", "initialize page");
+    scene.getStylesheets().add("/style.css");
+
+    screenController.gameChanged("switch page", "initialize page");
 
     stage.setTitle("Chaos Game");
     stage.setScene(scene);
@@ -32,7 +34,7 @@ public class MainLogic extends View{
     stage.setMinWidth(800);
     stage.show();
 
-    FactorialPageController factorialPageController = new FactorialPageController(screenController);
+    FactorialPageController factorialPageController = new FactorialPageController(screenController, factorialPage);
 
     addObserver(factorialPageController);
 
