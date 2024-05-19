@@ -49,14 +49,11 @@ public class MainLogic extends View{
 
     scene.widthProperty().addListener((observable, oldValue, newValue)-> {
       updateObserver("sceneChange", "0:" + newValue.toString());
-      System.out.println("old width: " + oldValue.toString() + " new width: " +
-          newValue.toString());
       MainLogic.width = newValue.intValue();
     });
 
     scene.heightProperty().addListener((observable, oldValue, newValue)-> {
       updateObserver("sceneChange", newValue.toString() + ":0");
-      System.out.println("old: " + oldValue.toString() + " new: " + newValue.toString());
       MainLogic.height = newValue.intValue();
     });
   }
