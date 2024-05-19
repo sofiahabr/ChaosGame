@@ -276,7 +276,7 @@
 .text-field {
     -fx-background-radius: 10;
     -fx-padding: 5 10;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
 }
 .text-field2 {
     -fx-background-radius: 10;
@@ -307,6 +307,11 @@
 .text {
     -fx-font: 14px "Helvetica";
     -fx-font-weight: bold;
+}
+.label. error {
+    -fx-text-fill: red;
+    -fx-font: 12px "helvetica";
+    -fx-font-weight: lighter;
 }
 .heading {
     -fx-font: 18px "Georgia";
