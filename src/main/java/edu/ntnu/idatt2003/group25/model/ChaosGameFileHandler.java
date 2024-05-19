@@ -10,8 +10,22 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
+/**
+ * The ChaosGameFileHandler class is responsible for reading and writing files for the ChaosGame.
+ */
 
 public class ChaosGameFileHandler extends ChaosGameDescription {
+  private static final Logger logger = Logger.getLogger(ChaosGameFileHandler.class.getName());
+
+  /**
+   * The constructor for the ChaosGameFileHandler class.
+   *
+   * @param transforms list of transform2D objects representing the transformations.
+   * @param minCoords the minimum coordinates of the plane.
+   * @param maxCoords the maximum coordinates of the plane.
+   */
 
   public ChaosGameFileHandler(List<Transform2D> transforms, Vector2D minCoords,
       Vector2D maxCoords) {
@@ -64,30 +78,42 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
         case ("Affine2D"):
           while (scanner.hasNext()) {
             String[] line = scanner.nextLine().split(lineSplitIndicator);
-            double a00 = Double.parseDouble(line[0]);
-            double a01 = Double.parseDouble(line[1]);
-            double a10 = Double.parseDouble(line[2]);
-            double a11 = Double.parseDouble(line[3]);
-
-            double b1 = Double.parseDouble(line[4]);
-            double b2 = Double.parseDouble(line[5]);
-
-            Matrix2x2 matrix = new Matrix2x2(a00, a01, a10, a11);
-            Vector2D vector = new Vector2D(b1, b2);
-
-            AffineTransform2D affine = new AffineTransform2D(matrix, vector);
+            AffineTransform2D affine = getAffineTransform2D(line);
             transforms.add(affine);
-            //System.out.println(a00 + " " + a01 + " " + a10 +  " " + a11 + " " +b1 + " " + b2);
           }
           break;
+        default:
+          logger.warning("Invalid transform type: " + transformName);
       }
       scanner.close();
       return new ChaosGameDescription(transforms, min, max);
 
     } catch (FileNotFoundException e) {
-      System.out.println("\nError: " + e.getMessage());
+      logger.severe("Error: " + e.getMessage());
       throw e;
     }
+  }
+
+  /**
+   * The getAffineTransform2D method creates an AffineTransform2D object from a given line.
+   *
+   * @param line a string[] with the values for the AffineTransform2D object
+   * @return an AffineTransform2D object
+   */
+
+  private static AffineTransform2D getAffineTransform2D(String[] line) {
+    double a00 = Double.parseDouble(line[0]);
+    double a01 = Double.parseDouble(line[1]);
+    double a10 = Double.parseDouble(line[2]);
+    double a11 = Double.parseDouble(line[3]);
+
+    double b1 = Double.parseDouble(line[4]);
+    double b2 = Double.parseDouble(line[5]);
+
+    Matrix2x2 matrix = new Matrix2x2(a00, a01, a10, a11);
+    Vector2D vector = new Vector2D(b1, b2);
+
+    return new AffineTransform2D(matrix, vector);
   }
 
   /**
@@ -98,27 +124,27 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
    */
 
   public void writeToFile(ChaosGameDescription description, String path) {
-  try {
+    try {
       File file = new File(path);
       BufferedWriter buffer = new BufferedWriter(new FileWriter(file));
       if (file.createNewFile()) {
-        System.out.println("File created: " + file.getName());
+        logger.info("File created: " + file.getName());
 
-        for (int i = 0; i < instructionForFile(description).size(); i ++) {
+        for (int i = 0; i < instructionForFile(description).size(); i++) {
           buffer.write(instructionForFile(description).get(i));
           buffer.newLine();
         }
         buffer.close();
       } else {
-        System.out.println("File: " + file.getName() + " already exists.");
-        for (int i = 0; i < instructionForFile(description).size(); i ++) {
+        logger.info("File: " + file.getName() + " already exists.");
+        for (int i = 0; i < instructionForFile(description).size(); i++) {
           buffer.write(instructionForFile(description).get(i));
           buffer.newLine();
         }
         buffer.close();
       }
     } catch (Exception e) {
-      System.out.println("An error occurred.");
+      logger.severe("An error occurred.");
       e.printStackTrace();
     }
 
@@ -140,7 +166,6 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
       if (transformName.contains("JuliaTransform")) {
         instructions.add("Julia  # Type of transform");
         instructions.add(description.getMinCoords().toString() + " # Lower left");
-        System.out.println(description.getMinCoords().toString());
         instructions.add(description.getMaxCoords().toString() + " # Upper right");
 
         instructions.add(transform2D.toString() + " # Real and imaginary parts of the constant c");
@@ -152,7 +177,8 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
           instructions.add(description.getMinCoords().toString() + " # Lower left");
           instructions.add(description.getMaxCoords().toString() + " # Upper right");
         }
-        instructions.add(transform2D.toString() + " # " + (i + 1) + " transform (a00, a01, a10, a11, b0, b1)");
+        instructions.add(transform2D.toString() + " # " + (i + 1)
+            + " transform (a00, a01, a10, a11, b0, b1)");
 
       }
     }
