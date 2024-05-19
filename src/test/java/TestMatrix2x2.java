@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import edu.ntnu.idatt2003.group25.Matrix2x2;
-import edu.ntnu.idatt2003.group25.Vector2D;
+import edu.ntnu.idatt2003.group25.model.Matrix2x2;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
