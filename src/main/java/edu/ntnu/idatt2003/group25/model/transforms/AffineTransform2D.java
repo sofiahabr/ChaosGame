@@ -51,5 +51,13 @@ public class AffineTransform2D implements Transform2D {
   public String toString() {
     return matrix.toString() + " , " + vector.getX0() + ", " + vector.getX1();
   }
+
+  public void setMatrix(Matrix2x2 matrix) {
+    this.matrix = matrix;
+  }
+
+  public void setVector(Vector2D vector) {
+    this.vector = vector;
+  }
 }
 

@@ -46,5 +46,9 @@ public class ChaosGame{
   public void setWidth(int width) {
     canvas.setWidth(width);
   }
+
+  public void setDescription(ChaosGameDescription description) {
+    this.description = description;
+  }
 }
 

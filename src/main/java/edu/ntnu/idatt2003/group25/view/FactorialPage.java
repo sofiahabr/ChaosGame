@@ -18,9 +18,14 @@ import javafx.scene.text.Text;
 
 public class FactorialPage extends View {
 
-  public BorderPane borderPane = new BorderPane();
-  public VBox sidebarMenu;
+  private final BorderPane borderPane = new BorderPane();
   public ScreenController screenController;
+  private ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
+  private FactorialPageController controller;
+  private String gameType; // Julia or Affine
+  private ChaosGame chaosGame = new ChaosGame(description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
+  private Canvas pixelCanvas = new Canvas(MainView.width*0.7, MainView.height*0.7);
+
   public ChaosGameDescription description;
   FactorialPageController controller;
   HashMap<String,String> errorMap = new HashMap<>();
@@ -33,11 +38,10 @@ public class FactorialPage extends View {
     this.controller = new FactorialPageController(screenController, this);
     this.screenController = screenController;
     addObserver(controller);
-    }
+  }
 
   @Override
   public void setUp() {
-    update();
 
     if(MainLogic.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
       juliaSidebar();
@@ -48,7 +52,18 @@ public class FactorialPage extends View {
     HBox topBox = new HBox(0);
     borderPane.setTop(topBox);
 
+    Menu console;
+    if (gameType.equals("Julia Transform")) {
+      console = new JuliaConsole(screenController, this);
+    } else {
+      console = new AffineConsole(screenController, this);
+    }
+    console.setUp();
     borderPane.setLeft(sidebarMenu);
+  }
+
+    borderPane.setTop(topBarMenu.getMenu());
+    borderPane.setLeft(console.getMenu());
   }
 
   @Override
@@ -263,5 +278,53 @@ public class FactorialPage extends View {
         updateErrorLabel("InputVector", vectorErrorLabel);
         break;
     }
+  }
+
+  public void draw(int steps) {
+
+    Canvas pixelCanvas =
+        new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
+
+    chaosGame.runSteps(steps);
+
+    int[][] canvas = chaosGame.getCanvas().getCanvasArray();
+    GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
+
+    for (int i = 0; i < canvas.length; i++) {
+      for (int j = 0; j < canvas[i].length; j++) {
+        double number = canvas[i][j] / 10f;
+        if ((number) > 0) {
+          if ((number) < 1) {
+            gc.setFill(Color.color(1, 0, number));
+          } else if ((number) < 2) {
+            gc.setFill(Color.color(2 - number, 0, 1));
+          } else {
+            gc.setFill(Color.color(0, 0, 1));
+          }
+          gc.fillRect(j, i, 1, 1); // Draw a single pixel
+        }
+      }
+    }
+    borderPane.setCenter(pixelCanvas);
+  }
+  public void reset() {
+    GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
+    gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());
+    borderPane.setCenter(pixelCanvas);
+  }
+  public ChaosGameDescription getDescription() {
+    return description;
+  }
+  public String getGameType(){
+    return gameType;
+  }
+
+  public void setGameType(String gameType) {
+    this.gameType = gameType;
+  }
+  public void setDescription(ChaosGameDescription description) {
+    this.description = description;
+    chaosGame = new ChaosGame(description, Math.round(MainView.width*0.7f), Math.round(MainView.height*0.7f));
+
   }
 }
