@@ -67,8 +67,5 @@ public class MainLogic extends View{
   public void setUp() {
   }
 
-  @Override
-  public void update() {
 
-  }
 }
