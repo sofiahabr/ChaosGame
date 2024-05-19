@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 public class FactorialPage extends View {
 
   private int buttonHeight = Math.round(MainLogic.height*0.03f);
-  private int buttonWidth = Math.round(MainLogic.width*0.13f);
+  private int buttonWidth = 180;
   private final BorderPane borderPane = new BorderPane();
   private VBox sidebarMenu;
   public ScreenController screenController;
