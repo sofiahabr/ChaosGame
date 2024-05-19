@@ -178,7 +178,6 @@ public class EditTransformsMenu extends Menu {
     editStage.setScene(editScene);
     editStage.show();
   }
-  @Override
   public void inputFieldStyle(TextField inputField, String text, int height, int width) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);
