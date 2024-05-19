@@ -72,10 +72,6 @@ public class InitializePage extends View {
     initPane.setCenter(infoBoxBackground);
   }
 
-  @Override
-  public void update() {
-
-  }
 
   @Override
   public BorderPane getPane() {
