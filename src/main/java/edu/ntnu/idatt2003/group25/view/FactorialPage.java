@@ -28,8 +28,8 @@ public class FactorialPage extends View {
   private ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
   private FactorialPageController controller;
   private String gameType; // Julia or Affine
-  private ChaosGame chaosGame; //= new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
-  private Canvas pixelCanvas; // = new Canvas(MainLogic.width*0.7, MainLogic.height*0.7);
+  private ChaosGame chaosGame;
+  private Canvas pixelCanvas;
 
   HashMap<String,String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
@@ -67,7 +67,6 @@ public class FactorialPage extends View {
 
     borderPane.setLeft(sidebarMenu);
     borderPane.setCenter(pixelCanvas);
-//    borderPane.setTop(topBarMenu.getMenu());
   }
 
   @Override
@@ -201,7 +200,7 @@ public class FactorialPage extends View {
     inputVectorX1.setOnKeyTyped(e-> updateObserver("vector input", inputVectorX0.getText() + ", " + inputVectorX1.getText()));
 
     HBox vectorInputs = new HBox(20);
-    vectorInputs.getChildren().addAll(inputVectorX0,inputVectorX1);
+    vectorInputs.getChildren().addAll(inputVectorX0, inputVectorX1);
 
     vectorErrorLabel = new Label();
     vectorErrorLabel.getStyleClass().add("error");
@@ -306,17 +305,15 @@ public class FactorialPage extends View {
         }
       }
     }
-    //borderPane.setCenter(pixelCanvas);
   }
   public void reset() {
     GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
     gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());
-    //borderPane.setCenter(pixelCanvas);
   }
   public ChaosGameDescription getDescription() {
     return description;
   }
-  public String getGameType(){
+  public String getGameType() {
     return gameType;
   }
 
@@ -325,7 +322,7 @@ public class FactorialPage extends View {
   }
   public void setDescription(ChaosGameDescription description) {
     this.description = description;
-    chaosGame = new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
+    chaosGame = new ChaosGame(description, Math.round(MainLogic.width * 0.7f), Math.round(MainLogic.height * 0.7f));
 
   }
 }
