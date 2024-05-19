@@ -5,8 +5,6 @@ import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
-import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
-import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
 import edu.ntnu.idatt2003.group25.view.menus.Menu;
 import java.util.HashMap;
 import javafx.geometry.Insets;
@@ -104,16 +102,35 @@ public class FactorialPage extends View {
     maxTitle.getStyleClass().add("heading");
     minTitle.getStyleClass().add("heading");
 
+
     TextField inputMax = new TextField();
-    inputFieldStyle(inputMax,"ex. 1", 30, 80);
-    inputMax.setOnKeyTyped(e-> updateObserver("max input", inputMax.getText() + ", "
-        + inputMax.getText()));
+    inputFieldStyle(inputMax, "1", 30, 35);
+
+    TextField inputMax2 = new TextField();
+    inputFieldStyle(inputMax2, "1", 30, 35);
+
+    HBox maxArea = new HBox(10);
+    maxArea.getChildren().addAll(inputMax, inputMax2);
+
+    inputMax.setOnKeyTyped(
+        e -> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
+    inputMax2.setOnKeyTyped(
+        e -> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
 
 
     TextField inputMin = new TextField();
-    inputFieldStyle(inputMin,"ex. 0", 30, 80);
-    inputMin.setOnKeyTyped(e-> updateObserver("min input", inputMin.getText() + ", "
-        + inputMin.getText()));
+    inputFieldStyle(inputMin, "0", 30, 35);
+
+    TextField inputMin2 = new TextField();
+    inputFieldStyle(inputMin2, "0", 30, 35);
+
+    HBox minArea = new HBox(10);
+    minArea.getChildren().addAll(inputMin, inputMin2);
+
+    inputMin2.setOnKeyTyped(
+        e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
+    inputMin2.setOnKeyTyped(
+        e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
 
 
     VBox minBox = new VBox(10);
@@ -123,8 +140,8 @@ public class FactorialPage extends View {
     minMaxError.getStyleClass().add("error");
     updateErrorLabel("InputMinMax", minMaxError);
 
-    minBox.getChildren().addAll(minTitle, inputMin);
-    maxBox.getChildren().addAll(maxTitle, inputMax);
+    minBox.getChildren().addAll(minTitle, minArea);
+    maxBox.getChildren().addAll(maxTitle, maxArea);
 
     HBox minMaxBox = new HBox(20);
     minMaxBox.getChildren().addAll(minBox, maxBox);
@@ -140,28 +157,34 @@ public class FactorialPage extends View {
   private VBox gameButtons() {
 
     Button playButton = new Button("Play");
-    addStyle(playButton,"green", 180);
-    playButton.setOnAction(e-> updateObserver("button clicked", "play"));
+    playButton.getStyleClass().add("button2");
+    addStyle(playButton, "green", 180);
+    playButton.setOnAction(e -> updateObserver("button clicked", "play"));
 
-    Button resetButton = new Button("Reset");
-    addStyle(resetButton,"red",80);
-    resetButton.setOnAction(e-> updateObserver("button clicked", "reset"));
+    Button resetButton = new Button("Reset canvas");
+    resetButton.getStyleClass().add("button2");
+    addStyle(resetButton, "red", 180);
+    resetButton.setOnAction(e -> updateObserver("button clicked", "reset"));
 
     Button saveButton = new Button("Save to file");
-    addStyle(saveButton, "black", 80);
-    saveButton.setOnAction(e-> updateObserver("button clicked", "save"));
-
+    saveButton.getStyleClass().add("button2");
+    addStyle(saveButton, "black", 180);
+    saveButton.setOnAction(e -> updateObserver("button clicked", "save"));
 
     Button addTransformButton = new Button("Add transform");
-    addStyle(addTransformButton,"grey",180);
-    addTransformButton.setOnAction(e-> updateObserver("button clicked", "add"));
+    addTransformButton.getStyleClass().add("button2");
+    addStyle(addTransformButton, "grey", 180);
+    addTransformButton.setOnAction(e -> updateObserver("button clicked", "add"));
+
+    Button applyEditsButton = new Button("Edit transformation");
+    applyEditsButton.getStyleClass().add("button2");
+    addStyle(applyEditsButton, "blue", 180);
+    applyEditsButton.setOnAction(e -> updateObserver("button clicked", "edit"));
 
 
-    HBox topButtonBox = new HBox(20);
-    topButtonBox.getChildren().addAll(saveButton, resetButton);
-
-    VBox buttonBox = new VBox(30);
-    buttonBox.getChildren().addAll(addTransformButton, topButtonBox, playButton);
+    VBox buttonBox = new VBox(10);
+    buttonBox.getChildren()
+        .addAll(addTransformButton, applyEditsButton, saveButton, resetButton, playButton);
     buttonBox.setAlignment(Pos.CENTER);
 
     return buttonBox;
@@ -235,15 +258,15 @@ public class FactorialPage extends View {
   }
 
   private void handleSceneChange(String info) {}
-  public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
+  public void inputFieldStyle(TextField inputField, String promptText, int height, int width) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);
     inputField.setPromptText(promptText);
   }
 
   public void addStyle(Button button, String color, int width) {
-    String colorInit = "-fx-background-color: " + color + ";" ;
-    String widthInit = "-fx-min-width: " + width + ";" ;
+    String colorInit = "-fx-background-color: " + color + ";";
+    String widthInit = "-fx-min-width: " + width + ";";
 
     button.setStyle(colorInit + widthInit);
   }
