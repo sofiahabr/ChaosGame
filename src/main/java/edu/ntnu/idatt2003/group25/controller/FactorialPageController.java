@@ -126,6 +126,10 @@ public class FactorialPageController extends Controller {
         this.pixelCanvas = new Canvas(width, height);
         this.chaosGame = new ChaosGame(MainLogic.description, width, height);
         break;
+      }
+      case "save vectors" -> saveVectors(info);
+      case "save matrix" -> saveMatrix(info);
+      case "edit description" -> editDescription(info);
     }
   }
 
