@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 public class MainLogic extends View{
   public static int height = (int) Math.round(Screen.getPrimary().getBounds().getHeight()*0.8f);
   public static int width = (int) Math.round(Screen.getPrimary().getBounds().getWidth()*0.8f);
-  public static BorderPane mainPage = new BorderPane();
   public static ChaosGameDescription description = ChaosGameDescriptionFactory.createBarnsleyFern();
   public Scene scene = new Scene(new Pane(), width, height);
   public ScreenController screenController = new ScreenController(scene);
@@ -40,7 +39,7 @@ public class MainLogic extends View{
 
     stage.setTitle("Chaos Game");
     stage.setScene(scene);
-    stage.setMinHeight(700);
+    stage.setMinHeight(500);
     stage.setMinWidth(800);
     stage.show();
 
@@ -50,13 +49,12 @@ public class MainLogic extends View{
 
     scene.widthProperty().addListener((observable, oldValue, newValue)-> {
       updateObserver("sceneChange", "0:" + newValue.toString());
-      System.out.println("old width: " + oldValue.toString() + " new width: " +
-          newValue.toString());
+      MainLogic.width = newValue.intValue();
     });
 
     scene.heightProperty().addListener((observable, oldValue, newValue)-> {
       updateObserver("sceneChange", newValue.toString() + ":0");
-      System.out.println("old: " + oldValue.toString() + " new: " + newValue.toString());
+      MainLogic.height = newValue.intValue();
     });
   }
 

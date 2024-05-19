@@ -58,10 +58,17 @@ public class FactorialPageController extends Controller {
       case "max input" -> max = handleInputVector(info, "InputMinMax");
       case "register steps" -> steps = handleInputSteps(info);
       case "matrix input" -> matrix = handleInputMatrix(info);
-      case "sceneChange" -> handleInputSceneChange(info);
     }
   }
-
+  public void buttonClicked(String info){
+    switch (info) {
+      case "play"-> factorialPage.draw(steps);
+      case "add"-> addAction();
+      case "reset"-> resetAction();
+      case "save" -> saveAction();
+      case "edit" -> new EditTransformsMenu(screenController, factorialPage);
+    }
+  }
   public int handleInputSteps(String input) {
     int inputSteps = Validation.verifyPositiveInt(input,0);
     if (inputSteps == 0) { //Default value
@@ -100,46 +107,27 @@ public class FactorialPageController extends Controller {
     }
     return null;
   }
-  public void handleInputSceneChange(String info) {
-    String[] newValue = info.split(":");
-    double providedHeight = Validation.verifyDouble(newValue[0], 0);
-    if (providedHeight > 0) {
-      this.height = (int) providedHeight;
-    }
-    double providedWidth = Validation.verifyDouble(newValue[1], 0);
-    if (providedWidth > 0) {
-      this.width = (int) providedWidth;
-    }
-  }
-  public void updateChaosGame(ChaosGame chaosGame, int width, int height) {
-    chaosGame.setWidth(width);
-    chaosGame.setHeight(height);
-  }
-  public void updateChaosCanvas(int width, int height) {
-    this.pixelCanvas = new Canvas(width, height);
-
-    //this.pixelCanvas.setHeight(height);
-    //this.pixelCanvas.setWidth(width);
-  }
-  public void buttonClicked(String info){
-    switch (info) {
-      case "play"-> factorialPage.draw(steps);
-      case "add"-> addAction();
-      case "reset"-> resetAction();
-      case "save" -> saveAction();
-      case "edit" -> new EditTransformsMenu(screenController, factorialPage);
-    }
-  }
-  private void addAction() {
-    if (factorialPage.getGameType().equals("Julia Transform")) {
-      complex = new Complex(vector2D.getX0(), vector2D.getX1());
-      factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, 1));
+//  public void handleInputSceneChange(String info) {
+//    String[] newValue = info.split(":");
+//    double providedHeight = Validation.verifyDouble(newValue[0], 0);
+//    if (providedHeight > 0) {
+//      this.height = (int) providedHeight;
+//    }
+//    double providedWidth = Validation.verifyDouble(newValue[1], 0);
+//    if (providedWidth > 0) {
+//      this.width = (int) providedWidth;
+//    }
+//  }
+private void addAction() {
+  if (factorialPage.getGameType().equals("Julia Transform")) {
+    complex = new Complex(vector2D.getX0(), vector2D.getX1());
+    factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, 1));
 
 
-    } else if (factorialPage.getGameType().equals("Affine Transform")){
-      factorialPage.getDescription().getTransforms().add(new AffineTransform2D(matrix, vector2D));
-    }
+  } else if (factorialPage.getGameType().equals("Affine Transform")){
+    factorialPage.getDescription().getTransforms().add(new AffineTransform2D(matrix, vector2D));
   }
+}
   private void resetAction() {
     factorialPage.reset();
   }
@@ -159,5 +147,14 @@ public class FactorialPageController extends Controller {
         System.out.println("Error: " + e.getMessage());
       }
     }
+  }
+  public void handleScreenResize(double newWidth, double newHeight) {
+    int canvasWidth = (int) (newWidth * 0.7);
+    int canvasHeight = (int) (newHeight * 0.7);
+    ChaosGameDescription description = factorialPage.getDescription();
+    ChaosGame newChaosGame = new ChaosGame(description, canvasWidth, canvasHeight);
+    factorialPage.setDescription(description);
+
+    factorialPage.reset();
   }
 }
