@@ -2,10 +2,12 @@ package edu.ntnu.idatt2003.group25.view;
 
 import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
+import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import java.util.HashMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -40,12 +42,10 @@ public class FactorialPage extends View {
   @Override
   public void setUp() {
     update();
-    borderPane.setStyle("-fx-background-color: white");
 
-
-    if (MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
+    if(MainLogic.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
       juliaSidebar();
-    } else if (MainView.description.getTransforms().getFirst().getClass().getName().contains("AffineTransform2D")) {
+    } else if (MainLogic.description.getTransforms().getFirst().getClass().getName().contains("AffineTransform2D")) {
       affineSidebar();
     }
 
@@ -55,24 +55,9 @@ public class FactorialPage extends View {
     borderPane.setLeft(sidebarMenu);
   }
 
-
+  @Override
   public void update() {
-    this.description = MainView.description;
-
-    TopMenu topBarMenu = new TopMenu(screenController);
-    topBarMenu.setUp();
-
-
-    SideMenu console;
-    if (MainView.description.getTransforms().getFirst().getClass().getName().contains("JuliaTransform")){
-      console = new JuliaConsole(screenController);
-    } else {
-      console = new AffineConsole(screenController);
-}
-    console.setUp();
-
-    borderPane.setTop(topBarMenu.getMenu());
-    borderPane.setLeft(console.getMenu());
+    this.description = MainLogic.description;
   }
 
   private void createSideBar() {

@@ -8,8 +8,8 @@ import edu.ntnu.idatt2003.group25.model.Validation;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.view.MainLogic;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
-import edu.ntnu.idatt2003.group25.view.MainView;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,7 +19,10 @@ import javafx.scene.paint.Color;
  * FactorialPageController function as the FactorialPage's controller class.
  */
 public class FactorialPageController extends Controller {
-  ChaosGame chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width*0.7f), MainView.height);
+
+  int height = MainLogic.height;
+  int width = MainLogic.width;
+  ChaosGame chaosGame = new ChaosGame(MainLogic.description,MainLogic.width, MainLogic.height);
   ScreenController screenController;
   int steps = 0;
   Vector2D min;
@@ -42,24 +45,26 @@ public class FactorialPageController extends Controller {
     this.screenController = screenController;
     this.factorialPage = factorialPage;
   }
+
   @Override
   public void gameChanged(String action, String info) {
     switch (action) {
       case "button clicked":
         switch (info) {
           case "play":
-            this.chaosGame = new ChaosGame(MainView.description, Math.round(MainView.width * 0.7f),
-                Math.round(MainView.height * 0.7f));
+            this.chaosGame = new ChaosGame(MainLogic.description,
+                Math.round(MainLogic.width * 0.7f),
+                Math.round(MainLogic.height * 0.7f));
             chaosGame.runSteps(steps);
             draw();
             break;
           case "add":
-            if (MainView.description.getTransforms().getFirst().getClass().getName()
+            if (MainLogic.description.getTransforms().getFirst().getClass().getName()
                 .contains("Julia")) {
               complex = new Complex(vector2D.getX0(), vector2D.getX1());
-              MainView.description.getTransforms().add(new JuliaTransform(complex, 1));
+              MainLogic.description.getTransforms().add(new JuliaTransform(complex, 1));
             } else {
-              MainView.description.getTransforms().add(new AffineTransform2D(matrix, vector2D));
+              MainLogic.description.getTransforms().add(new AffineTransform2D(matrix, vector2D));
             }
             break;
           case "reset":
@@ -68,7 +73,7 @@ public class FactorialPageController extends Controller {
           case "save":
             ChaosGameFileHandler fileHandler =
                 new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0), new Vector2D(1, 1));
-            fileHandler.writeToFile(MainView.description, "src/main/resources/TestSave.txt");
+            fileHandler.writeToFile(MainLogic.description, "src/main/resources/TestSave.txt");
             break;
         }
       case "vector input":
@@ -121,13 +126,25 @@ public class FactorialPageController extends Controller {
           factorialPage.showError("InputMatrix", "");
         }
         break;
+      case "sceneChange":
+        String[] newValue = info.split(":");
+        double providedHeight = Validation.verifyDouble(newValue[0],0);
+        if (providedHeight > 0) {
+          this.height = (int) providedHeight;
+        }
+        double providedWidth = Validation.verifyDouble(newValue[1],0);
+        if (providedWidth > 0) {
+          this.width = (int) providedWidth;
+        }
+        this.pixelCanvas = new Canvas(width, height);
+        this.chaosGame = new ChaosGame(MainLogic.description, width, height);
+        break;
     }
   }
 
   public void draw(){
     int[][] canvas = chaosGame.getCanvas().getCanvasArray();
     GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
-
     for (int i = 0; i < canvas.length; i++) {
       for (int j = 0; j < canvas[i].length; j++) {
         double number = canvas[i][j] / 10f;
@@ -166,5 +183,15 @@ public class FactorialPageController extends Controller {
     return new Matrix2x2(
         Validation.verifyDouble(values[0],defaultValue), Validation.verifyDouble(values[1],defaultValue),
         Validation.verifyDouble(values[2],defaultValue), Validation.verifyDouble(values[3],defaultValue));
+  }
+  public void updateChaosGame(ChaosGame chaosGame, int width, int height) {
+    chaosGame.setWidth(width);
+    chaosGame.setHeight(height);
+  }
+  public void updateChaosCanvas(int width, int height) {
+    this.pixelCanvas = new Canvas(width, height);
+
+    //this.pixelCanvas.setHeight(height);
+    //this.pixelCanvas.setWidth(width);
   }
 }
