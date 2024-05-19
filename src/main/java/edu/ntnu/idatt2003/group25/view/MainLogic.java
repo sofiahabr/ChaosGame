@@ -28,6 +28,15 @@ public class MainLogic extends View{
 
     screenController.gameChanged("switch page", "initialize page");
 
+//    screenController.addScreenContent(initializePage, "initialize page");
+//
+//    screenController.gameChanged( "switch page","initialize page");
+//    scene.getStylesheets().add("/style/style.css");
+//
+//    stage.setTitle("Chaos Game");
+//    stage.setScene(scene);
+//    stage.show();
+
     stage.setTitle("Chaos Game");
     stage.setScene(scene);
     stage.setMinHeight(700);

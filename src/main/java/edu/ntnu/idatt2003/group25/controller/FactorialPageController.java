@@ -19,19 +19,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 /**
  * FactorialPageController function as the FactorialPage's controller class.
  */
 public class FactorialPageController extends Controller {
-
   int height = MainLogic.height;
   int width = MainLogic.width;
   ChaosGame chaosGame = new ChaosGame(MainLogic.description,MainLogic.width, MainLogic.height);
   ScreenController screenController;
   FactorialPage factorialPage;
-  ChaosGame chaosGame;
   int steps = 0;
   Vector2D min = null;
   Vector2D max = null;
@@ -40,13 +40,6 @@ public class FactorialPageController extends Controller {
   Matrix2x2 matrix = null;
   List<Vector2D> vectorsInDescription = null;
   List<Matrix2x2> matrixesInDescription = null;
-  Canvas pixelCanvas;
-  public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
-  Vector2D min;
-  Vector2D max;
-  Vector2D vector2D;
-  Complex complex;
-  Matrix2x2 matrix;
   Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
   String invalidPositiveNumber = "Please enter a positive number\n 0 -1000 000 000";
   String invalidNumber = "Please enter numbers";
@@ -54,16 +47,14 @@ public class FactorialPageController extends Controller {
 
   /**
    * The FactorialPageController takes in instances of ScreenController and FactorialPage.
-   * @param screenController
    * @param factorialPage
    */
+
   public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
     this.factorialPage = factorialPage;
-    this.chaosGame = new ChaosGame(ChaosGameDescriptionFactory.createSierpinski(), Math.round(MainView.width*0.7f), Math.round(MainView.height));
+    this.chaosGame = new ChaosGame(ChaosGameDescriptionFactory.createSierpinski(), Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height));
     this.pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
-
-
 
   }
 
@@ -240,7 +231,7 @@ public class FactorialPageController extends Controller {
   private void saveAction() {
     ChaosGameFileHandler fileHandler =
         new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0),
-            new Vector2D(MainView.width * 0.7f, MainView.height * 0.7f));
+            new Vector2D(MainLogic.width * 0.7f, MainLogic.height * 0.7f));
     FileChooser fileChooser = new FileChooser();
     fileChooser.getExtensionFilters().add(
         new FileChooser.ExtensionFilter(

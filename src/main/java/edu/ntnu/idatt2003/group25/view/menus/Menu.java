@@ -7,11 +7,13 @@ import edu.ntnu.idatt2003.group25.model.ChaosGameObserver;
 import edu.ntnu.idatt2003.group25.model.ChaosGameSubject;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +21,11 @@ import javafx.scene.text.Text;
 
 public abstract class Menu implements ChaosGameSubject {
   private List<ChaosGameObserver> observers = new ArrayList<>();
+  public Label stepsErrorLabel;
+  public Label minMaxError;
+  public Label matrixErrorLabel;
+  public Label vectorErrorLabel;
+  HashMap<String,String> errorMap = new HashMap<>();
 
   public Menu(ScreenController screenController) {
     addObserver(screenController);
@@ -227,5 +234,26 @@ public abstract class Menu implements ChaosGameSubject {
     matrixArea.setAlignment(Pos.CENTER);
 
     return matrixArea;
+  }
+  private void updateErrorLabel(String key, Label label) {
+    String errorMessage = errorMap.getOrDefault(key, "");
+    label.setText(errorMessage.isEmpty() ? " " : errorMessage);
+  }
+  public void showError(String placement, String message) {
+    errorMap.put(placement, message);
+    switch (placement) {
+      case "InputSteps":
+        updateErrorLabel("InputSteps", stepsErrorLabel);
+        break;
+      case "InputMinMax":
+        updateErrorLabel("InputMinMax", minMaxError);
+        break;
+      case "InputMatrix":
+        updateErrorLabel("InputMatrix", matrixErrorLabel);
+        break;
+      case "InputVector":
+        updateErrorLabel("InputVector", vectorErrorLabel);
+        break;
+    }
   }
 }

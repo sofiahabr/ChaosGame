@@ -78,7 +78,7 @@ public class InitializePageController extends Controller {
     factorialPage.setGameType("Julia Transform");
     ChaosGameFileHandler fileHandler =
         new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0),
-            new Vector2D(MainView.width * 0.7f, MainView.height * 0.7f));
+            new Vector2D(MainLogic.width * 0.7f, MainLogic.height * 0.7f));
     FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
             new FileChooser.ExtensionFilter(
