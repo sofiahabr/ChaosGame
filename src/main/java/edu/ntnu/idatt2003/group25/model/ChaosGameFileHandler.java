@@ -124,20 +124,20 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
    */
 
   public void writeToFile(ChaosGameDescription description, String path) {
-  try {
+    try {
       File file = new File(path);
       BufferedWriter buffer = new BufferedWriter(new FileWriter(file));
       if (file.createNewFile()) {
         logger.info("File created: " + file.getName());
 
-        for (int i = 0; i < instructionForFile(description).size(); i ++) {
+        for (int i = 0; i < instructionForFile(description).size(); i++) {
           buffer.write(instructionForFile(description).get(i));
           buffer.newLine();
         }
         buffer.close();
       } else {
         logger.info("File: " + file.getName() + " already exists.");
-        for (int i = 0; i < instructionForFile(description).size(); i ++) {
+        for (int i = 0; i < instructionForFile(description).size(); i++) {
           buffer.write(instructionForFile(description).get(i));
           buffer.newLine();
         }
@@ -177,7 +177,8 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
           instructions.add(description.getMinCoords().toString() + " # Lower left");
           instructions.add(description.getMaxCoords().toString() + " # Upper right");
         }
-        instructions.add(transform2D.toString() + " # " + (i + 1) + " transform (a00, a01, a10, a11, b0, b1)");
+        instructions.add(transform2D.toString() + " # " + (i + 1)
+            + " transform (a00, a01, a10, a11, b0, b1)");
 
       }
     }
