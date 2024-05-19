@@ -85,6 +85,7 @@ public class InitializePageController extends Controller {
       }
     }
     factorialPage.setDescription(description);
+    factorialPage.reset();
     screenController.addScreenContent(factorialPage, "factorial page");
     screenController.getScreenContent("factorial page").setUp();
     screenController.gameChanged("switch page", "factorial page");
