@@ -7,7 +7,7 @@ import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
 import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
-import edu.ntnu.idatt2003.group25.view.menus.SideMenu;
+import edu.ntnu.idatt2003.group25.view.menus.Menu;
 import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
