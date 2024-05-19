@@ -4,12 +4,16 @@ import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class TopMenu extends Menu {
-  private HBox menu = new HBox(20);
+  private final HBox menu = new HBox(20);
 
   public TopMenu(ScreenController screenController) {
     super(screenController);
@@ -24,9 +28,9 @@ public class TopMenu extends Menu {
     homeButton.getStyleClass().add("heading");
     homeButton.setStyle("-fx-font: 30px");
 
-    homeButton.setOnAction(e -> {
-      updateObserver("home", "initialize page");
-    });
+    homeButton.setOnAction(e ->
+      updateObserver("home", "initialize page"));
+
     homeButton.setAlignment(Pos.CENTER);
 
     Button exitButton = new Button("X");
@@ -34,10 +38,7 @@ public class TopMenu extends Menu {
     exitButton.setAlignment(Pos.CENTER_RIGHT);
 
     Button infoButton = new Button("Help and instructions");
-
-
-    //TODO: drop down informasjon om spillet og hvordan det fungerer
-    // TODO: Ikoner for back, exit og info + spillnavn i midten
+    infoButton.setOnAction(e -> showInstructions());
 
     HBox buffer = new HBox();
     HBox.setHgrow(buffer, Priority.ALWAYS);
@@ -45,6 +46,63 @@ public class TopMenu extends Menu {
     menu.setPrefHeight(60);
     menu.setPadding(new Insets(20));
     menu.getChildren().addAll(homeButton, buffer,infoButton, exitButton);
+  }
+
+
+  public void showInstructions() {
+    Stage informationStage = new Stage();
+    informationStage.setTitle("Help and instructions");
+
+
+    Text infoTitle = new Text("Instructions");
+    infoTitle.getStyleClass().add("heading");
+
+    Text infoText = getInfoText();
+    infoText.getStyleClass().add("text");
+
+    Button okButton = new Button("OK");
+    okButton.getStyleClass().add("button");
+    okButton.setOnAction(e -> informationStage.close());
+
+    VBox instructionArea = new VBox(10);
+    instructionArea.getChildren().addAll(infoTitle, infoText, okButton);
+    instructionArea.setAlignment(Pos.CENTER);
+    instructionArea.setPadding(new Insets(10));
+
+    Scene infoScene = new Scene(instructionArea);
+    infoScene.getStylesheets().add("style/style.css");
+
+    informationStage.setScene(infoScene);
+    informationStage.show();
+  }
+
+  private static Text getInfoText() {
+    Text infoText;
+    infoText = new Text("""
+        START GAME:
+        Select a fractal and press the yellow start button
+        
+        TO PLAY:
+        Choose nr of iterations and click the green play button
+        
+        TO SAVE:
+        Click the save button and choose a file
+        
+        TO ADD TRANSFORMS:
+        Enter values in the text fields and press the add button
+        
+        TO EDIT:
+        Click the edit button and change values in the text fields
+        
+        TO RESET SCREEN:
+        Click the remove button
+        
+        TO CHANGE FRACTAL:
+        Click the home button and choose new fractal
+        
+        TO EXIT:
+        Click the X button""");
+    return infoText;
   }
 
   @Override
