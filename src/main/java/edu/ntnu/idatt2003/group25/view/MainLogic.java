@@ -20,22 +20,22 @@ public class MainLogic extends View{
   public FactorialPage factorialPage = new FactorialPage(screenController);
 
   public void start(Stage stage) {
-    screenController.addScreenContent(factorialPage, "factorial page");
-    screenController.addScreenContent(initializePage, "initialize page");
-
-    screenController.gameChanged("switch page", "initialize page");
-    scene.getStylesheets().add("/style.css");
-
-    screenController.gameChanged("switch page", "initialize page");
-
+//    screenController.addScreenContent(factorialPage, "factorial page");
 //    screenController.addScreenContent(initializePage, "initialize page");
 //
-//    screenController.gameChanged( "switch page","initialize page");
-//    scene.getStylesheets().add("/style/style.css");
+//    screenController.gameChanged("switch page", "initialize page");
+//    scene.getStylesheets().add("/style.css");
 //
-//    stage.setTitle("Chaos Game");
-//    stage.setScene(scene);
-//    stage.show();
+//    screenController.gameChanged("switch page", "initialize page");
+
+    screenController.addScreenContent(initializePage, "initialize page");
+
+    screenController.gameChanged( "switch page","initialize page");
+    scene.getStylesheets().add("/style/style.css");
+
+    stage.setTitle("Chaos Game");
+    stage.setScene(scene);
+    stage.show();
 
     stage.setTitle("Chaos Game");
     stage.setScene(scene);
