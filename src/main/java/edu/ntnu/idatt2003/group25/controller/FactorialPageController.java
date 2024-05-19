@@ -12,15 +12,10 @@ import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import edu.ntnu.idatt2003.group25.view.MainLogic;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
-import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
-import edu.ntnu.idatt2003.group25.view.MainView;
 import edu.ntnu.idatt2003.group25.view.menus.EditTransformsMenu;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 /**
@@ -38,8 +33,6 @@ public class FactorialPageController extends Controller {
   Vector2D vector2D = null;
   Complex complex = null;
   Matrix2x2 matrix = null;
-  List<Vector2D> vectorsInDescription = null;
-  List<Matrix2x2> matrixesInDescription = null;
   Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
   String invalidPositiveNumber = "Please enter a positive number\n 0 -1000 000 000";
   String invalidNumber = "Please enter numbers";
@@ -53,8 +46,6 @@ public class FactorialPageController extends Controller {
   public FactorialPageController(ScreenController screenController, FactorialPage factorialPage) {
     this.screenController = screenController;
     this.factorialPage = factorialPage;
-    this.chaosGame = new ChaosGame(ChaosGameDescriptionFactory.createSierpinski(), Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height));
-    this.pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
 
   }
 
@@ -196,50 +187,5 @@ public class FactorialPageController extends Controller {
         System.out.println("Error: " + e.getMessage());
       }
     }
-  }
-
-  private List<Vector2D> saveVectors(String info) {
-    System.out.println("Vectors: " + info);
-    String[] vectorNumbers = info.split(",");
-    List<Vector2D> vectorList = new ArrayList<>();
-
-    for (int i = 0; i < vectorNumbers.length-2;) {
-      vectorList.add(new Vector2D(Validation.verifyDouble(vectorNumbers[i], 0) ,
-          Validation.verifyDouble(vectorNumbers[i + 1], 0)));
-      i += 2;
-    }
-    return vectorList;
-  }
-  private List<Matrix2x2> saveMatrix(String info) {
-    String[] matrixNumbers = info.split(",");
-    List<Matrix2x2> matrixList = new ArrayList<>();
-
-    for (int i = 0; i < matrixNumbers.length - 4;) {
-      matrixList.add(new Matrix2x2(Validation.verifyDouble(matrixNumbers[i], 0) ,
-          Validation.verifyDouble(matrixNumbers[i + 1], 0),
-          Validation.verifyDouble(matrixNumbers[i + 2], 0),
-          Validation.verifyDouble(matrixNumbers[i + 3], 0)));
-      i += 4;
-    }
-    return matrixList;
-  }
-  private void editDescription(String info) {
-    System.out.println("Min and max: " + info);
-    String[] minMax = info.split(",");
-
-    List<Transform2D> transforms = new ArrayList<>();
-    if(factorialPage.getGameType().equals("Affine Transform") && matrixesInDescription.size() == vectorsInDescription.size()) {
-      for(int i = 0; i < matrixesInDescription.size(); i++) {
-        transforms.add(new AffineTransform2D(matrixesInDescription.get(i), vectorsInDescription.get(i)));
-      }
-    }
-    if(factorialPage.getGameType().equals("Julia Transform")) {
-      for(int i = 0; i < vectorsInDescription.size(); i++) {
-        transforms.add(new JuliaTransform(new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()),1));
-      }
-    }
-    factorialPage.setDescription(new ChaosGameDescription(transforms,
-        new Vector2D(Validation.verifyDouble(minMax[0], 0), Validation.verifyDouble(minMax[1], 0)),
-        new Vector2D(Validation.verifyDouble(minMax[2], 0), Validation.verifyDouble(minMax[3], 0))));
   }
 }
