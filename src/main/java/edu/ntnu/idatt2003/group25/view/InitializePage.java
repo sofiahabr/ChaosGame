@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2003.group25.view;
 
+
 import edu.ntnu.idatt2003.group25.controller.InitializePageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
-import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 
 public class InitializePage extends View {
   ScreenController screenController;
-  private BorderPane initPane = new BorderPane();
+  private final BorderPane initPane = new BorderPane();
 
   public InitializePage(ScreenController screenController){
     this.screenController = screenController;
@@ -25,10 +25,7 @@ public class InitializePage extends View {
 
   @Override
   public void setUp() {
-    TopMenu topMenu = new TopMenu(screenController);
-    topMenu.setUp();
-
-    initPane.setTop(topMenu.getMenu());
+    initPane.setStyle("-fx-background-color: white; ");
 
     StackPane infoBoxBackground = new StackPane();
     Rectangle box = new Rectangle(600, 400);
@@ -36,22 +33,30 @@ public class InitializePage extends View {
 
     Text heading = new Text("Chaos Game");
     heading.getStyleClass().add("heading");
-    heading.setStyle("-fx-font-size: 30");
+    heading.setStyle("-fx-font-size: 40");
 
-    Text subheading = new Text("Choose an option:");
+        Text subheading = new Text("Choose an option:");
     subheading.getStyleClass().add("heading");
     subheading.setStyle("-fx-font-size: 20");
 
     ComboBox<String> optionBox = new ComboBox<>();
     optionBox.getItems().addAll(
         "Create new Affine Transform","Create new Julia Transform", "Julia Transform",
-        "Sierpinski Triangle", "Barnsley Fern", "Read from file");
+        "Sierpinski Triangle", "Barnsley Fern","Lévy Dragon", "Heighway Dragon", "Read from file");
 
     optionBox.setMinSize(180, 30);
 
     Button startButton  = new Button("Start Game");
+    startButton.setOnAction(e-> {
+      if (optionBox.getValue() == null) {
+        optionBox.setPromptText("Please choose a transform");
+        optionBox.getStyleClass().add("error");
+      } else {
+        updateObserver("button clicked", optionBox.getValue());
+      }
+    });
 
-    startButton.setOnAction(e-> updateObserver("button clicked", optionBox.getValue()));
+
 
     VBox infoArea = new VBox(30, heading, subheading, optionBox, new VBox(), startButton);
     infoArea.setAlignment(Pos.CENTER);
@@ -64,7 +69,10 @@ public class InitializePage extends View {
     initPane.setCenter(infoBoxBackground);
   }
 
+  @Override
+  public void update() {
 
+  }
 
   @Override
   public BorderPane getPane() {

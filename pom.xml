@@ -26,11 +26,6 @@
       <version>5.10.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-graphics</artifactId>
-      <version>21.0.1</version>
-    </dependency>
   </dependencies>
 
   <build>
