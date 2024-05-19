@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class TopMenu extends Menu {
-  private HBox menu = new HBox(20);
+  private final HBox menu = new HBox(20);
 
   public TopMenu(ScreenController screenController) {
     super(screenController);
@@ -28,9 +28,9 @@ public class TopMenu extends Menu {
     homeButton.getStyleClass().add("heading");
     homeButton.setStyle("-fx-font: 30px");
 
-    homeButton.setOnAction(e -> {
-      updateObserver("home", "initialize page");
-    });
+    homeButton.setOnAction(e ->
+      updateObserver("home", "initialize page"));
+
     homeButton.setAlignment(Pos.CENTER);
 
     Button exitButton = new Button("X");
@@ -39,9 +39,6 @@ public class TopMenu extends Menu {
 
     Button infoButton = new Button("Help and instructions");
     infoButton.setOnAction(e -> showInstructions());
-
-    //TODO: drop down informasjon om spillet og hvordan det fungerer
-    // TODO: Ikoner for back, exit og info + spillnavn i midten
 
     HBox buffer = new HBox();
     HBox.setHgrow(buffer, Priority.ALWAYS);
@@ -54,31 +51,58 @@ public class TopMenu extends Menu {
 
   public void showInstructions() {
     Stage informationStage = new Stage();
-    informationStage.setTitle("Instructions");
+    informationStage.setTitle("Help and instructions");
 
 
     Text infoTitle = new Text("Instructions");
     infoTitle.getStyleClass().add("heading");
-    Text infoText;
-    infoText = new Text("START GAME: Select a fractal and press the yellow start button\n\n"
-        + "TO PLAY: choose nr of iterations and click the green play button\n\n"
-        + "TO SAVE: click the save button and choose a file\n\n"
-        + "TO ADD TRANSFORMS: enter values in the text fields and press the add button\n\n"
-        + "TO EDIT: click the edit button and change values in the text fields\n\n"
-        + "TO RESET SCREEN: click the remove button\n\n"
-        + "TO CHANGE FRACTAL: click the home button and choose new fractal\n\n"
-        + "TO EXIT: click the X button\n\n");
 
+    Text infoText = getInfoText();
     infoText.getStyleClass().add("text");
 
+    Button okButton = new Button("OK");
+    okButton.getStyleClass().add("button");
+    okButton.setOnAction(e -> informationStage.close());
+
     VBox instructionArea = new VBox(10);
-    instructionArea.getChildren().addAll(infoTitle, infoText);
+    instructionArea.getChildren().addAll(infoTitle, infoText, okButton);
+    instructionArea.setAlignment(Pos.CENTER);
+    instructionArea.setPadding(new Insets(10));
 
     Scene infoScene = new Scene(instructionArea);
     infoScene.getStylesheets().add("style/style.css");
 
     informationStage.setScene(infoScene);
     informationStage.show();
+  }
+
+  private static Text getInfoText() {
+    Text infoText;
+    infoText = new Text("""
+        START GAME:
+        Select a fractal and press the yellow start button
+        
+        TO PLAY:
+        Choose nr of iterations and click the green play button
+        
+        TO SAVE:
+        Click the save button and choose a file
+        
+        TO ADD TRANSFORMS:
+        Enter values in the text fields and press the add button
+        
+        TO EDIT:
+        Click the edit button and change values in the text fields
+        
+        TO RESET SCREEN:
+        Click the remove button
+        
+        TO CHANGE FRACTAL:
+        Click the home button and choose new fractal
+        
+        TO EXIT:
+        Click the X button""");
+    return infoText;
   }
 
   @Override
