@@ -67,7 +67,7 @@ public class FactorialPage extends View {
   }
 
   private void createSideBar() {
-    sidebarMenu = new VBox(40);
+    sidebarMenu = new VBox(10);
     sidebarMenu.getStyleClass().add("vbox");
     sidebarMenu.setPadding(new Insets(20));
   }
