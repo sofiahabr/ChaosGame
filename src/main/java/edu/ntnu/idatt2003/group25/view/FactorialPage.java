@@ -23,11 +23,13 @@ import javafx.scene.text.Text;
 
 public class FactorialPage extends View {
 
+  private int buttonHeight = Math.round(MainLogic.height*0.03f);
+  private int buttonWidth = Math.round(MainLogic.width*0.13f);
   private final BorderPane borderPane = new BorderPane();
   private VBox sidebarMenu;
   public ScreenController screenController;
   private ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
-  private FactorialPageController controller;
+  private final FactorialPageController controller;
   private String gameType; // Julia or Affine
   private ChaosGame chaosGame = new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
   private Canvas pixelCanvas = new Canvas(MainLogic.width*0.7, MainLogic.height*0.7);
@@ -78,7 +80,7 @@ public class FactorialPage extends View {
 
 
     TextField inputSteps = new TextField();
-    inputFieldStyle(inputSteps, "Ex. 500...", 30, 180);
+    inputFieldStyle(inputSteps, "Ex. 500...", buttonHeight, buttonWidth);
 
     VBox stepsArea = new VBox(10);
 
@@ -106,10 +108,10 @@ public class FactorialPage extends View {
 
 
     TextField inputMax = new TextField();
-    inputFieldStyle(inputMax, "1", 30, 35);
+    inputFieldStyle(inputMax, "1", buttonHeight, buttonWidth/4 - 10);
 
     TextField inputMax2 = new TextField();
-    inputFieldStyle(inputMax2, "1", 30, 35);
+    inputFieldStyle(inputMax2, "1", buttonHeight, buttonWidth/4 - 10);
 
     HBox maxArea = new HBox(10);
     maxArea.getChildren().addAll(inputMax, inputMax2);
@@ -121,10 +123,10 @@ public class FactorialPage extends View {
 
 
     TextField inputMin = new TextField();
-    inputFieldStyle(inputMin, "0", 30, 35);
+    inputFieldStyle(inputMin, "0", buttonHeight, buttonWidth/4 - 10);
 
     TextField inputMin2 = new TextField();
-    inputFieldStyle(inputMin2, "0", 30, 35);
+    inputFieldStyle(inputMin2, "0", buttonHeight, buttonWidth/4 - 10);
 
     HBox minArea = new HBox(10);
     minArea.getChildren().addAll(inputMin, inputMin2);
@@ -160,29 +162,28 @@ public class FactorialPage extends View {
 
     Button playButton = new Button("Play");
     playButton.getStyleClass().add("button2");
-    addStyle(playButton, "green", 180);
+    addStyle(playButton, "green", buttonWidth);
     playButton.setOnAction(e -> updateObserver("button clicked", "play"));
 
     Button resetButton = new Button("Reset canvas");
     resetButton.getStyleClass().add("button2");
-    addStyle(resetButton, "red", 180);
+    addStyle(resetButton, "red", buttonWidth);
     resetButton.setOnAction(e -> updateObserver("button clicked", "reset"));
 
     Button saveButton = new Button("Save to file");
     saveButton.getStyleClass().add("button2");
-    addStyle(saveButton, "black", 180);
+    addStyle(saveButton, "black", buttonWidth);
     saveButton.setOnAction(e -> updateObserver("button clicked", "save"));
 
     Button addTransformButton = new Button("Add transform");
     addTransformButton.getStyleClass().add("button2");
-    addStyle(addTransformButton, "grey", 180);
+    addStyle(addTransformButton, "grey", buttonWidth);
     addTransformButton.setOnAction(e -> updateObserver("button clicked", "add"));
 
     Button applyEditsButton = new Button("Edit transformation");
     applyEditsButton.getStyleClass().add("button2");
-    addStyle(applyEditsButton, "blue", 180);
+    addStyle(applyEditsButton, "blue", buttonWidth);
     applyEditsButton.setOnAction(e -> updateObserver("button clicked", "edit"));
-
 
     VBox buttonBox = new VBox(10);
     buttonBox.getChildren()
@@ -208,9 +209,9 @@ public class FactorialPage extends View {
     chooseVector.getStyleClass().add("heading");
 
     TextField inputVectorX0 = new TextField();
-    inputFieldStyle(inputVectorX0,"x0", 30, 80);
+    inputFieldStyle(inputVectorX0,"x0", buttonHeight, buttonWidth/2 - 10);
     TextField inputVectorX1 = new TextField();
-    inputFieldStyle(inputVectorX1,"x1", 30, 80);
+    inputFieldStyle(inputVectorX1,"x1", buttonHeight, buttonWidth/2 - 10);
 
     inputVectorX0.setOnKeyTyped(e-> updateObserver("vector input", inputVectorX0.getText() + ", " + inputVectorX1.getText()));
     inputVectorX1.setOnKeyTyped(e-> updateObserver("vector input", inputVectorX0.getText() + ", " + inputVectorX1.getText()));
@@ -233,13 +234,13 @@ public class FactorialPage extends View {
     createMatrix.getStyleClass().add("heading");
 
     TextField inputA = new TextField();
-    inputFieldStyle(inputA,"a", 30, 80);
+    inputFieldStyle(inputA,"a", buttonHeight, buttonWidth/2 - 10);
     TextField inputB = new TextField();
-    inputFieldStyle(inputB,"b", 30, 80);
+    inputFieldStyle(inputB,"b", buttonHeight, buttonWidth/2 - 10);
     TextField inputC = new TextField();
-    inputFieldStyle(inputC,"c", 30, 80);
+    inputFieldStyle(inputC,"c", buttonHeight, buttonWidth/2 - 10);
     TextField inputD = new TextField();
-    inputFieldStyle(inputD,"d", 30, 80);
+    inputFieldStyle(inputD,"d", buttonHeight, buttonWidth/2 - 10);
 
     inputA.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
     inputB.setOnKeyTyped(e-> updateObserver("matrix input", inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", " + inputD.getText()));
