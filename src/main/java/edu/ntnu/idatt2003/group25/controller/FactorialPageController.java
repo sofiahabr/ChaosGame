@@ -53,91 +53,63 @@ public class FactorialPageController extends Controller {
   public void gameChanged(String action, String info) {
     switch (action) {
       case "button clicked" -> buttonClicked(info);
-      case "vector input" -> {
-        vector2D = registerVector2D(info);
-        System.out.println(vector2D.toString());
-        boolean hasError = false;
-        if (vector2D.getX0() == defaultValue) {
-          factorialPage.showError("InputVector", invalidNumber);
-          hasError = true;
-        }
-        if (vector2D.getX1() == defaultValue) {
-          factorialPage.showError("InputVector", invalidNumber);
-          hasError = true;
-        }
-        if (!hasError) {
-          factorialPage.showError("InputVector", " ");
-        }
-      }
-      case "min input" -> {
-        min = registerVector2D(info);
-        if (min.getX0() == defaultValue || min.getX1() == defaultValue) {
-          factorialPage.showError("InputMinMax", invalidNumber);
-        } else {
-          factorialPage.showError("InputMinMax", " ");
-        }
-      }
-      case "max input" -> {
-        max = registerVector2D(info);
-        if (max.getX0() == defaultValue || max.getX1() == defaultValue) {
-          factorialPage.showError("InputMinMax", invalidNumber);
-          factorialPage.showError("InputMinMax", invalidNumber);
-        } else {
-          factorialPage.showError("InputMinMax", " ");
-        }
-      }
-      case "register steps" -> {
-        int input = registerInt(info);
-        if (input == 0) { //Default value
-          factorialPage.showError("InputSteps", invalidPositiveNumber);
-        } else {
-          factorialPage.showError("InputSteps", "");
-          steps = input;
-        }
-      }
-      case "matrix input" -> {
-        matrix = registerMatrix(info);
-        if (matrix.getA00() == defaultValue || matrix.getA01() == defaultValue ||
-            matrix.getA10() == defaultValue || matrix.getA11() == defaultValue) {
-          factorialPage.showError("InputMatrix", invalidNumber);
-        } else {
-          factorialPage.showError("InputMatrix", "");
-        }
-      }
-      case "sceneChange" -> {
-        String[] newValue = info.split(":");
-        double providedHeight = Validation.verifyDouble(newValue[0], 0);
-        if (providedHeight > 0) {
-          this.height = (int) providedHeight;
-        }
-        double providedWidth = Validation.verifyDouble(newValue[1], 0);
-        if (providedWidth > 0) {
-          this.width = (int) providedWidth;
-        }
-        this.pixelCanvas = new Canvas(width, height);
-        this.chaosGame = new ChaosGame(MainLogic.description, width, height);
-        break;
-      }
-      case "save vectors" -> saveVectors(info);
-      case "save matrix" -> saveMatrix(info);
-      case "edit description" -> editDescription(info);
+      case "vector input" -> vector2D = handleInputVector(info, "InputVector");
+      case "min input" -> min = handleInputVector(info, "InputMinMax");
+      case "max input" -> max = handleInputVector(info, "InputMinMax");
+      case "register steps" -> steps = handleInputSteps(info);
+      case "matrix input" -> matrix = handleInputMatrix(info);
+      case "sceneChange" -> handleInputSceneChange(info);
     }
   }
 
-  public int registerInt(String input) {
-    steps = Validation.verifyPositiveInt(input,0);
-    return steps;
+  public int handleInputSteps(String input) {
+    int inputSteps = Validation.verifyPositiveInt(input,0);
+    if (inputSteps == 0) { //Default value
+      factorialPage.showError("InputSteps", invalidPositiveNumber);
+    }
+    else {
+      factorialPage.showError("InputSteps", "");
+    }
+    return inputSteps;
   }
-  public Vector2D registerVector2D(String info){
+  public Vector2D handleInputVector(String info, String key){
     String[] values = info.split(",");
-    return new Vector2D(Validation.verifyDouble(values[0], defaultValue), Validation.verifyDouble(values[1],defaultValue));
+    Vector2D vector = new Vector2D(Validation.verifyDouble(values[0], defaultValue),
+        Validation.verifyDouble(values[1], defaultValue));
 
+    if (vector.getX0() == defaultValue || vector.getX1() == defaultValue) {
+      factorialPage.showError(key, invalidNumber);
+    } else {
+      factorialPage.showError(key, " ");
+      return vector;
+    }
+    return null;
   }
-  public Matrix2x2 registerMatrix(String info){
+  public Matrix2x2 handleInputMatrix(String info){
     String[] values = info.split(",");
-    return new Matrix2x2(
+    Matrix2x2 matrix2x2 = new Matrix2x2(
         Validation.verifyDouble(values[0],defaultValue), Validation.verifyDouble(values[1],defaultValue),
         Validation.verifyDouble(values[2],defaultValue), Validation.verifyDouble(values[3],defaultValue));
+
+    if (matrix2x2.getA00() == defaultValue || matrix2x2.getA01() == defaultValue ||
+        matrix2x2.getA10() == defaultValue || matrix2x2.getA11() == defaultValue) {
+      factorialPage.showError("InputMatrix", invalidNumber);
+    } else {
+      factorialPage.showError("InputMatrix", "");
+      return matrix2x2;
+    }
+    return null;
+  }
+  public void handleInputSceneChange(String info) {
+    String[] newValue = info.split(":");
+    double providedHeight = Validation.verifyDouble(newValue[0], 0);
+    if (providedHeight > 0) {
+      this.height = (int) providedHeight;
+    }
+    double providedWidth = Validation.verifyDouble(newValue[1], 0);
+    if (providedWidth > 0) {
+      this.width = (int) providedWidth;
+    }
   }
   public void updateChaosGame(ChaosGame chaosGame, int width, int height) {
     chaosGame.setWidth(width);
