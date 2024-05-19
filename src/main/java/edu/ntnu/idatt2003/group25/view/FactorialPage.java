@@ -5,8 +5,6 @@ import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
-import edu.ntnu.idatt2003.group25.view.menus.AffineConsole;
-import edu.ntnu.idatt2003.group25.view.menus.JuliaConsole;
 import edu.ntnu.idatt2003.group25.view.menus.Menu;
 import java.util.HashMap;
 import javafx.geometry.Insets;
@@ -30,8 +28,8 @@ public class FactorialPage extends View {
   private ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
   private FactorialPageController controller;
   private String gameType; // Julia or Affine
-  private ChaosGame chaosGame = new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
-  private Canvas pixelCanvas = new Canvas(MainLogic.width*0.7, MainLogic.height*0.7);
+  private ChaosGame chaosGame; //= new ChaosGame(description, Math.round(MainLogic.width*0.7f), Math.round(MainLogic.height*0.7f));
+  private Canvas pixelCanvas; // = new Canvas(MainLogic.width*0.7, MainLogic.height*0.7);
 
   HashMap<String,String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
@@ -43,8 +41,18 @@ public class FactorialPage extends View {
     this.controller = new FactorialPageController(screenController, this);
     this.screenController = screenController;
     addObserver(controller);
+    initilizeCanvas();
   }
-
+  private void initilizeCanvas() {
+    this.pixelCanvas = new Canvas();
+    this.chaosGame = new ChaosGame(description, (int) (MainLogic.width*0.7),
+        (int) (MainLogic.height * 0.7));
+    bindCanvasSize();
+  }
+  private void bindCanvasSize() {
+    pixelCanvas.widthProperty().bind(borderPane.widthProperty().multiply(0.7));
+    pixelCanvas.heightProperty().bind(borderPane.heightProperty().multiply(0.7));
+  }
   @Override
   public void setUp() {
     HBox topBox = new HBox(0);
@@ -58,12 +66,14 @@ public class FactorialPage extends View {
     }
 
     borderPane.setLeft(sidebarMenu);
+    borderPane.setCenter(pixelCanvas);
 //    borderPane.setTop(topBarMenu.getMenu());
   }
 
   @Override
   public void update() {
     this.description = MainLogic.description;
+    initilizeCanvas();
   }
 
   private void createSideBar() {
@@ -169,7 +179,7 @@ public class FactorialPage extends View {
 
   public void juliaSidebar() {
     createSideBar();
-    sidebarMenu.getChildren().addAll(chooseStepsField(),chooseMinMaxField(),createVector(),gameButtons());
+    sidebarMenu.getChildren().addAll(chooseStepsField(),chooseMinMaxField(), createVector(),gameButtons());
   }
 
   public void affineSidebar() {
@@ -234,7 +244,7 @@ public class FactorialPage extends View {
     return matrixArea;
   }
 
-  private void handleSceneChange(String info) {}
+  private void handleSceneFChange(String info) {}
   public void inputFieldStyle(TextField inputField, String promptText, int height,int width ) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);
@@ -276,10 +286,6 @@ public class FactorialPage extends View {
   }
 
   public void draw(int steps) {
-
-    Canvas pixelCanvas =
-        new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
-
     chaosGame.runSteps(steps);
 
     int[][] canvas = chaosGame.getCanvas().getCanvasArray();
@@ -300,12 +306,12 @@ public class FactorialPage extends View {
         }
       }
     }
-    borderPane.setCenter(pixelCanvas);
+    //borderPane.setCenter(pixelCanvas);
   }
   public void reset() {
     GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
     gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());
-    borderPane.setCenter(pixelCanvas);
+    //borderPane.setCenter(pixelCanvas);
   }
   public ChaosGameDescription getDescription() {
     return description;
