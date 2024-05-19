@@ -150,7 +150,6 @@ public class FactorialPageController extends Controller {
     if(factorialPage.getGameType().equals("Julia Transform")) {
       for(int i = 0; i < vectorsInDescription.size(); i++) {
         transforms.add(new JuliaTransform(new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()),1));
-        transforms.add(new JuliaTransform(new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()),-1));
       }
     }
     factorialPage.setDescription(new ChaosGameDescription(transforms,
