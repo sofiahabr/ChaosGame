@@ -51,7 +51,6 @@ public class FactorialPage extends View {
     topMenu.setUp();
     borderPane.setTop(topMenu.getMenu());
 
-    Menu console;
     if (gameType.equals("Julia Transform")) {
       juliaSidebar();
     } else {
