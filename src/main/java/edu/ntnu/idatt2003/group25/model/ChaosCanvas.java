@@ -32,6 +32,12 @@ public class ChaosCanvas {
     clear();
   }
 
+  /**
+   * The getPixel method is used to get the value of a specific pixel on the canvas.
+   *
+   * @param point is the (x,y) coordinate of the pixel being processed.
+   * @return the value of the pixel on the canvas.
+   */
 
   public int getPixel(Vector2D point) {
     Vector2D coordsVector = transformCoordsToIndices.transform(point);
@@ -50,6 +56,7 @@ public class ChaosCanvas {
   /**
    * putPixel is a method for assigning values on the canvas.
    * Each canvas value represents the color of a specific pixel on the canvas.
+   *
    * @param point is the (x,y) coordinate of the pixel being processed.
    *
    */
@@ -63,6 +70,11 @@ public class ChaosCanvas {
     }
   }
 
+  /**
+   * The getCanvasArray method is used to get the canvas array.
+   *
+   * @return the canvas array.
+   */
   public int[][] getCanvasArray() {
     return canvas;
   }
@@ -137,10 +149,22 @@ public class ChaosCanvas {
     return minCoords;
   }
 
+  /**
+   * Set method for the canvas height.
+   *
+   * @param height the height of the canvas.
+   */
+
   public void setHeight(int height) {
     this.height = height;
     fillAffineTransform();
   }
+
+  /**
+   * Set method for the canvas width.
+   *
+   * @param width the width of the canvas.
+   */
   public void setWidth(int width) {
     this.width = width;
     fillAffineTransform();
