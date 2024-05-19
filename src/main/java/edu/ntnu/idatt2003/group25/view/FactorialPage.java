@@ -6,6 +6,7 @@ import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.view.menus.Menu;
+import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import java.util.HashMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -45,8 +46,10 @@ public class FactorialPage extends View {
 
   @Override
   public void setUp() {
-    HBox topBox = new HBox(0);
-    borderPane.setTop(topBox);
+
+    TopMenu topMenu = new TopMenu(screenController);
+    topMenu.setUp();
+    borderPane.setTop(topMenu.getMenu());
 
     Menu console;
     if (gameType.equals("Julia Transform")) {
