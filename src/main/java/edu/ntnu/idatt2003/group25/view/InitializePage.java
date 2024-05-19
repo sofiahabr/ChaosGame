@@ -3,6 +3,7 @@ package edu.ntnu.idatt2003.group25.view;
 
 import edu.ntnu.idatt2003.group25.controller.InitializePageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
+import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -25,7 +26,9 @@ public class InitializePage extends View {
 
   @Override
   public void setUp() {
-    initPane.setStyle("-fx-background-color: white; ");
+    TopMenu topMenu = new TopMenu(screenController);
+    topMenu.setUp();
+    initPane.setTop(topMenu.getMenu());
 
     StackPane infoBoxBackground = new StackPane();
     Rectangle box = new Rectangle(600, 400);
