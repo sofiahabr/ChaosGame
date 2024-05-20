@@ -314,7 +314,7 @@
     -fx-font-weight: lighter;
 }
 .heading {
-    -fx-font: 18px "Georgia";
+    -fx-font: 14px "Georgia";
     -fx-font-weight: bold;
 }
 .rectangle {
