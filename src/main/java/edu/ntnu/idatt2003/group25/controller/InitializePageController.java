@@ -4,17 +4,13 @@ import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
 import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
 import edu.ntnu.idatt2003.group25.model.Complex;
-import edu.ntnu.idatt2003.group25.model.Matrix2x2;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
-import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import edu.ntnu.idatt2003.group25.view.MainLogic;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
-import edu.ntnu.idatt2003.group25.view.MainView;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.stage.FileChooser;
 
 public class InitializePageController extends Controller {
