@@ -62,7 +62,10 @@ public class FactorialPageController extends Controller {
   }
   public void buttonClicked(String info){
     switch (info) {
-      case "play"-> factorialPage.draw(steps);
+      case "play"-> {
+        factorialPage.getChaosGame().runSteps(steps);
+        factorialPage.draw();
+      }
       case "add"-> addAction();
       case "reset"-> resetAction();
       case "save" -> saveAction();
