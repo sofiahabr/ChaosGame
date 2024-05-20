@@ -98,9 +98,7 @@ public class EditTransformsMenu extends Menu {
     List<TextField> matrixTextFields = new ArrayList<>();
     List<TextField> signTextFields = new ArrayList<>();
 
-    for (int i = 0; i < factorialPage.getDescription().getTransforms().size(); i++) {
-
-      Transform2D transform = factorialPage.getDescription().getTransforms().get(i);
+    factorialPage.getDescription().getTransforms().forEach(transform -> {
       if (transform instanceof AffineTransform2D) {
         AffineTransform2D affine = (AffineTransform2D) transform;
 
