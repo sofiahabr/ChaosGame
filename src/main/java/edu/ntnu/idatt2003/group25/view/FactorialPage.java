@@ -349,9 +349,7 @@ public class FactorialPage extends View {
       }
     }
 
-    public void draw( int steps){
-      chaosGame.runSteps(steps);
-
+    public void draw(){
       int[][] canvas = chaosGame.getCanvas().getCanvasArray();
       GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
 
@@ -390,6 +388,9 @@ public class FactorialPage extends View {
       chaosGame = new ChaosGame(description, Math.round(MainLogic.width * 0.7f),
           Math.round(MainLogic.height * 0.7f));
 
+    }
+    public ChaosGame getChaosGame() {
+    return chaosGame;
     }
 }
 
