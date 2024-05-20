@@ -269,14 +269,14 @@
     -fx-min-height: 30;
     -fx-text-fill: white;
     -fx-border-radius: 10;
-    -fx-font: 16px "helvetica";
+    -fx-font: 12px "helvetica";
     -fx-font-weight: bold;
 
 }
 .text-field {
     -fx-background-radius: 10;
     -fx-padding: 5 10;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
 }
 .text-field2 {
     -fx-background-radius: 10;
@@ -302,10 +302,10 @@
     -fx-fill: white;
     -fx-border-radius: 5;
     -fx-background-color: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
 }
 .text {
-    -fx-font: 14px "Helvetica";
+    -fx-font: 12px "Helvetica";
     -fx-font-weight: bold;
 }
 .label. error {
@@ -314,7 +314,7 @@
     -fx-font-weight: lighter;
 }
 .heading {
-    -fx-font: 18px "Georgia";
+    -fx-font: 14px "Georgia";
     -fx-font-weight: bold;
 }
 .rectangle {
