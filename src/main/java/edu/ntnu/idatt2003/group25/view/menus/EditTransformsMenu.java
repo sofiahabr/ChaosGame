@@ -28,6 +28,7 @@ public class EditTransformsMenu extends Menu {
   Label minMaxError = new Label();
   Label matrixErrorLabel = new Label();
   Label vectorErrorLabel = new Label();
+  Label signErrorLabel = new Label();
   Label finalErrorLabel = new Label();
 
 
@@ -95,6 +96,7 @@ public class EditTransformsMenu extends Menu {
 
     List<TextField> vectorTextFields = new ArrayList<>();
     List<TextField> matrixTextFields = new ArrayList<>();
+    List<TextField> signTextFields = new ArrayList<>();
 
     for (int i = 0; i < factorialPage.getDescription().getTransforms().size(); i++) {
 
@@ -173,13 +175,24 @@ public class EditTransformsMenu extends Menu {
         c0.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
         c1.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
 
+        TextField signInput = new TextField();
+        inputFieldStyle(signInput, julia.getSign() + "", 30, 50);
+
+        Text signText = new Text("Sign");
+        signText.getStyleClass().add("text");
+        signInput.setOnKeyTyped(e -> updateObserver("sign input", signInput.getText()));
+
         vectorTextFields.add(c0);
         vectorTextFields.add(c1);
+
+        signTextFields.add(signInput);
 
         HBox vectorInput = new HBox(10, c0, c1);
 
         VBox juliaArea = new VBox(10);
-        juliaArea.getChildren().addAll(complex, vectorInput);
+        juliaArea.getChildren().addAll(complex, vectorInput,signText, signInput);
+        juliaArea.setAlignment(Pos.CENTER);
+
         descriptions.getChildren().add(juliaArea);
       }
     }
@@ -191,6 +204,9 @@ public class EditTransformsMenu extends Menu {
 
     matrixErrorLabel.getStyleClass().add("error");
     updateErrorLabel("InputMatrix", matrixErrorLabel);
+
+    signErrorLabel.getStyleClass().add("error");
+    updateErrorLabel("InputSign", signErrorLabel);
 
     finalErrorLabel.getStyleClass().add("error");
     updateErrorLabel("final", finalErrorLabel);
@@ -205,14 +221,20 @@ public class EditTransformsMenu extends Menu {
       for (TextField textField : matrixTextFields) {
         matrix += textField.getText() + ", ";
       }
-      updateObserver("save vectors", vectors);
-      updateObserver("save matrix", matrix);
+      StringBuilder sign = new StringBuilder();
+      for (TextField textField : signTextFields) {
+        sign.append(textField.getText()).append(",");
+      }
+      updateObserver("save vectors", vectors.toString());
+      updateObserver("save matrix", matrix.toString());
+      updateObserver("save signs", sign.toString());
       updateObserver("edit description",
           inputMin.getText() + ", " + inputMin2.getText() + ", " + inputMax.getText() + ", " +
               inputMax2.getText());
+
       // Checks that there are no error before closing the stage
-      if (!matrixErrorLabel.getText().isEmpty() || !vectorErrorLabel.getText().isEmpty() || !minMaxError
-          .getText().isEmpty()) {
+      if (!matrixErrorLabel.getText().isEmpty() || !vectorErrorLabel.getText().isEmpty() ||
+          !minMaxError.getText().isEmpty() || !signErrorLabel.getText().isEmpty() ) {
         showError("final", "You can not save without entering ONLY numbers");
       } else {
         editStage.close();
@@ -223,7 +245,9 @@ public class EditTransformsMenu extends Menu {
     stage.setAlignment(Pos.CENTER);
     stage.setPadding(new Insets(40));
 
-    stage.getChildren().addAll(minMaxBox, minMaxError, descriptions, vectorErrorLabel, matrixErrorLabel, finalErrorLabel, save);
+    stage.getChildren()
+        .addAll(editTransformsTitle, minMaxBox, minMaxError, descriptions, signErrorLabel, vectorErrorLabel,
+            matrixErrorLabel, finalErrorLabel, save);
 
     Scene editScene = new Scene(stage);
     editScene.getStylesheets().add("/style/style.css");
@@ -260,8 +284,10 @@ public class EditTransformsMenu extends Menu {
       case "InputVector":
         updateErrorLabel("InputVector", vectorErrorLabel);
         break;
-        case "final":
-          updateErrorLabel("final", finalErrorLabel);
+      case "InputSign":
+        updateErrorLabel("InputSign", signErrorLabel);
+      case "final":
+        updateErrorLabel("final", finalErrorLabel);
 
     }
   }
