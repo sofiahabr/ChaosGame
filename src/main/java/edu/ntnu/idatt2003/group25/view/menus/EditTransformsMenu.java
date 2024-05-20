@@ -242,9 +242,13 @@ public class EditTransformsMenu extends Menu {
       }
     });
 
+    Text editTransformsTitle = new Text("Edit Transforms");
+    editTransformsTitle.getStyleClass().add("heading");
+    editTransformsTitle.setStyle("-fx-font-size: 20");
+
     VBox stage = new VBox(20);
     stage.setAlignment(Pos.CENTER);
-    stage.setPadding(new Insets(40));
+    stage.setPadding(new Insets(10));
 
     stage.getChildren()
         .addAll(editTransformsTitle, minMaxBox, minMaxError, descriptions, signErrorLabel, vectorErrorLabel,
