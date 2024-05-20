@@ -37,7 +37,10 @@ public class EditTransformsMenu extends Menu {
     this.factorialPage = factorialPage;
     addObserver(new EditTransformController(this, factorialPage));
 
-    setUp();
+    if (!factorialPage.getDescription().getTransforms().isEmpty()){
+
+      setUp();
+    }
   }
 
   @Override
@@ -193,7 +196,7 @@ public class EditTransformsMenu extends Menu {
 
         descriptions.getChildren().add(juliaArea);
       }
-    }
+    });
     minMaxError.getStyleClass().add("error");
     updateErrorLabel("InputMinMax", minMaxError);
 
@@ -211,13 +214,13 @@ public class EditTransformsMenu extends Menu {
 
     Button save = new Button("Save");
     save.setOnAction(e -> {
-      String vectors = "";
+      StringBuilder vectors = new StringBuilder();
       for (TextField textField : vectorTextFields) {
-        vectors += textField.getText() + ", ";
+        vectors.append(textField.getText()).append(", ");
       }
-      String matrix = "";
+      StringBuilder matrix = new StringBuilder();
       for (TextField textField : matrixTextFields) {
-        matrix += textField.getText() + ", ";
+        matrix.append(textField.getText()).append(", ");
       }
       StringBuilder sign = new StringBuilder();
       for (TextField textField : signTextFields) {
