@@ -22,9 +22,6 @@ import javafx.stage.FileChooser;
  * FactorialPageController function as the FactorialPage's controller class.
  */
 public class FactorialPageController extends Controller {
-  int height = MainLogic.height;
-  int width = MainLogic.width;
-  ChaosGame chaosGame = new ChaosGame(MainLogic.description,MainLogic.width, MainLogic.height);
   ScreenController screenController;
   FactorialPage factorialPage;
   int steps = 0;
@@ -36,6 +33,7 @@ public class FactorialPageController extends Controller {
   Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
   String invalidPositiveNumber = "Please enter a positive \nnumber 0 -1000 000 000";
   String invalidNumber = "Please enter numbers";
+  String oneOrNegOne = "Number must be 1 or -1";
   int defaultValue = -9999;
 
   /**
@@ -56,6 +54,7 @@ public class FactorialPageController extends Controller {
       case "vector input" -> vector2D = handleInputVector(info, "InputVector");
       case "min input" -> min = handleInputVector(info, "InputMinMax");
       case "max input" -> max = handleInputVector(info, "InputMinMax");
+      case "sign input" -> sign = handleInputSign(info);
       case "register steps" -> steps = handleInputSteps(info);
       case "matrix input" -> matrix = handleInputMatrix(info);
     }
@@ -72,9 +71,19 @@ public class FactorialPageController extends Controller {
       case "edit" -> new EditTransformsMenu(screenController, factorialPage);
     }
   }
+    public int handleInputSign(String input) {
+      int sign = Validation.verifyInt(input, 0);
+      if (sign == 1 || sign == -1) {
+        factorialPage.showError("InputSign", "");
+        return sign;
+      } else {
+        factorialPage.showError("InputSign", oneOrNegOne);
+      }
+      return 0; //Default value
+    }
   public int handleInputSteps(String input) {
     int inputSteps = Validation.verifyPositiveInt(input,0);
-    if (inputSteps == 0) { //Default value
+    if (inputSteps == 0) {
       factorialPage.showError("InputSteps", invalidPositiveNumber);
     }
     else {
@@ -124,10 +133,8 @@ public class FactorialPageController extends Controller {
 private void addAction() {
   if (factorialPage.getGameType().equals("Julia Transform")) {
     complex = new Complex(vector2D.getX0(), vector2D.getX1());
-    factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, 1));
-
-
-  } else if (factorialPage.getGameType().equals("Affine Transform")){
+    factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, sign));
+  } else if (factorialPage.getGameType().equals("Affine Transform")) {
     factorialPage.getDescription().getTransforms().add(new AffineTransform2D(matrix, vector2D));
   }
 }
