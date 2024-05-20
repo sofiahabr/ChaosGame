@@ -38,11 +38,13 @@ public class FactorialPage extends View {
   private Label minMaxError;
   private Label matrixErrorLabel;
   private Label vectorErrorLabel;
+  private Label signErrorLabel;
 
   public FactorialPage(ScreenController screenController) {
     this.controller = new FactorialPageController(screenController, this);
     this.screenController = screenController;
     addObserver(controller);
+
     initilizeCanvas();
     bindCanvasSize();
     addResizeListener();
@@ -99,6 +101,7 @@ public class FactorialPage extends View {
     VBox stepsArea = new VBox(10);
 
     stepsErrorLabel = new Label();
+    stepsErrorLabel.setPrefHeight(buttonHeight * 1.25);
     stepsErrorLabel.getStyleClass().add("error");
     updateErrorLabel("InputSteps", stepsErrorLabel);
 
@@ -190,6 +193,7 @@ public class FactorialPage extends View {
     Button addTransformButton = new Button("Add transform");
     addTransformButton.getStyleClass().add("button2");
     addStyle(addTransformButton, "grey", buttonWidth);
+
     addTransformButton.setOnAction(e -> updateObserver("button clicked", "add"));
 
     Button applyEditsButton = new Button("Edit transformation");
@@ -208,13 +212,13 @@ public class FactorialPage extends View {
   public void juliaSidebar() {
     createSideBar();
     sidebarMenu.getChildren()
-        .addAll(chooseStepsField(), chooseMinMaxField(), createVector(), gameButtons());
+        .addAll(chooseStepsField(), createVector(), createSignArea(), chooseMinMaxField(), gameButtons());
   }
 
   public void affineSidebar() {
     createSideBar();
-    sidebarMenu.getChildren().addAll(chooseStepsField(), chooseMinMaxField(), createVector(),
-        createMatrix(), gameButtons());
+    sidebarMenu.getChildren().addAll(chooseStepsField(), createVector(),
+        createMatrix(), chooseMinMaxField(), gameButtons());
   }
 
   public VBox createVector() {
@@ -242,6 +246,25 @@ public class FactorialPage extends View {
     vectorArea.getChildren().addAll(chooseVector, vectorInputs, vectorErrorLabel);
     vectorArea.setAlignment(Pos.CENTER);
     return vectorArea;
+  }
+  public VBox createSignArea() {
+    Text chooseSign = new Text("Choose sign:");
+    chooseSign.getStyleClass().add("heading");
+
+    TextField inputSign = new TextField();
+    inputFieldStyle(inputSign,"1", buttonHeight, buttonWidth / 2 - 10);
+
+    inputSign.setOnKeyTyped(e -> updateObserver("sign input", inputSign.getText()));
+
+    signErrorLabel = new Label();
+    signErrorLabel.getStyleClass().add("error");
+    updateErrorLabel("InputSign", signErrorLabel);
+
+    VBox signArea = new VBox(10);
+    signArea.getChildren().addAll(chooseSign, inputSign, signErrorLabel);
+    signArea.setAlignment(Pos.CENTER);
+
+    return signArea;
   }
 
   public VBox createMatrix() {
@@ -320,6 +343,9 @@ public class FactorialPage extends View {
         case "InputVector":
           updateErrorLabel("InputVector", vectorErrorLabel);
           break;
+        case "InputSign":
+            updateErrorLabel("InputSign", signErrorLabel);
+            break;
       }
     }
 
