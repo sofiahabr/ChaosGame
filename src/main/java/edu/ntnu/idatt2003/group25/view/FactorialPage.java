@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 
 public class FactorialPage extends View {
 
-  private int buttonHeight = Math.round(MainLogic.height*0.03f);
+  private int buttonHeight = Math.round(MainLogic.height*0.05f);
   private int buttonWidth = 180;
   private final BorderPane borderPane = new BorderPane();
   private VBox sidebarMenu;
@@ -84,7 +84,7 @@ public class FactorialPage extends View {
     borderPane.setCenter(pixelCanvas);
   }
   private void createSideBar() {
-    sidebarMenu = new VBox(10);
+    sidebarMenu = new VBox(MainLogic.height * 0.01f);
     sidebarMenu.getStyleClass().add("vbox");
     sidebarMenu.setPadding(new Insets(20));
   }
@@ -99,6 +99,7 @@ public class FactorialPage extends View {
     VBox stepsArea = new VBox(10);
 
     stepsErrorLabel = new Label();
+    stepsErrorLabel.setMinHeight(buttonHeight*1.25);
     stepsErrorLabel.getStyleClass().add("error");
     updateErrorLabel("InputSteps", stepsErrorLabel);
 
