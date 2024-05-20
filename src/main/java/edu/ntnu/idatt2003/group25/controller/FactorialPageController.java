@@ -25,12 +25,12 @@ public class FactorialPageController extends Controller {
   ScreenController screenController;
   FactorialPage factorialPage;
   int steps = 0;
-  Vector2D min = null;
-  Vector2D max = null;
-  Vector2D vector2D = null;
-  Complex complex = null;
-  Matrix2x2 matrix = null;
-  Canvas pixelCanvas = new Canvas(chaosGame.getCanvas().getWidth(), chaosGame.getCanvas().getHeight());
+  Vector2D min = new Vector2D(0,0);
+  Vector2D max = new Vector2D(0,0);
+  Vector2D vector2D = new Vector2D(0,0);
+  Complex complex = new Complex(0,0);
+  Matrix2x2 matrix = new Matrix2x2(0,0,0,0);
+  int sign = 0;
   String invalidPositiveNumber = "Please enter a positive \nnumber 0 -1000 000 000";
   String invalidNumber = "Please enter numbers";
   String oneOrNegOne = "Number must be 1 or -1";
