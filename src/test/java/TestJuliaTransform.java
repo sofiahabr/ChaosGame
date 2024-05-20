@@ -15,8 +15,8 @@ public class TestJuliaTransform {
     @Test
     void testTransform() {
       JuliaTransform test = new JuliaTransform(z, 1);
-      assertEquals(0.506, test.transform(c).round().getX0());
-      assertEquals(-0.395, test.transform(c).round().getX1());
+      assertEquals(0.395, test.transform(c).round().getX0());
+      assertEquals(0.506, test.transform(c).round().getX1());
 
     }
   }

@@ -31,7 +31,7 @@ public class InitializePage extends View {
     initPane.setTop(topMenu.getMenu());
 
     StackPane infoBoxBackground = new StackPane();
-    Rectangle box = new Rectangle(MainLogic.width*0.45f, MainLogic.height*0.45f);
+    Rectangle box = new Rectangle(MainLogic.width*0.6, MainLogic.height*0.6);
     box.getStyleClass().add("rectangle");
 
     Text heading = new Text("Chaos Game");
@@ -63,11 +63,9 @@ public class InitializePage extends View {
 
     VBox infoArea = new VBox(30, heading, subheading, optionBox, new VBox(), startButton);
     infoArea.setAlignment(Pos.CENTER);
-    infoArea.setPadding(new Insets(40));
 
     infoBoxBackground.getChildren().addAll(box, infoArea);
     infoBoxBackground.setAlignment(Pos.CENTER);
-    infoBoxBackground.setPadding(new Insets(150));
 
     initPane.setCenter(infoBoxBackground);
   }
