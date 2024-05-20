@@ -209,12 +209,12 @@ public class FactorialPage extends View {
   public void juliaSidebar() {
     createSideBar();
     sidebarMenu.getChildren()
-        .addAll(chooseStepsField(), chooseMinMaxField(), createVector(), gameButtons());
+        .addAll(chooseStepsField(), createVector(), gameButtons());
   }
 
   public void affineSidebar() {
     createSideBar();
-    sidebarMenu.getChildren().addAll(chooseStepsField(), chooseMinMaxField(), createVector(),
+    sidebarMenu.getChildren().addAll(chooseStepsField(), createVector(),
         createMatrix(), gameButtons());
   }
 
