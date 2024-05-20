@@ -63,4 +63,7 @@ public class JuliaTransform implements Transform2D {
   public Complex getComplex() {
     return point;
   }
+  public int getSign() {
+    return sign;
+  }
 }
