@@ -31,7 +31,7 @@ public class InitializePage extends View {
     initPane.setTop(topMenu.getMenu());
 
     StackPane infoBoxBackground = new StackPane();
-    Rectangle box = new Rectangle(600, 400);
+    Rectangle box = new Rectangle(MainLogic.width*0.45f, MainLogic.height*0.45f);
     box.getStyleClass().add("rectangle");
 
     Text heading = new Text("Chaos Game");
