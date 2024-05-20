@@ -140,6 +140,7 @@ private void addAction() {
 }
   private void resetAction() {
     factorialPage.reset();
+    factorialPage.getChaosGame().getCanvas().clear();
   }
   private void saveAction() {
     ChaosGameFileHandler fileHandler =
