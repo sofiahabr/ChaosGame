@@ -112,7 +112,7 @@ public class EditTransformController extends Controller{
         Validation.verifyDouble(values[1], defaultValue));
 
     if (vector.getX0() == defaultValue || vector.getX1() == defaultValue) {
-      editTransformsMenu.showError(key, name + oneOrNegOne);
+      editTransformsMenu.showError(key, name + invalidNumber);
     } else {
       editTransformsMenu.showError(key, "");
     }
