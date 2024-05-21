@@ -258,7 +258,6 @@
 .button {
     -fx-background-radius: 10;
     -fx-background-color: #F9F288 ;
-    -fx-min-height: 30;
     -fx-text-fill: black;
     -fx-border-radius: 10;
     -fx-font: 12px "helvetica";
@@ -266,7 +265,6 @@
 }
 .button2 {
     -fx-background-radius: 10;
-    -fx-min-height: 30;
     -fx-text-fill: white;
     -fx-border-radius: 10;
     -fx-font: 12px "helvetica";
@@ -291,7 +289,6 @@
 }
 .button:hover {
     -fx-background-radius: 10;
-    -fx-min-height: 30;
     -fx-text-fill: darkgrey ;
     -fx-font: 12px "helvetica";
     -fx-font-weight: bold;
@@ -310,8 +307,7 @@
 }
 .label. error {
     -fx-text-fill: red;
-    -fx-font: 12px "helvetica";
-    -fx-font-weight: lighter;
+    -fx-font: 10px "helvetica";
 }
 .heading {
     -fx-font: 14px "Georgia";
