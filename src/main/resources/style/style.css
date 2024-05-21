@@ -322,6 +322,13 @@
     -fx-border-width: 20;
     -fx-border-radius: 20;
 }
+.scroll-bar {
+    -fx-background-color: #9CD8DC;
+    -fx-fit-to-width: 5;
+}
+.scroll-pane {
+    -fx-background-color: #9CD8DC;
+}
 
 /*.root {*/
 /*    -fx-background-color: #F2F2F2;*/
