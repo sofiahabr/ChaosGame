@@ -35,10 +35,7 @@ public class FactorialPage extends View {
   private Canvas pixelCanvas;
   HashMap<String, String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
-  private Label minMaxError;
-  private Label matrixErrorLabel;
-  private Label vectorErrorLabel;
-  private Label signErrorLabel;
+  private final EditTransformsMenu editTransformsMenu = new EditTransformsMenu(screenController, this);
 
   public FactorialPage(ScreenController screenController) {
     this.controller = new FactorialPageController(screenController, this);
@@ -76,11 +73,7 @@ public class FactorialPage extends View {
     topMenu.setUp();
     borderPane.setTop(topMenu.getMenu());
 
-    if (gameType.equals("Julia Transform")) {
-      juliaSidebar();
-    } else {
-      affineSidebar();
-    }
+    setSidebarMenu();
 
     borderPane.setLeft(sidebarMenu);
     borderPane.setCenter(pixelCanvas);
@@ -207,10 +200,11 @@ public class FactorialPage extends View {
     return buttonBox;
   }
 
-  public void juliaSidebar() {
+  public void setSidebarMenu() {
+    editTransformsMenu.setUp();
     createSideBar();
     sidebarMenu.getChildren()
-        .addAll(chooseStepsField(), createVector(), createSignArea(), chooseMinMaxField(), gameButtons());
+        .addAll(chooseStepsField(), editTransformsMenu.getMenu(), gameButtons());
   }
 
   public void affineSidebar() {
