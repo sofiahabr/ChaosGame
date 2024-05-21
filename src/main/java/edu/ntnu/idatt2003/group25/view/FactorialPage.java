@@ -34,7 +34,7 @@ public class FactorialPage extends View {
   private Canvas pixelCanvas;
   HashMap<String, String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
-  private final EditTransformsMenu editTransformsMenu = new EditTransformsMenu(screenController, this);
+  private EditTransformsMenu editTransformsMenu;
 
   public FactorialPage(ScreenController screenController) {
     this.controller = new FactorialPageController(screenController, this);
