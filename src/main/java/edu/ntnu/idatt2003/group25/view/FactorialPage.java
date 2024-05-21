@@ -108,63 +108,6 @@ public class FactorialPage extends View {
     return stepsArea;
   }
 
-  private VBox chooseMinMaxField() {
-
-    // Create min/ max area
-    Text minTitle = new Text(" Min: ");
-    Text maxTitle = new Text(" Max: ");
-    maxTitle.getStyleClass().add("heading");
-    minTitle.getStyleClass().add("heading");
-
-    TextField inputMax = new TextField();
-    inputFieldStyle(inputMax, "1", buttonHeight, buttonWidth/4 - 10);
-
-    TextField inputMax2 = new TextField();
-    inputFieldStyle(inputMax2, "1", buttonHeight, buttonWidth/4 - 10);
-
-    HBox maxArea = new HBox(10);
-    maxArea.getChildren().addAll(inputMax, inputMax2);
-
-    inputMax.setOnKeyTyped(
-        e -> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
-    inputMax2.setOnKeyTyped(
-        e -> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
-
-    TextField inputMin = new TextField();
-    inputFieldStyle(inputMin, "0", buttonHeight, buttonWidth/4 - 10);
-
-    TextField inputMin2 = new TextField();
-    inputFieldStyle(inputMin2, "0", buttonHeight, buttonWidth/4 - 10);
-
-    HBox minArea = new HBox(10);
-    minArea.getChildren().addAll(inputMin, inputMin2);
-
-    inputMin.setOnKeyTyped(
-        e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
-    inputMin2.setOnKeyTyped(
-        e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
-
-    VBox minBox = new VBox(10);
-    VBox maxBox = new VBox(10);
-
-    minMaxError = new Label();
-    minMaxError.getStyleClass().add("error");
-    updateErrorLabel("InputMinMax", minMaxError);
-
-    minBox.getChildren().addAll(minTitle, minArea);
-    maxBox.getChildren().addAll(maxTitle, maxArea);
-
-    HBox minMaxBox = new HBox(20);
-    minMaxBox.getChildren().addAll(minBox, maxBox);
-    minMaxBox.setAlignment(Pos.CENTER);
-
-    VBox minMaxArea = new VBox(10);
-    minMaxArea.getChildren().addAll(minMaxBox, minMaxError);
-    minMaxArea.setAlignment(Pos.CENTER);
-
-    return minMaxArea;
-  }
-
   private VBox gameButtons() {
 
     Button playButton = new Button("Play");
@@ -187,14 +130,9 @@ public class FactorialPage extends View {
     addStyle(addTransformButton, "grey", buttonWidth);
     addTransformButton.setOnAction(e -> updateObserver("button clicked", "add"));
 
-    Button applyEditsButton = new Button("Edit transformation");
-    applyEditsButton.getStyleClass().add("button2");
-    addStyle(applyEditsButton, "blue", buttonWidth);
-    applyEditsButton.setOnAction(e -> updateObserver("button clicked", "edit"));
-
     VBox buttonBox = new VBox(10);
     buttonBox.getChildren()
-        .addAll(addTransformButton, applyEditsButton, saveButton, resetButton, playButton);
+        .addAll(addTransformButton, saveButton, resetButton, playButton);
     buttonBox.setAlignment(Pos.CENTER);
 
     return buttonBox;
@@ -205,97 +143,6 @@ public class FactorialPage extends View {
     createSideBar();
     sidebarMenu.getChildren()
         .addAll(chooseStepsField(), editTransformsMenu.getMenu(), gameButtons());
-  }
-
-  public void affineSidebar() {
-    createSideBar();
-    sidebarMenu.getChildren().addAll(chooseStepsField(), createVector(),
-        createMatrix(), chooseMinMaxField(), gameButtons());
-  }
-
-  public VBox createVector() {
-    Text chooseVector = new Text("Choose vector:");
-    chooseVector.getStyleClass().add("heading");
-
-    TextField inputVectorX0 = new TextField();
-    inputFieldStyle(inputVectorX0,"x0", buttonHeight, buttonWidth/2 - 10);
-    TextField inputVectorX1 = new TextField();
-    inputFieldStyle(inputVectorX1,"x1", buttonHeight, buttonWidth/2 - 10);
-
-    inputVectorX0.setOnKeyTyped(e -> updateObserver("vector input",
-        inputVectorX0.getText() + ", " + inputVectorX1.getText()));
-    inputVectorX1.setOnKeyTyped(e -> updateObserver("vector input",
-        inputVectorX0.getText() + ", " + inputVectorX1.getText()));
-
-    HBox vectorInputs = new HBox(20);
-    vectorInputs.getChildren().addAll(inputVectorX0, inputVectorX1);
-
-    vectorErrorLabel = new Label();
-    vectorErrorLabel.getStyleClass().add("error");
-    updateErrorLabel("InputVector", vectorErrorLabel);
-
-    VBox vectorArea = new VBox(10);
-    vectorArea.getChildren().addAll(chooseVector, vectorInputs, vectorErrorLabel);
-    vectorArea.setAlignment(Pos.CENTER);
-    return vectorArea;
-  }
-  public VBox createSignArea() {
-    Text chooseSign = new Text("Choose sign:");
-    chooseSign.getStyleClass().add("heading");
-
-    TextField inputSign = new TextField();
-    inputFieldStyle(inputSign,"1", buttonHeight, buttonWidth / 2 - 10);
-
-    inputSign.setOnKeyTyped(e -> updateObserver("sign input", inputSign.getText()));
-
-    signErrorLabel = new Label();
-    signErrorLabel.getStyleClass().add("error");
-    updateErrorLabel("InputSign", signErrorLabel);
-
-    VBox signArea = new VBox(10);
-    signArea.getChildren().addAll(chooseSign, inputSign, signErrorLabel);
-    signArea.setAlignment(Pos.CENTER);
-
-    return signArea;
-  }
-
-  public VBox createMatrix() {
-    Text createMatrix = new Text("Choose matrix:");
-    createMatrix.getStyleClass().add("heading");
-
-    TextField inputA = new TextField();
-    inputFieldStyle(inputA,"a", buttonHeight, buttonWidth/2 - 10);
-    TextField inputB = new TextField();
-    inputFieldStyle(inputB,"b", buttonHeight, buttonWidth/2 - 10);
-    TextField inputC = new TextField();
-    inputFieldStyle(inputC,"c", buttonHeight, buttonWidth/2 - 10);
-    TextField inputD = new TextField();
-    inputFieldStyle(inputD,"d", buttonHeight, buttonWidth/2 - 10);
-
-    inputA.setOnKeyTyped(e -> updateObserver("matrix input",
-        inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", "
-            + inputD.getText()));
-    inputB.setOnKeyTyped(e -> updateObserver("matrix input",
-        inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", "
-            + inputD.getText()));
-    inputC.setOnKeyTyped(e -> updateObserver("matrix input",
-        inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", "
-            + inputD.getText()));
-    inputD.setOnKeyTyped(e -> updateObserver("matrix input",
-        inputA.getText() + ", " + inputB.getText() + ", " + inputC.getText() + ", "
-            + inputD.getText()));
-
-    matrixErrorLabel = new Label();
-    matrixErrorLabel.getStyleClass().add("error");
-    updateErrorLabel("InputMatrix", matrixErrorLabel);
-    HBox inputAB = new HBox(20, inputA, inputB);
-    HBox inputCD = new HBox(20, inputC, inputD);
-
-    VBox matrixArea = new VBox(10);
-    matrixArea.getChildren().addAll(createMatrix, inputAB, inputCD, matrixErrorLabel);
-    matrixArea.setAlignment(Pos.CENTER);
-
-    return matrixArea;
   }
 
     public void inputFieldStyle (TextField inputField, String promptText,int height, int width){
@@ -326,18 +173,6 @@ public class FactorialPage extends View {
         case "InputSteps":
           updateErrorLabel("InputSteps", stepsErrorLabel);
           break;
-        case "InputMinMax":
-          updateErrorLabel("InputMinMax", minMaxError);
-          break;
-        case "InputMatrix":
-          updateErrorLabel("InputMatrix", matrixErrorLabel);
-          break;
-        case "InputVector":
-          updateErrorLabel("InputVector", vectorErrorLabel);
-          break;
-        case "InputSign":
-            updateErrorLabel("InputSign", signErrorLabel);
-            break;
       }
     }
 
