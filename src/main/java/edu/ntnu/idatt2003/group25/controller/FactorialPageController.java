@@ -119,17 +119,6 @@ public class FactorialPageController extends Controller {
     }
     return null;
   }
-//  public void handleInputSceneChange(String info) {
-//    String[] newValue = info.split(":");
-//    double providedHeight = Validation.verifyDouble(newValue[0], 0);
-//    if (providedHeight > 0) {
-//      this.height = (int) providedHeight;
-//    }
-//    double providedWidth = Validation.verifyDouble(newValue[1], 0);
-//    if (providedWidth > 0) {
-//      this.width = (int) providedWidth;
-//    }
-//  }
 private void addAction() {
   if (factorialPage.getGameType().equals("Julia Transform")) {
     complex = new Complex(vector2D.getX0(), vector2D.getX1());
