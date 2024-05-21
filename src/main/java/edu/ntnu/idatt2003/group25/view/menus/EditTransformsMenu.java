@@ -1,19 +1,14 @@
 package edu.ntnu.idatt2003.group25.view.menus;
 
 import edu.ntnu.idatt2003.group25.controller.EditTransformController;
-import edu.ntnu.idatt2003.group25.controller.FactorialPageController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
-import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
