@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 
 public class FactorialPage extends View {
 
-  private final int buttonHeight = Math.round(MainLogic.height*0.03f);
+  private final int buttonHeight = Math.round(MainLogic.height*0.04f);
   private final int buttonWidth = 200;
   private final BorderPane borderPane = new BorderPane();
   private VBox sidebarMenu;
@@ -155,6 +155,8 @@ public class FactorialPage extends View {
     public void addStyle(Button button, String color,int width) {
       String colorInit = "-fx-background-color: " + color + ";";
       String widthInit = "-fx-min-width: " + width + ";";
+
+      button.setMaxHeight(buttonHeight);
 
       button.setStyle(colorInit + widthInit);
     }
