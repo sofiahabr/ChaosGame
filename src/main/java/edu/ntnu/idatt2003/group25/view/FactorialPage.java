@@ -34,7 +34,7 @@ public class FactorialPage extends View {
   private Canvas pixelCanvas;
   HashMap<String, String> errorMap = new HashMap<>();
   private Label stepsErrorLabel;
-  private final EditTransformsMenu editTransformsMenu = new EditTransformsMenu(screenController, this);
+  private EditTransformsMenu editTransformsMenu;
 
   public FactorialPage(ScreenController screenController) {
     this.controller = new FactorialPageController(screenController, this);
@@ -57,12 +57,8 @@ public class FactorialPage extends View {
     pixelCanvas.heightProperty().bind(borderPane.heightProperty().multiply(0.7));
   }
   private void addResizeListener() {
-    borderPane.widthProperty().addListener((obs, oldValue, newValue) -> {
-      controller.handleScreenResize(newValue.doubleValue(), borderPane.getHeight());
-    });
-    borderPane.heightProperty().addListener((obs, oldValue, newValue) -> {
-      controller.handleScreenResize(borderPane.getWidth(), newValue.doubleValue());
-    });
+    borderPane.widthProperty().addListener((obs, oldValue, newValue) -> controller.handleScreenResize(newValue.doubleValue(), borderPane.getHeight()));
+    borderPane.heightProperty().addListener((obs, oldValue, newValue) -> controller.handleScreenResize(borderPane.getWidth(), newValue.doubleValue()));
   }
 
   @Override
@@ -101,9 +97,7 @@ public class FactorialPage extends View {
     stepsArea.setAlignment(Pos.CENTER);
 
     // send to controller
-    inputSteps.setOnKeyTyped(e -> {
-      updateObserver("register steps", inputSteps.getText());
-    });
+    inputSteps.setOnKeyTyped(e -> updateObserver("register steps", inputSteps.getText()));
 
     return stepsArea;
   }
@@ -139,6 +133,7 @@ public class FactorialPage extends View {
   }
 
   public void setSidebarMenu() {
+    editTransformsMenu = new EditTransformsMenu(screenController, this);
     editTransformsMenu.setUp();
     createSideBar();
     sidebarMenu.getChildren()

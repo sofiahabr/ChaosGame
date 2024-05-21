@@ -279,23 +279,8 @@ public class EditTransformsMenu extends Menu {
       boolean failed = false;
 
       try {
-        for (TextField textField : vectorTextFields) {
-          Double.parseDouble(textField.getText());
-          vectors.append(textField.getText()).append(", ");
-        }
-        for (TextField textField : matrixTextFields) {
-          Double.parseDouble(textField.getText());
-          matrix.append(textField.getText()).append(", ");
-        }
-        for (TextField textField : signTextFields) {
-          Double.parseDouble(textField.getText());
-          sign.append(textField.getText()).append(",");
-        }
-        for (TextField textField : minMaxFields) {
-          Double.parseDouble(textField.getText());
-          minMax.append(textField.getText()).append(", ");
-
-        }
+        getInput(vectors, matrix, vectorTextFields, matrixTextFields);
+        getInput(sign, minMax, signTextFields, minMaxFields);
       }catch(Exception exception){
           failed = true;
         }
@@ -310,6 +295,18 @@ public class EditTransformsMenu extends Menu {
       }
     });
     return save;
+  }
+
+  private void getInput(StringBuilder vectors, StringBuilder matrix,
+                        List<TextField> vectorTextFields, List<TextField> matrixTextFields) {
+    for (TextField textField : vectorTextFields) {
+      Double.parseDouble(textField.getText());
+      vectors.append(textField.getText()).append(",");
+    }
+    for (TextField textField : matrixTextFields) {
+      Double.parseDouble(textField.getText());
+      matrix.append(textField.getText()).append(",");
+    }
   }
 
   public void inputFieldStyle(TextField inputField, String text, int height, int width) {
