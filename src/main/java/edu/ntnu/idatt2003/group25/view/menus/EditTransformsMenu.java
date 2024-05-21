@@ -276,8 +276,8 @@ public class EditTransformsMenu extends Menu {
   }
 
   @Override
-  public Node getMenu() {
-    return null;
+  public VBox getMenu() {
+    return menu;
   }
 
   private void updateErrorLabel(String key, Label label) {
