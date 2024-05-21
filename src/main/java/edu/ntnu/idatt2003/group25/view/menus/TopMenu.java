@@ -12,13 +12,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The top menu of the application
+ */
 public class TopMenu extends Menu {
+
+  /**
+   * The menu of the application as a HBox
+   */
   private final HBox menu = new HBox(20);
 
+  /**
+   * Constructor for the TopMenu class
+   *
+   * @param screenController ScreenController object that the menu is observing
+   */
   public TopMenu(ScreenController screenController) {
     super(screenController);
   }
 
+  /**
+   * Sets up the menu of the application
+   */
   @Override
   public void setUp() {
     menu.getStyleClass().add("hbox");
@@ -48,7 +63,9 @@ public class TopMenu extends Menu {
     menu.getChildren().addAll(homeButton, buffer,infoButton, exitButton);
   }
 
-
+  /**
+   * Shows the help instructions of the application
+   */
   public void showInstructions() {
     Stage informationStage = new Stage();
     informationStage.setTitle("Help and instructions");
@@ -76,6 +93,11 @@ public class TopMenu extends Menu {
     informationStage.show();
   }
 
+  /**
+   * Returns the text of the help instructions
+   *
+   * @return Text object with the help instructions
+   */
   private static Text getInfoText() {
     Text infoText;
     infoText = new Text("""
@@ -105,6 +127,11 @@ public class TopMenu extends Menu {
     return infoText;
   }
 
+  /**
+   * Returns the menu of the application
+   *
+   * @return HBox object with the menu of the application
+   */
   @Override
   public HBox getMenu() {
     return menu;
