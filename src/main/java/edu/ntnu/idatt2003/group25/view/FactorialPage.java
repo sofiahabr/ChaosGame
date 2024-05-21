@@ -5,7 +5,7 @@ import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescriptionFactory;
-import edu.ntnu.idatt2003.group25.view.menus.Menu;
+import edu.ntnu.idatt2003.group25.view.menus.EditTransformsMenu;
 import edu.ntnu.idatt2003.group25.view.menus.TopMenu;
 import java.util.HashMap;
 import javafx.geometry.Insets;
@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -42,12 +41,12 @@ public class FactorialPage extends View {
     this.screenController = screenController;
     addObserver(controller);
 
-    initilizeCanvas();
+    initializeCanvas();
     bindCanvasSize();
     addResizeListener();
   }
 
-  private void initilizeCanvas() {
+  private void initializeCanvas() {
     this.pixelCanvas = new Canvas();
     this.chaosGame = new ChaosGame(description, (int) (MainLogic.width * 0.7),
         (int) (MainLogic.height * 0.7));
@@ -94,6 +93,7 @@ public class FactorialPage extends View {
     VBox stepsArea = new VBox(10);
 
     stepsErrorLabel = new Label();
+    stepsErrorLabel.setMinHeight(buttonHeight*1.3);
     stepsErrorLabel.getStyleClass().add("error");
     updateErrorLabel("InputSteps", stepsErrorLabel);
 
