@@ -19,36 +19,81 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * The EditTransformsMenu class creates a menu for editing the transforms of a ChaosGameDescription.
+ */
 public class EditTransformsMenu extends Menu {
+
+  /**
+   * FactorialPage object representing the page where the transforms are edited.
+   */
   private final FactorialPage factorialPage;
+  /**
+   * HashMap containing error messages and their placement.
+   */
   private final HashMap<String, String> errorMap = new HashMap<>();
-  private final int buttonHeight = Math.round(MainLogic.height*0.03f);
-  private final int buttonWidth = 190;
+  /**
+   * Height and width of the buttons in the menu.
+   */
+  private final int buttonHeight = Math.round(MainLogic.height * 0.03f);
+  private static final int buttonWidth = 190;
+  /**
+   * VBox object representing the menu.
+   */
   private VBox menu = new VBox(20);
+  /**
+   * Label object representing the error label.
+   */
   private final Label errorLabel = new Label();
+  /**
+   * List of TextField objects representing the vector input fields.
+   */
   private final List<TextField> vectorTextFields = new ArrayList<>();
+  /**
+   * List of TextField objects representing the matrix input fields.
+   */
   private final List<TextField> matrixTextFields = new ArrayList<>();
+  /**
+   * List of TextField objects representing the sign input fields.
+   */
   private final List<TextField> signTextFields = new ArrayList<>();
+  /**
+   * List of TextField objects representing the min/max input fields.
+   */
   private final List<TextField> minMaxFields = new ArrayList<>();
 
-
-
+  /**
+   * Constructs an EditTransformsMenu object with specified screenController and FactorialPage.
+   *
+   * @param screenController ScreenController object representing the controller for the page.
+   * @param factorialPage FactorialPage object representing the page where the transforms
+   *                      are edited.
+   */
   public EditTransformsMenu(ScreenController screenController, FactorialPage factorialPage) {
     super(screenController);
     this.factorialPage = factorialPage;
     addObserver(new EditTransformController(this, factorialPage));
 
-    if (!factorialPage.getDescription().getTransforms().isEmpty()){
-
+    if (!factorialPage.getDescription().getTransforms().isEmpty()) {
       setUp();
     }
   }
+
+  /**
+   * Sets up the menu for editing the transforms.
+   */
 
   @Override
   public void setUp() {
     menu.getStyleClass().add("vbox");
     this.menu = createSideBar();
   }
+
+  /**
+   * Creates a VBox object containing the min/max input fields.
+   *
+   * @return VBox object containing the min/max input fields.
+   */
   private VBox chooseMinMaxArea() {
     // Create min/ max area
     Text minTitle = new Text(" Min: ");
@@ -57,40 +102,48 @@ public class EditTransformsMenu extends Menu {
     minTitle.getStyleClass().add("heading");
 
     TextField inputMax = new TextField();
-    inputFieldStyle(inputMax, factorialPage.getDescription().getMaxCoords().getX0() + "", buttonHeight, buttonWidth/4-5);
+    inputFieldStyle(inputMax, factorialPage.getDescription().getMaxCoords().getX0()
+        + "", buttonHeight, buttonWidth / 4 - 5);
 
     TextField inputMax2 = new TextField();
-    inputFieldStyle(inputMax2, factorialPage.getDescription().getMaxCoords().getX1() + "", buttonHeight, buttonWidth/4-5);
+    inputFieldStyle(inputMax2, factorialPage.getDescription().getMaxCoords().getX1()
+        + "", buttonHeight, buttonWidth / 4 - 5);
 
     inputMax.setOnKeyTyped(
-        e -> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
+        e -> updateObserver("max input", inputMax.getText()
+            + ", " + inputMax2.getText()));
     inputMax2.setOnKeyTyped(
-        e -> updateObserver("max input", inputMax.getText() + ", " + inputMax2.getText()));
+        e -> updateObserver("max input", inputMax.getText()
+            + ", " + inputMax2.getText()));
 
     HBox maxArea = new HBox(10);
     maxArea.getChildren().addAll(inputMax, inputMax2);
 
     // Min area
     TextField inputMin = new TextField();
-    inputFieldStyle(inputMin, factorialPage.getDescription().getMinCoords().getX0() + "", buttonHeight, buttonWidth/4-5);
+    inputFieldStyle(inputMin, factorialPage.getDescription().getMinCoords().getX0()
+        + "", buttonHeight, buttonWidth / 4 - 5);
     TextField inputMin2 = new TextField();
-    inputFieldStyle(inputMin2, factorialPage.getDescription().getMinCoords().getX1() + "", buttonHeight, buttonWidth/4-5);
+    inputFieldStyle(inputMin2, factorialPage.getDescription().getMinCoords().getX1()
+        + "", buttonHeight, buttonWidth / 4 - 5);
 
     inputMin.setOnKeyTyped(
-        e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
+        e -> updateObserver("min input", inputMin.getText() + ", "
+            + inputMin2.getText()));
     inputMin2.setOnKeyTyped(
-        e -> updateObserver("min input", inputMin.getText() + ", " + inputMin2.getText()));
+        e -> updateObserver("min input", inputMin.getText() + ", "
+            + inputMin2.getText()));
 
     HBox minArea = new HBox(10);
     minArea.getChildren().addAll(inputMin, inputMin2);
-
-    VBox minBox = new VBox(10);
-    VBox maxBox = new VBox(10);
 
     minMaxFields.add(inputMin);
     minMaxFields.add(inputMin2);
     minMaxFields.add(inputMax);
     minMaxFields.add(inputMax2);
+
+    VBox minBox = new VBox(10);
+    VBox maxBox = new VBox(10);
 
     minBox.getChildren().addAll(minTitle, minArea);
     maxBox.getChildren().addAll(maxTitle, maxArea);
@@ -101,6 +154,13 @@ public class EditTransformsMenu extends Menu {
 
     return new VBox(hBox);
   }
+
+  /**
+   * Creates a VBox object containing the vector input fields.
+   *
+   * @param transform Transform2D object representing the transformation.
+   * @return VBox object containing the vector input fields.
+   */
   private VBox createVectorArea(Transform2D transform) {
 
     if (transform instanceof AffineTransform2D affine) {
@@ -115,7 +175,7 @@ public class EditTransformsMenu extends Menu {
       TextField b = new TextField();
       inputFieldStyle(b, Double.toString(affine.getVector().getX1()), buttonHeight,
           buttonWidth / 2);
-      HBox vectorInput = new HBox(20, a, b);
+
 
       b.setOnKeyTyped(
           e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
@@ -124,7 +184,7 @@ public class EditTransformsMenu extends Menu {
 
       vectorTextFields.add(a);
       vectorTextFields.add(b);
-
+      HBox vectorInput = new HBox(20, a, b);
       return new VBox(10, vector, vectorInput);
 
     } else if (transform instanceof JuliaTransform julia) {
@@ -140,8 +200,10 @@ public class EditTransformsMenu extends Menu {
       inputFieldStyle(c1, Double.toString(julia.getComplex().getX1()), buttonHeight,
           buttonWidth / 2 - 5);
 
-      c0.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
-      c1.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
+      c0.setOnKeyTyped(e -> updateObserver("vector input",
+          c0.getText() + ", " + c1.getText()));
+      c1.setOnKeyTyped(e -> updateObserver("vector input",
+          c0.getText() + ", " + c1.getText()));
 
       vectorTextFields.add(c0);
       vectorTextFields.add(c1);
@@ -156,6 +218,13 @@ public class EditTransformsMenu extends Menu {
     }
     return null;
   }
+
+  /**
+   * Creates a VBox object containing the sign input fields.
+   *
+   * @param julia JuliaTransform object representing the transformation.
+   * @return VBox object containing the sign input fields.
+   */
   private VBox createSignArea(JuliaTransform julia) {
     TextField signInput = new TextField();
     inputFieldStyle(signInput, julia.getSign() + "", buttonHeight, buttonWidth / 4 - 5);
@@ -170,21 +239,31 @@ public class EditTransformsMenu extends Menu {
     return new VBox(10, signText, signInput);
   }
 
+  /**
+   * Creates a VBox object containing the matrix input fields.
+   *
+   * @param transform AffineTransform2D object representing the transformation.
+   * @return VBox object containing the matrix input fields.
+   */
   private VBox createMatrix(AffineTransform2D transform) {
     Text matrix = new Text("Matrix");
     matrix.getStyleClass().add("text");
 
     TextField a00 = new TextField();
-    inputFieldStyle(a00, Double.toString(transform.getMatrix().getA00()), buttonHeight, buttonWidth/2);
+    inputFieldStyle(a00, Double.toString(transform.getMatrix().getA00()),
+        buttonHeight, buttonWidth / 2);
 
     TextField a01 = new TextField();
-    inputFieldStyle(a01, Double.toString(transform.getMatrix().getA01()), buttonHeight, buttonWidth / 2);
+    inputFieldStyle(a01, Double.toString(transform.getMatrix().getA01()),
+        buttonHeight, buttonWidth / 2);
 
     TextField a10 = new TextField();
-    inputFieldStyle(a10, Double.toString(transform.getMatrix().getA10()), buttonHeight, buttonWidth/2);
+    inputFieldStyle(a10, Double.toString(transform.getMatrix().getA10()),
+        buttonHeight, buttonWidth / 2);
 
     TextField a11 = new TextField();
-    inputFieldStyle(a11, Double.toString(transform.getMatrix().getA11()), buttonHeight, buttonWidth / 2);
+    inputFieldStyle(a11, Double.toString(transform.getMatrix().getA11()),
+        buttonHeight, buttonWidth / 2);
 
     a00.setOnKeyTyped(e -> updateObserver("matrix input",
         a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
@@ -206,12 +285,18 @@ public class EditTransformsMenu extends Menu {
     return new VBox(10, matrix, inputA0, inputA1);
   }
 
+  /**
+   * Creates a VBox object containing the sidebar menu with all necessary input fields for the
+   * different transform types.
+   *
+   * @return VBox object containing the sidebar menu.
+   */
   private VBox createSideBar() {
     VBox descriptions = new VBox(20);
     descriptions.setAlignment(Pos.CENTER);
     descriptions.getStyleClass().add("vbox");
 
-    VBox minMaxBox = chooseMinMaxArea();
+
 
     factorialPage.getDescription().getTransforms().forEach(transform -> {
       if (transform instanceof AffineTransform2D affine) {
@@ -242,32 +327,38 @@ public class EditTransformsMenu extends Menu {
     errorLabel.getStyleClass().add("error");
     updateErrorLabel("final", errorLabel);
 
-    Button aplyChangesButton = getAplyChangesButton();
-
     ScrollPane scrollPane = new ScrollPane();
     scrollPane.setContent(descriptions);
     scrollPane.getStyleClass().add("scroll-pane");
 
-    scrollPane.setMinHeight(MainLogic.height*0.25);
-    scrollPane.setMaxHeight(MainLogic.height*0.25);
+    scrollPane.setMinHeight(MainLogic.height * 0.25);
+    scrollPane.setMaxHeight(MainLogic.height * 0.25);
 
 
     scrollPane.setFitToHeight(true);
     scrollPane.setFitToWidth(true);
 
-    VBox menu = new VBox(20);
+    VBox sidebarMenu = new VBox(20);
 
-    menu.setAlignment(Pos.CENTER);
-    menu.getStyleClass().add("vbox");
+    sidebarMenu.setAlignment(Pos.CENTER);
+    sidebarMenu.getStyleClass().add("vbox");
 
+    VBox minMaxBox = chooseMinMaxArea();
+    Button applyChangesButton = getApplyChangesButton();
+    sidebarMenu.getChildren()
+        .addAll(minMaxBox, scrollPane, errorLabel, applyChangesButton);
 
-    menu.getChildren()
-        .addAll(minMaxBox, scrollPane, errorLabel, aplyChangesButton);
-
-    return menu;
+    return sidebarMenu;
   }
 
-  private Button getAplyChangesButton() {
+  /**
+   * Creates a Button object for applying changes to the transforms.
+   * The button will call the updateObserver method with the necessary information for saving the
+   * validating and saving the input.
+   *
+   * @return Button object for applying changes to the transforms.
+   */
+  private Button getApplyChangesButton() {
     Button save = new Button("Apply Changes");
     save.setMinWidth(buttonWidth);
     save.setOnAction(e -> {
@@ -281,22 +372,30 @@ public class EditTransformsMenu extends Menu {
       try {
         getInput(vectors, matrix, vectorTextFields, matrixTextFields);
         getInput(sign, minMax, signTextFields, minMaxFields);
-      }catch(Exception exception){
-          failed = true;
-        }
-        // Checks that there are no error before closing the stage
-        if (failed) {
-          showError("final", "You can not apply with invalid input");
-        } else {
-          updateObserver("save vectors", vectors.toString());
-          updateObserver("save matrix", matrix.toString());
-          updateObserver("save signs", sign.toString());
-          updateObserver("edit description", minMax.toString());
+      } catch (Exception exception) {
+        failed = true;
+      }
+      // Checks that there are no error before closing the stage
+      if (failed) {
+        showError("final", "You can not apply with invalid input");
+      } else {
+        updateObserver("save vectors", vectors.toString());
+        updateObserver("save matrix", matrix.toString());
+        updateObserver("save signs", sign.toString());
+        updateObserver("edit description", minMax.toString());
       }
     });
     return save;
   }
 
+  /**
+   * Gets the input from the input fields and appends it to the StringBuilder objects.
+   *
+   * @param vectors StringBuilder object representing the vector input.
+   * @param matrix StringBuilder object representing the matrix input.
+   * @param vectorTextFields List of TextField objects representing the vector input fields.
+   * @param matrixTextFields List of TextField objects representing the matrix input fields.
+   */
   private void getInput(StringBuilder vectors, StringBuilder matrix,
                         List<TextField> vectorTextFields, List<TextField> matrixTextFields) {
     for (TextField textField : vectorTextFields) {
@@ -309,21 +408,47 @@ public class EditTransformsMenu extends Menu {
     }
   }
 
+  /**
+   * Sets the style of the input fields.
+   *
+   * @param inputField TextField object representing the input field.
+   * @param text String representing the text in the input field.
+   * @param height int representing the height of the input field.
+   * @param width int representing the width of the input field.
+   */
   public void inputFieldStyle(TextField inputField, String text, int height, int width) {
     inputField.setMinHeight(height);
     inputField.setMaxWidth(width);
     inputField.setText(text);
   }
 
+  /**
+   * Returns the menu as a VBox object.
+   *
+   * @return VBox object representing the menu.
+   */
   @Override
   public VBox getMenu() {
     return menu;
   }
 
+  /**
+   * Updates the error label with the error message.
+   *
+   * @param key String representing the placement of the error message.
+   * @param label Label object representing the error label.
+   */
   private void updateErrorLabel(String key, Label label) {
     String errorMessage = errorMap.getOrDefault(key, "");
     label.setText(errorMessage.isEmpty() ? "" : errorMessage);
   }
+
+  /**
+   * Shows an error message in the error label.
+   *
+   * @param placement String representing the placement of the error message.
+   * @param message String representing the error message.
+   */
 
   public void showError(String placement, String message) {
     errorMap.put(placement, message);
@@ -343,7 +468,8 @@ public class EditTransformsMenu extends Menu {
       case "final":
         updateErrorLabel("final", errorLabel);
         break;
-
+      default:
+        break;
     }
   }
 }
