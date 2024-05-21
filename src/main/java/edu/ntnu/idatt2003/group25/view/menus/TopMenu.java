@@ -89,13 +89,13 @@ public class TopMenu extends Menu {
         Click the save button and choose a file
         
         TO ADD TRANSFORMS:
-        Enter values in the text fields and press the add button
+        Press the add button and enter values in the text fields
         
         TO EDIT:
-        Click the edit button and change values in the text fields
+        Change values in the text fields and click the edit button
         
         TO RESET SCREEN:
-        Click the remove button
+        Click the reset canvas button
         
         TO CHANGE FRACTAL:
         Click the home button and choose new fractal
