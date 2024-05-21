@@ -5,6 +5,7 @@ import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
+import edu.ntnu.idatt2003.group25.view.MainLogic;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,9 @@ import javafx.stage.Stage;
 public class EditTransformsMenu extends Menu {
   private FactorialPage factorialPage;
   private HashMap<String, String> errorMap = new HashMap<>();
+  private int buttonHeight = Math.round(MainLogic.height*0.03f);
+  private int buttonWidth = 200;
+  private VBox menu = new VBox(20);
   Label minMaxError = new Label();
   Label matrixErrorLabel = new Label();
   Label vectorErrorLabel = new Label();
