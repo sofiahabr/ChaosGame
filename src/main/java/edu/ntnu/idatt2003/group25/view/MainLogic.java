@@ -11,7 +11,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainLogic extends View{
-  public static int height = (int) Math.round(Screen.getPrimary().getBounds().getHeight()*0.8f);
+  public static int height = (int) Math.round(Screen.getPrimary().getBounds().getHeight()*0.85f);
   public static int width = (int) Math.round(Screen.getPrimary().getBounds().getWidth()*0.8f);
   public static ChaosGameDescription description = ChaosGameDescriptionFactory.createBarnsleyFern();
   public Scene scene = new Scene(new Pane(), width, height);
