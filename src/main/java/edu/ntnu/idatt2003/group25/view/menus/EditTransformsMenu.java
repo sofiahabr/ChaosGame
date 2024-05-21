@@ -4,6 +4,7 @@ import edu.ntnu.idatt2003.group25.controller.EditTransformController;
 import edu.ntnu.idatt2003.group25.controller.ScreenController;
 import edu.ntnu.idatt2003.group25.model.transforms.AffineTransform2D;
 import edu.ntnu.idatt2003.group25.model.transforms.JuliaTransform;
+import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import edu.ntnu.idatt2003.group25.view.FactorialPage;
 import edu.ntnu.idatt2003.group25.view.MainLogic;
 import java.util.ArrayList;
@@ -17,16 +18,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class EditTransformsMenu extends Menu {
-  private FactorialPage factorialPage;
-  private HashMap<String, String> errorMap = new HashMap<>();
-  private int buttonHeight = Math.round(MainLogic.height*0.03f);
-  private int buttonWidth = 200;
+  private final FactorialPage factorialPage;
+  private final HashMap<String, String> errorMap = new HashMap<>();
+  private final int buttonHeight = Math.round(MainLogic.height*0.03f);
+  private final int buttonWidth = 200;
   private VBox menu = new VBox(20);
-  Label minMaxError = new Label();
-  Label errorLabel = new Label();
+  private final Label errorLabel = new Label();
+  private final List<TextField> vectorTextFields = new ArrayList<>();
+  private final List<TextField> matrixTextFields = new ArrayList<>();
+  private final List<TextField> signTextFields = new ArrayList<>();
+  private final List<TextField> minMaxFields = new ArrayList<>();
+
 
 
   public EditTransformsMenu(ScreenController screenController, FactorialPage factorialPage) {
@@ -45,15 +49,7 @@ public class EditTransformsMenu extends Menu {
     menu.getStyleClass().add("vbox");
     this.menu = createSideBar();
   }
-
-  private VBox createSideBar() {
-    Stage editStage = new Stage();
-
-//    editStage.setTitle("Edit Transforms");
-    VBox descriptions = new VBox(20);
-    descriptions.setAlignment(Pos.CENTER);
-    descriptions.getStyleClass().add("vbox");
-
+  private VBox chooseMinMaxArea() {
     // Create min/ max area
     Text minTitle = new Text(" Min: ");
     Text maxTitle = new Text(" Max: ");
@@ -91,6 +87,10 @@ public class EditTransformsMenu extends Menu {
     VBox minBox = new VBox(10);
     VBox maxBox = new VBox(10);
 
+    minMaxFields.add(inputMin);
+    minMaxFields.add(inputMin2);
+    minMaxFields.add(inputMax);
+    minMaxFields.add(inputMax2);
 
     minBox.getChildren().addAll(minTitle, minArea);
     maxBox.getChildren().addAll(maxTitle, maxArea);
@@ -99,103 +99,140 @@ public class EditTransformsMenu extends Menu {
     hBox.getChildren().addAll(minBox, maxBox);
     hBox.setAlignment(Pos.CENTER);
 
-    VBox minMaxBox = new VBox(hBox, minMaxError);
+    return new VBox(hBox);
+  }
+  private VBox createVectorArea(Transform2D transform) {
 
-    List<TextField> vectorTextFields = new ArrayList<>();
-    List<TextField> matrixTextFields = new ArrayList<>();
-    List<TextField> signTextFields = new ArrayList<>();
+    if (transform instanceof AffineTransform2D affine) {
+
+      Text vector = new Text("Vector");
+      vector.getStyleClass().add("text");
+
+      TextField a = new TextField();
+      inputFieldStyle(a, Double.toString(affine.getVector().getX0()), buttonHeight,
+          buttonWidth / 2);
+
+      TextField b = new TextField();
+      inputFieldStyle(b, Double.toString(affine.getVector().getX1()), buttonHeight,
+          buttonWidth / 2);
+      HBox vectorInput = new HBox(20, a, b);
+
+      b.setOnKeyTyped(
+          e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
+      a.setOnKeyTyped(
+          e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
+
+      vectorTextFields.add(a);
+      vectorTextFields.add(b);
+
+      return new VBox(10, vector, vectorInput);
+
+    } else if (transform instanceof JuliaTransform julia) {
+
+      Text complex = new Text("Complex");
+      complex.getStyleClass().add("text");
+
+      TextField c0 = new TextField();
+      inputFieldStyle(c0, Double.toString(julia.getComplex().getX0()), buttonHeight,
+          buttonWidth / 2 - 5);
+
+      TextField c1 = new TextField();
+      inputFieldStyle(c1, Double.toString(julia.getComplex().getX1()), buttonHeight,
+          buttonWidth / 2 - 5);
+
+      c0.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
+      c1.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
+
+      vectorTextFields.add(c0);
+      vectorTextFields.add(c1);
+
+      HBox vectorInput = new HBox(15, c0, c1);
+
+      VBox vectorArea = new VBox(10);
+      vectorArea.getChildren().addAll(complex, vectorInput);
+      vectorArea.setAlignment(Pos.CENTER);
+
+      return vectorArea;
+    }
+    return null;
+  }
+  private VBox createSignArea(JuliaTransform julia) {
+    TextField signInput = new TextField();
+    inputFieldStyle(signInput, julia.getSign() + "", buttonHeight, buttonWidth / 4 - 5);
+
+    Text signText = new Text("Sign");
+    signText.getStyleClass().add("text");
+    signInput.setOnKeyTyped(e -> updateObserver("sign input", signInput.getText()));
+
+
+    signTextFields.add(signInput);
+
+    return new VBox(10, signText, signInput);
+  }
+
+  private VBox createMatrix(AffineTransform2D transform) {
+    Text matrix = new Text("Matrix");
+    matrix.getStyleClass().add("text");
+
+    TextField a00 = new TextField();
+    inputFieldStyle(a00, Double.toString(transform.getMatrix().getA00()), buttonHeight, buttonWidth/2);
+
+    TextField a01 = new TextField();
+    inputFieldStyle(a01, Double.toString(transform.getMatrix().getA01()), buttonHeight, buttonWidth / 2);
+
+    TextField a10 = new TextField();
+    inputFieldStyle(a10, Double.toString(transform.getMatrix().getA10()), buttonHeight, buttonWidth/2);
+
+    TextField a11 = new TextField();
+    inputFieldStyle(a11, Double.toString(transform.getMatrix().getA11()), buttonHeight, buttonWidth / 2);
+
+    a00.setOnKeyTyped(e -> updateObserver("matrix input",
+        a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
+    a01.setOnKeyTyped(e -> updateObserver("matrix input",
+        a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
+    a10.setOnKeyTyped(e -> updateObserver("matrix input",
+        a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
+    a11.setOnKeyTyped(e -> updateObserver("matrix input",
+        a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
+
+    matrixTextFields.add(a00);
+    matrixTextFields.add(a01);
+    matrixTextFields.add(a10);
+    matrixTextFields.add(a11);
+
+    HBox inputA0 = new HBox(20, a00, a01);
+    HBox inputA1 = new HBox(20, a10, a11);
+
+    return new VBox(10, matrix, inputA0, inputA1);
+  }
+
+  private VBox createSideBar() {
+    VBox descriptions = new VBox(20);
+    descriptions.setAlignment(Pos.CENTER);
+    descriptions.getStyleClass().add("vbox");
+
+    VBox minMaxBox = chooseMinMaxArea();
 
     factorialPage.getDescription().getTransforms().forEach(transform -> {
-      if (transform instanceof AffineTransform2D) {
-        AffineTransform2D affine = (AffineTransform2D) transform;
+      if (transform instanceof AffineTransform2D affine) {
 
-        Text vector = new Text("Vector");
-        vector.getStyleClass().add("text");
+        VBox vector = createVectorArea(affine);
+        VBox matrix = createMatrix(affine);
 
-        TextField a = new TextField();
-        inputFieldStyle(a, Double.toString(affine.getVector().getX0()), buttonHeight, buttonWidth / 2);
 
-        TextField b = new TextField();
-        inputFieldStyle(b, Double.toString(affine.getVector().getX1()), buttonHeight, buttonWidth / 2);
-        HBox vectorInput = new HBox(20, a, b);
-
-        b.setOnKeyTyped(
-            e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
-        a.setOnKeyTyped(
-            e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
-
-        vectorTextFields.add(a);
-        vectorTextFields.add(b);
-
-        Text matrix = new Text("Matrix");
-        matrix.getStyleClass().add("text");
-
-        TextField a00 = new TextField();
-        inputFieldStyle(a00, Double.toString(affine.getMatrix().getA00()), buttonHeight, buttonWidth/2);
-
-        TextField a01 = new TextField();
-        inputFieldStyle(a01, Double.toString(affine.getMatrix().getA01()), buttonHeight, buttonWidth / 2);
-
-        TextField a10 = new TextField();
-        inputFieldStyle(a10, Double.toString(affine.getMatrix().getA10()), buttonHeight, buttonWidth/2);
-
-        TextField a11 = new TextField();
-        inputFieldStyle(a11, Double.toString(affine.getMatrix().getA11()), buttonHeight, buttonWidth / 2);
-
-        a00.setOnKeyTyped(e -> updateObserver("matrix input",
-            a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
-        a01.setOnKeyTyped(e -> updateObserver("matrix input",
-            a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
-        a10.setOnKeyTyped(e -> updateObserver("matrix input",
-            a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
-        a11.setOnKeyTyped(e -> updateObserver("matrix input",
-            a00.getText() + ", " + a01.getText() + ", " + a10.getText() + ", " + a11.getText()));
-
-        matrixTextFields.add(a00);
-        matrixTextFields.add(a01);
-        matrixTextFields.add(a10);
-        matrixTextFields.add(a11);
-
-        HBox inputA0 = new HBox(20, a00, a01);
-        HBox inputA1 = new HBox(20, a10, a11);
-
-        VBox affineArea = new VBox(10);
-        affineArea.getChildren().addAll(vector, vectorInput, matrix, inputA0, inputA1);
+        VBox affineArea = new VBox(5);
+        affineArea.getChildren().addAll(vector,  matrix);
         descriptions.getChildren().add(affineArea);
 
       }
-      if (transform instanceof JuliaTransform) {
+      if (transform instanceof JuliaTransform julia) {
 
-        JuliaTransform julia = (JuliaTransform) transform;
+        VBox complex = createVectorArea(julia);
+        VBox signArea = createSignArea(julia);
+        signArea.setAlignment(Pos.CENTER);
 
-        Text complex = new Text("Complex");
-        complex.getStyleClass().add("text");
-
-        TextField c0 = new TextField();
-        inputFieldStyle(c0, Double.toString(julia.getComplex().getX0()), buttonHeight, buttonWidth/2-5);
-
-        TextField c1 = new TextField();
-        inputFieldStyle(c1, Double.toString(julia.getComplex().getX1()), buttonHeight, buttonWidth/2-5);
-
-        c0.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
-        c1.setOnKeyTyped(e -> updateObserver("vector input", c0.getText() + ", " + c1.getText()));
-
-        TextField signInput = new TextField();
-        inputFieldStyle(signInput, julia.getSign() + "", buttonHeight, buttonWidth/4-5);
-
-        Text signText = new Text("Sign");
-        signText.getStyleClass().add("text");
-        signInput.setOnKeyTyped(e -> updateObserver("sign input", signInput.getText()));
-
-        vectorTextFields.add(c0);
-        vectorTextFields.add(c1);
-
-        signTextFields.add(signInput);
-
-        HBox vectorInput = new HBox(15, c0, c1);
-
-        VBox juliaArea = new VBox(10);
-        juliaArea.getChildren().addAll(complex, vectorInput,signText, signInput);
+        VBox juliaArea = new VBox(5);
+        juliaArea.getChildren().addAll(complex, signArea);
         juliaArea.setAlignment(Pos.CENTER);
 
         descriptions.getChildren().add(juliaArea);
@@ -205,12 +242,39 @@ public class EditTransformsMenu extends Menu {
     errorLabel.getStyleClass().add("error");
     updateErrorLabel("final", errorLabel);
 
+    Button aplyChangesButton = getAplyChangesButton();
+
+    ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setContent(descriptions);
+    scrollPane.getStyleClass().add("scroll-pane");
+
+    scrollPane.setMinHeight(MainLogic.height*0.3);
+    scrollPane.setMaxHeight(MainLogic.height*0.3);
+
+
+    scrollPane.setFitToHeight(true);
+    scrollPane.setFitToWidth(true);
+
+    VBox menu = new VBox(20);
+
+    menu.setAlignment(Pos.CENTER);
+    menu.getStyleClass().add("vbox");
+
+
+    menu.getChildren()
+        .addAll(minMaxBox, scrollPane, errorLabel, aplyChangesButton);
+
+    return menu;
+  }
+
+  private Button getAplyChangesButton() {
     Button save = new Button("Apply Changes");
     save.setMinWidth(buttonWidth);
     save.setOnAction(e -> {
       StringBuilder vectors = new StringBuilder();
       StringBuilder matrix = new StringBuilder();
       StringBuilder sign = new StringBuilder();
+      StringBuilder minMax = new StringBuilder();
 
       boolean failed = false;
 
@@ -227,46 +291,25 @@ public class EditTransformsMenu extends Menu {
           Double.parseDouble(textField.getText());
           sign.append(textField.getText()).append(",");
         }
-      }catch (Exception exception) {
+        for (TextField textField : minMaxFields) {
+          Double.parseDouble(textField.getText());
+          minMax.append(textField.getText()).append(", ");
+
+        }
+      }catch(Exception exception){
           failed = true;
         }
-
-      // Checks that there are no error before closing the stage
-      if (failed) {
-        showError("final", "You can not apply with invalid input");
-      } else {
-        updateObserver("save vectors", vectors.toString());
-        updateObserver("save matrix", matrix.toString());
-        updateObserver("save signs", sign.toString());
-        updateObserver("edit description",
-            inputMin.getText() + ", " + inputMin2.getText() + ", " + inputMax.getText() + ", " +
-                inputMax2.getText());
+        // Checks that there are no error before closing the stage
+        if (failed) {
+          showError("final", "You can not apply with invalid input");
+        } else {
+          updateObserver("save vectors", vectors.toString());
+          updateObserver("save matrix", matrix.toString());
+          updateObserver("save signs", sign.toString());
+          updateObserver("edit description", minMax.toString());
       }
     });
-
-    ScrollPane scrollPane = new ScrollPane();
-    scrollPane.setContent(descriptions);
-    scrollPane.getStyleClass().add("scroll-pane");
-
-    scrollPane.setMinHeight(MainLogic.height*0.25);
-    scrollPane.setMaxHeight(MainLogic.height*0.25);
-
-
-    scrollPane.setFitToHeight(true);
-    scrollPane.setFitToWidth(true);
-
-    VBox menu = new VBox(5);
-
-    menu.setAlignment(Pos.CENTER);
-    menu.getStyleClass().add("vbox");
-
-    Text transformTitle = new Text("Transforms");
-    transformTitle.getStyleClass().add("heading");
-
-    menu.getChildren()
-        .addAll(minMaxBox, minMaxError, transformTitle, scrollPane, errorLabel, save);
-
-    return menu;
+    return save;
   }
 
   public void inputFieldStyle(TextField inputField, String text, int height, int width) {
