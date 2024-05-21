@@ -23,7 +23,7 @@ public class EditTransformsMenu extends Menu {
   private final FactorialPage factorialPage;
   private final HashMap<String, String> errorMap = new HashMap<>();
   private final int buttonHeight = Math.round(MainLogic.height*0.03f);
-  private final int buttonWidth = 200;
+  private final int buttonWidth = 190;
   private VBox menu = new VBox(20);
   private final Label errorLabel = new Label();
   private final List<TextField> vectorTextFields = new ArrayList<>();
@@ -248,8 +248,8 @@ public class EditTransformsMenu extends Menu {
     scrollPane.setContent(descriptions);
     scrollPane.getStyleClass().add("scroll-pane");
 
-    scrollPane.setMinHeight(MainLogic.height*0.3);
-    scrollPane.setMaxHeight(MainLogic.height*0.3);
+    scrollPane.setMinHeight(MainLogic.height*0.25);
+    scrollPane.setMaxHeight(MainLogic.height*0.25);
 
 
     scrollPane.setFitToHeight(true);
