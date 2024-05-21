@@ -57,22 +57,5 @@ public class AffineTransform2D implements Transform2D {
     return matrix.toString() + " , " + vector.getX0() + ", " + vector.getX1();
   }
 
-  /**
-   * Mutator method for matrix.
-   *
-   * @param matrix the new matrix value is set
-   */
-  public void setMatrix(Matrix2x2 matrix) {
-    this.matrix = matrix;
-  }
-
-  /**
-   * Mutator method for vector 2d.
-   *
-   * @param vector the new vector value is set
-   */
-  public void setVector(Vector2D vector) {
-    this.vector = vector;
-  }
 }
 
