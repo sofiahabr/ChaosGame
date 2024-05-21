@@ -17,6 +17,7 @@ public abstract class View implements ChaosGameSubject {
 
   /**
    * The method that adds an observer to the view.
+   *
    * @param observer the observer that is to be added.
    */
   @Override
@@ -38,7 +39,7 @@ public abstract class View implements ChaosGameSubject {
   /**
    * The method that updates the observers of the view.
    *
-   * @param event the event that has happened
+   * @param event the event that has happened.
    * @param info the information that is to be sent to the observers
    */
 

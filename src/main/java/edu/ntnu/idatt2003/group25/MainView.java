@@ -25,6 +25,7 @@ public class MainView extends Application {
 
   /**
    * The main method that starts the application.
+   *
    * @param args the arguments.
    */
 
