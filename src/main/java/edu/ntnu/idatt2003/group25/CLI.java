@@ -1,16 +1,24 @@
-package edu.ntnu.idatt2003.group25.controller;
+package edu.ntnu.idatt2003.group25;
 
 import edu.ntnu.idatt2003.group25.model.ChaosCanvas;
 import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
 import edu.ntnu.idatt2003.group25.model.Vector2D;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The type Cli.
+ */
 public class CLI {
+  /**
+   * The entry point of application.
+   *
+   * @param args the input arguments
+   * @throws FileNotFoundException the file not found exception
+   */
   public static void main(String[] args) throws FileNotFoundException {
     Scanner scanner = new Scanner(System.in);
 
@@ -60,7 +68,8 @@ public class CLI {
               canvas =
                   new ChaosCanvas(100, 30, description.getMinCoords(), description.getMaxCoords());
               chaosGame = new ChaosGame(description, canvas.getWidth(), canvas.getHeight());
-            } if(choice1 > 2 || choice1 < 1) {
+            }
+            if (choice1 > 2 || choice1 < 1) {
               System.out.println(choice1 + "was not an option");
             }
             break;
