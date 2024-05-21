@@ -121,10 +121,11 @@ public class FactorialPageController extends Controller {
   }
 private void addAction() {
   if (factorialPage.getGameType().equals("Julia Transform")) {
-    complex = new Complex(vector2D.getX0(), vector2D.getX1());
     factorialPage.getDescription().getTransforms().add(new JuliaTransform(complex, sign));
+    factorialPage.setUp();
   } else if (factorialPage.getGameType().equals("Affine Transform")) {
     factorialPage.getDescription().getTransforms().add(new AffineTransform2D(matrix, vector2D));
+    factorialPage.setUp();
   }
 }
   private void resetAction() {
