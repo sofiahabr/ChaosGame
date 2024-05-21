@@ -10,15 +10,40 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * The type Main logic that holds the values and attributes necessary to run the project.
+ */
 public class MainLogic extends View{
+  /**
+   * The constant height of the application, based on the individual screen size.
+   */
   public static int height = (int) Math.round(Screen.getPrimary().getBounds().getHeight()*0.85f);
+  /**
+   * The constant width of the application, based on the individual screen size.
+   */
   public static int width = (int) Math.round(Screen.getPrimary().getBounds().getWidth()*0.8f);
-  public static ChaosGameDescription description = ChaosGameDescriptionFactory.createBarnsleyFern();
+  /**
+   * The Scene the view is displayed on.
+   */
   public Scene scene = new Scene(new Pane(), width, height);
+  /**
+   * The Screen controller, the object that controls what screen is showed.
+   */
   public ScreenController screenController = new ScreenController(scene);
+  /**
+   * The Initialize page the view representing the .
+   */
   public InitializePage initializePage = new InitializePage(screenController);
+  /**
+   * The Factorial page.
+   */
   public FactorialPage factorialPage = new FactorialPage(screenController);
 
+  /**
+   * Start.
+   *
+   * @param stage the stage
+   */
   public void start(Stage stage) {
 //    screenController.addScreenContent(factorialPage, "factorial page");
 //    screenController.addScreenContent(initializePage, "initialize page");
