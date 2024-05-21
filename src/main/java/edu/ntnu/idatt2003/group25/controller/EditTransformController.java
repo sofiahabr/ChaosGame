@@ -43,7 +43,6 @@ public class EditTransformController extends Controller{
     }
   }
   private void saveVectors(String info) {
-      System.out.println("Vectors: " + info);
       String[] vectorNumbers = info.split(",");
       List<Vector2D> vectorList = new ArrayList<>();
 
@@ -68,7 +67,6 @@ public class EditTransformController extends Controller{
       this.matrixInDescription = matrixList;
     }
   private void saveSigns(String info) {
-    System.out.println("Signs: " + info);
     String[] signNumbers = info.split(",");
 
     List<Integer> signList = new ArrayList<>();
@@ -82,7 +80,6 @@ public class EditTransformController extends Controller{
     this.signInput = signList;
   }
     private void editDescription(String info) {
-      System.out.println("Min and max: " + info);
       String[] minMax = info.split(",");
 
       List<Transform2D> transforms = new ArrayList<>();
@@ -96,7 +93,6 @@ public class EditTransformController extends Controller{
       }
       if(factorialPage.getGameType().equals("Julia Transform") && vectorsInDescription.size() == signInput.size()) {
         for (int i = 0; i < vectorsInDescription.size(); i++) {
-          System.out.println("Sign " + i + ": " + signInput.get(i));
           transforms.add(new JuliaTransform(new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()), signInput.get(i)));
         }
       }
@@ -104,9 +100,6 @@ public class EditTransformController extends Controller{
       factorialPage.setDescription(description);
     }
   public void handleInputVector(String key, String info, String name){
-    System.out.println(info);
-    System.out.println(key);
-    System.out.println(name);
     String[] values = info.split(",");
     Vector2D vector = new Vector2D(Validation.verifyDouble(values[0], defaultValue),
         Validation.verifyDouble(values[1], defaultValue));
