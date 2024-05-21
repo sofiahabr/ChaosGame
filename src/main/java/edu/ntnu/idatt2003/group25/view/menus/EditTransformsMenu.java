@@ -26,10 +26,7 @@ public class EditTransformsMenu extends Menu {
   private int buttonWidth = 200;
   private VBox menu = new VBox(20);
   Label minMaxError = new Label();
-  Label matrixErrorLabel = new Label();
-  Label vectorErrorLabel = new Label();
-  Label signErrorLabel = new Label();
-  Label finalErrorLabel = new Label();
+  Label errorLabel = new Label();
 
 
   public EditTransformsMenu(ScreenController screenController, FactorialPage factorialPage) {
@@ -292,18 +289,20 @@ public class EditTransformsMenu extends Menu {
     errorMap.put(placement, message);
     switch (placement) {
       case "InputMinMax":
-        updateErrorLabel("InputMinMax", minMaxError);
+        updateErrorLabel("InputMinMax", errorLabel);
         break;
       case "InputMatrix":
-        updateErrorLabel("InputMatrix", matrixErrorLabel);
+        updateErrorLabel("InputMatrix", errorLabel);
         break;
       case "InputVector":
-        updateErrorLabel("InputVector", vectorErrorLabel);
+        updateErrorLabel("InputVector", errorLabel);
         break;
       case "InputSign":
-        updateErrorLabel("InputSign", signErrorLabel);
+        updateErrorLabel("InputSign", errorLabel);
+        break;
       case "final":
-        updateErrorLabel("final", finalErrorLabel);
+        updateErrorLabel("final", errorLabel);
+        break;
 
     }
   }
