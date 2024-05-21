@@ -13,19 +13,41 @@ import java.io.File;
 import java.util.ArrayList;
 import javafx.stage.FileChooser;
 
+/**
+ * The type controller for the initialize page.
+ */
 public class InitializePageController extends Controller {
+  /**
+   * The Screen controller that controls what view is displayed on the screen.
+   */
   ScreenController screenController;
+  /**
+   * The Factorial page, the view where the factorial game is displayed.
+   */
   FactorialPage factorialPage;
 
+  /**
+   * Instantiates a new Initialize page controller.
+   * The initialize page is the first page the user sees when the application is started.
+   *
+   * @param screenController the screen controller
+   */
   public InitializePageController(ScreenController screenController) {
     this.screenController = screenController;
     this.factorialPage = new FactorialPage(screenController);
   }
 
+  /**
+   * The method that handles changes in the view InitializePage.
+   * The method changes the game type and the description of the game based on the event and the transform name.
+   *
+   * @param event the event that has happened
+   * @param transformName the name of the transform the user wishes to use
+   */
+
   @Override
   public void gameChanged(String event, String transformName) {
     ChaosGameDescription description = ChaosGameDescriptionFactory.createEmpty();
-//    this.factorialPage = new FactorialPage(screenController);
     if (event.equals("button clicked")) {
       switch (transformName) {
         case "Create new Affine Transform":
@@ -61,9 +83,9 @@ public class InitializePageController extends Controller {
               new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0, 0),
                   new Vector2D(MainLogic.width * 0.7f, MainLogic.height * 0.7f));
           FileChooser fileChooser = new FileChooser();
-//        fileChooser.getExtensionFilters().add(
-////            new FileChooser.ExtensionFilter(
-////                "files", "Files"));
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter(
+                "files (*.txt)", "*.txt"));
           File selectedFile = fileChooser.showOpenDialog(null);
           if (selectedFile != null) {
             try {

@@ -14,15 +14,32 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/**
+ * The type Initialize page.
+ */
 public class InitializePage extends View {
+  /**
+   * The Screen controller.
+   */
   ScreenController screenController;
   private final BorderPane initPane = new BorderPane();
 
+  /**
+   * Instantiates a new Initialize page.
+   * The initialize page is the first page the user sees when the application is started.
+   * The initialize page is used to choose what game the user wants to play.
+   *
+   * @param screenController the screen controller
+   */
   public InitializePage(ScreenController screenController){
     this.screenController = screenController;
     addObserver(new InitializePageController(screenController));
     setUp();
   }
+
+  /**
+   * The method that sets up the UI- layout.
+   */
 
   @Override
   public void setUp() {
@@ -59,8 +76,6 @@ public class InitializePage extends View {
       }
     });
 
-
-
     VBox infoArea = new VBox(30, heading, subheading, optionBox, new VBox(), startButton);
     infoArea.setAlignment(Pos.CENTER);
 
@@ -70,6 +85,11 @@ public class InitializePage extends View {
     initPane.setCenter(infoBoxBackground);
   }
 
+  /**
+   * A method for accessing panes of the views.
+   *
+   * @return the pane
+   */
 
   @Override
   public BorderPane getPane() {
