@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--This is the pom.xml file for the project. It contains the dependencies and plugins needed for the project.-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- The projects group id, artifact id and version. -->
   <groupId>edu.ntnu.idatt2003.group25</groupId>
+  <!-- The projects artifact id -->
   <artifactId>ChaosGame</artifactId>
+  <!-- The projects version -->
   <version>1.0-SNAPSHOT</version>
 
+  <!-- The projects properties. -->
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+<!-- The projects dependencies. -->
   <dependencies>
+    <!-- Dependencies for JavaFX controls. -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>21.0.1</version>
     </dependency>
+    <!-- Dependencies for JUnit Jupiter for testing. -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -28,18 +36,22 @@
     </dependency>
   </dependencies>
 
+  <!-- Project's build configuration -->
   <build>
     <plugins>
+      <!-- The maven compiler plugin. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.12.1</version>
       </plugin>
+      <!-- The maven surefire plugin, for running tests. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.3</version>
       </plugin>
+      <!-- The javafx maven plugin, for running the application. -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -55,6 +67,7 @@
           </execution>
         </executions>
       </plugin>
+      <!-- The maven javadoc plugin, for generating javadoc. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
