@@ -23,12 +23,12 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
    * The constructor for the ChaosGameFileHandler class.
    *
    * @param transforms list of transform2D objects representing the transformations.
-   * @param minCoords the minimum coordinates of the plane.
-   * @param maxCoords the maximum coordinates of the plane.
+   * @param minCoords  the minimum coordinates of the plane.
+   * @param maxCoords  the maximum coordinates of the plane.
    */
 
   public ChaosGameFileHandler(List<Transform2D> transforms, Vector2D minCoords,
-      Vector2D maxCoords) {
+                              Vector2D maxCoords) {
     super(transforms, minCoords, maxCoords);
   }
 
@@ -120,7 +120,7 @@ public class ChaosGameFileHandler extends ChaosGameDescription {
    * The writeToFile method write instructions to given file path.
    *
    * @param description of ChaosGame with transform, min and max values
-   * @param path the file path for the file being written to
+   * @param path        the file path for the file being written to
    */
 
   public void writeToFile(ChaosGameDescription description, String path) {

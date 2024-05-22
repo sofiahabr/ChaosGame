@@ -3,6 +3,7 @@ package edu.ntnu.idatt2003.group25.model;
 import edu.ntnu.idatt2003.group25.model.transforms.Transform2D;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Class creating a ChaosGame object.
  */
@@ -17,8 +18,8 @@ public class ChaosGame {
    * Constructor for ChaosGame.
    *
    * @param description all necessary information for the ChaosGame.
-   * @param width int value representing the width of the ChaosGame canvas.
-   * @param height int value representing the height of the ChaosGame canvas.
+   * @param width       int value representing the width of the ChaosGame canvas.
+   * @param height      int value representing the height of the ChaosGame canvas.
    */
 
   public ChaosGame(ChaosGameDescription description, int width, int height) {
@@ -56,7 +57,6 @@ public class ChaosGame {
 
     }
   }
-
   /**
    * Method for accessing the height of the canvas.
    *

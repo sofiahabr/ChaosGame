@@ -8,20 +8,50 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
+/**
+ * JUnit tests for the ChaosGame class.
+
+ */
 class TestChaosGame {
+
+  /**
+   * Test ChaosGameFileHandler object.
+
+   */
   ChaosGameFileHandler fileHandler = new ChaosGameFileHandler(new ArrayList<>(), new Vector2D(0,0), new Vector2D(1,1));
-  ChaosGameDescription description = fileHandler.readFromFile("src/main/resources/AffineTransform");
+  /**
+   * Test ChaosGameDescription object defined from path.
+
+   */
+  ChaosGameDescription description =
+      fileHandler.readFromFile("src/main/resources/AffineTransform");
+  /**
+   * Test ChaosGame object.
+
+
+   */
   ChaosGame test = new ChaosGame(description, 110, 40);
 
+  /**
+   * Constructor for the test class.
+   *
+   * @throws FileNotFoundException if file for affine path is invalid.
+   */
   TestChaosGame() throws FileNotFoundException {
   }
 
+  /**
+   * Test the getCanvas method returns correct values.
+   */
   @Test
   void getCanvas() {
     assertEquals(40, test.getCanvas().getCanvasArray().length);
     assertEquals(110, test.getCanvas().getCanvasArray()[0].length);
   }
 
+  /**
+   * Test the runSteps method returns correct values.
+   */
   @Test
   void runSteps() {
     test.runSteps(100000);

@@ -14,7 +14,7 @@ public class JuliaTransform implements Transform2D {
    * Constructor a JuliaTransform object with a specified point and sign.
    *
    * @param point a complex value representing the point in a complex pane.
-   * @param sign an integer represents the direction of the transformation
+   * @param sign  an integer represents the direction of the transformation
    */
 
   public JuliaTransform(Complex point, int sign) {
@@ -62,5 +62,15 @@ public class JuliaTransform implements Transform2D {
    */
   public Complex getComplex() {
     return point;
+  }
+
+  /**
+   * Gets the sign of the transformation.
+   *
+   * @return an integer representing the sign of the transformation.
+   */
+
+  public int getSign() {
+    return sign;
   }
 }

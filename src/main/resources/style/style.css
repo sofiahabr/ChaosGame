@@ -258,7 +258,6 @@
 .button {
     -fx-background-radius: 10;
     -fx-background-color: #F9F288 ;
-    -fx-min-height: 30;
     -fx-text-fill: black;
     -fx-border-radius: 10;
     -fx-font: 12px "helvetica";
@@ -266,17 +265,16 @@
 }
 .button2 {
     -fx-background-radius: 10;
-    -fx-min-height: 30;
     -fx-text-fill: white;
     -fx-border-radius: 10;
-    -fx-font: 16px "helvetica";
+    -fx-font: 12px "helvetica";
     -fx-font-weight: bold;
 
 }
 .text-field {
     -fx-background-radius: 10;
     -fx-padding: 5 10;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
 }
 .text-field2 {
     -fx-background-radius: 10;
@@ -291,7 +289,6 @@
 }
 .button:hover {
     -fx-background-radius: 10;
-    -fx-min-height: 30;
     -fx-text-fill: darkgrey ;
     -fx-font: 12px "helvetica";
     -fx-font-weight: bold;
@@ -302,25 +299,31 @@
     -fx-fill: white;
     -fx-border-radius: 5;
     -fx-background-color: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
 }
 .text {
-    -fx-font: 14px "Helvetica";
+    -fx-font: 12px "Helvetica";
     -fx-font-weight: bold;
 }
 .label. error {
     -fx-text-fill: red;
-    -fx-font: 12px "helvetica";
-    -fx-font-weight: lighter;
+    -fx-font: 10px "helvetica";
 }
 .heading {
-    -fx-font: 18px "Georgia";
+    -fx-font: 14px "Georgia";
     -fx-font-weight: bold;
 }
 .rectangle {
     -fx-fill: #9CD8DC;
     -fx-border-width: 20;
     -fx-border-radius: 20;
+}
+.scroll-bar {
+    -fx-background-color: #9CD8DC;
+    -fx-fit-to-width: 5;
+}
+.scroll-pane {
+    -fx-background-color: #9CD8DC;
 }
 
 /*.root {*/

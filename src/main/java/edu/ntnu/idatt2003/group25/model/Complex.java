@@ -18,7 +18,7 @@ public class Complex extends Vector2D {
   /**
    * Constructor of complex objects with real and imaginary parts.
    *
-   * @param realPart double realPart illustrates the real part of the complex number.
+   * @param realPart      double realPart illustrates the real part of the complex number.
    * @param imaginaryPart double imaginaryPart illustrates the imaginary part of the complex number.
    */
   public Complex(double realPart, double imaginaryPart) {
@@ -32,10 +32,10 @@ public class Complex extends Vector2D {
    */
 
   public Complex sqrt() {
-    double newRealPart = Math.sqrt(0.5 * (Math.sqrt(Math.pow(getX0(), 2)
-        + Math.pow(getX1(), 2)) + getX0()));
-    double newImaginaryPart = Math.signum(getX1()) * Math.sqrt(0.5
-        * (Math.sqrt(Math.pow(getX0(), 2) + Math.pow(getX1(), 2)) - getX0()));
+    double newRealPart =
+        Math.sqrt(0.5 * (Math.sqrt(Math.pow(getX0(), 2) + Math.pow(getX1(), 2)) + getX0()));
+    double newImaginaryPart = Math.signum(getX1())
+        * Math.sqrt(0.5 * (Math.sqrt(Math.pow(getX0(), 2) + Math.pow(getX1(), 2)) - getX0()));
 
     return new Complex(newRealPart, newImaginaryPart);
   }
@@ -46,7 +46,7 @@ public class Complex extends Vector2D {
    *
    * @param other The Vector2D to be subtracted.
    * @return A new Vector2D representing the difference between this vector
-   *     and the specified vector.
+   * and the specified vector.
    */
   @Override
   public Complex subtract(Vector2D other) {

@@ -3,7 +3,6 @@ package edu.ntnu.idatt2003.group25.model;
 /**
  * The Vector2D class represents a two-dimensional vector with components x0 and x1.
  * It provides methods for basic vector operations such as addition and subtraction.
- *
  */
 
 public class Vector2D {
@@ -130,7 +129,7 @@ public class Vector2D {
 
   @Override
   public String toString() {
-    return  x0 + ", " + x1;
+    return x0 + ", " + x1;
   }
 
   /**

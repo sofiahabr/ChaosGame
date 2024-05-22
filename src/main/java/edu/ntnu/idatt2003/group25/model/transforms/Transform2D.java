@@ -7,6 +7,12 @@ import edu.ntnu.idatt2003.group25.model.Vector2D;
  * C
  */
 public interface Transform2D {
+  /**
+   * Transforms a vector.
+   *
+   * @param point the starting point
+   * @return the transformed vector
+   */
 
   public Vector2D transform(Vector2D point);
 
