@@ -180,22 +180,23 @@ public class FactorialPage extends View {
     Button playButton = new Button("Play");
     playButton.getStyleClass().add("button2");
     addStyle(playButton, "green", buttonWidth);
-    playButton.setOnAction(e -> updateObserver("button clicked", "play"));
+    String buttonClicked = "button clicked";
+    playButton.setOnAction(e -> updateObserver(buttonClicked, "play"));
 
     Button resetButton = new Button("Reset canvas");
     resetButton.getStyleClass().add("button2");
     addStyle(resetButton, "red", buttonWidth);
-    resetButton.setOnAction(e -> updateObserver("button clicked", "reset"));
+    resetButton.setOnAction(e -> updateObserver(buttonClicked, "reset"));
 
     Button saveButton = new Button("Save to file");
     saveButton.getStyleClass().add("button2");
     addStyle(saveButton, "black", buttonWidth);
-    saveButton.setOnAction(e -> updateObserver("button clicked", "save"));
+    saveButton.setOnAction(e -> updateObserver(buttonClicked, "save"));
 
     Button addTransformButton = new Button("Add transform");
     addTransformButton.getStyleClass().add("button2");
     addStyle(addTransformButton, "grey", buttonWidth);
-    addTransformButton.setOnAction(e -> updateObserver("button clicked", "add"));
+    addTransformButton.setOnAction(e -> updateObserver(buttonClicked, "add"));
 
     VBox buttonBox = new VBox(10);
     buttonBox.getChildren()
