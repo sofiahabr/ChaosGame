@@ -9,7 +9,6 @@ import javafx.scene.Node;
 
 /**
  * Abstract class for the different menus in the application.
-
  */
 public abstract class Menu implements ChaosGameSubject {
   /**
@@ -52,7 +51,7 @@ public abstract class Menu implements ChaosGameSubject {
    * controller.
    *
    * @param event The event that has occurred.
-   * @param info Information about the event that has occurred.
+   * @param info  Information about the event that has occurred.
    */
   @Override
   public void updateObserver(String event, String info) {

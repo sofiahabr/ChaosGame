@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * The type Cli.
  */
-public class CLI {
+public class Cli {
   /**
    * The entry point of application.
    *
@@ -100,7 +100,6 @@ public class CLI {
             for (int i = 0; i < screen.length; i++) {
               // Iterate over each column in the current row
               for (int j = 0; j < screen[i].length; j++) {
-//        System.out.print(canvas[i][j] + ", ");
                 // Print the value at the current position in the canvas array
                 if (screen[i][j] == 1) {
                   System.out.print("X");
@@ -111,6 +110,10 @@ public class CLI {
               // Move to the next line after printing each row
               System.out.println();
             }
+            break;
+          default:
+            System.out.println("Invalid input");
+            break;
         }
 
       }

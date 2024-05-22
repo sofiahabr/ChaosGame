@@ -29,16 +29,17 @@ public class MainLogic extends View {
    */
   private final ScreenController screenController = new ScreenController(scene);
   /**
-   * The Initialize page the view representing the .
+   * The Initialize page the view representing the first page of the application.
    */
   private final InitializePage initializePage = new InitializePage(screenController);
   /**
-   * The Factorial page.
+   * The Factorial page, the view representing the page of the
+   * application where the fractal is drawn.
    */
   private final FactorialPage factorialPage = new FactorialPage(screenController);
 
   /**
-   * Start.
+   * The method for starting the application.
    *
    * @param stage the stage
    */

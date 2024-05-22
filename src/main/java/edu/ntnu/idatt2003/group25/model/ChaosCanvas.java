@@ -18,8 +18,8 @@ public class ChaosCanvas {
    * A canvas is set by parameters for "width" and "height" which determine the size of the canvas,
    * and parameter for "maxCoords" and "minCoords" determine scope of the grid on the canvas.
    *
-   * @param width determine the canvas width by number of pixels
-   * @param height determine the canvas height by number of pixels
+   * @param width     determine the canvas width by number of pixels
+   * @param height    determine the canvas height by number of pixels
    * @param minCoords determine the max coordinate for the grid
    * @param maxCoords determine the min coordinate for the grid
    */
@@ -58,7 +58,6 @@ public class ChaosCanvas {
    * Each canvas value represents the color of a specific pixel on the canvas.
    *
    * @param point is the (x,y) coordinate of the pixel being processed.
-   *
    */
   public void putPixel(Vector2D point) {
     Vector2D thisPixel = transformCoordsToIndices.transform(point);
@@ -132,7 +131,6 @@ public class ChaosCanvas {
    * Get method for maximal coordinate.
    *
    * @return the maximum value for coordinates on the grid.
-   *
    */
   public Vector2D getMaxCoords() {
     return maxCoords;
@@ -142,7 +140,6 @@ public class ChaosCanvas {
    * Get method for minimal coordinate.
    *
    * @return the minimal value for coordinates on the grid.
-   *
    */
 
   public Vector2D getMinCoords() {

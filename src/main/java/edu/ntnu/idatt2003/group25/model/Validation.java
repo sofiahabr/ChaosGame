@@ -36,12 +36,12 @@ public class Validation {
       return dummy;
     }
   }
+
   /**
    * The verifyDouble method validate double input or returns dummy values if the input is invalid.
    *
    * @param input The given input from user.
    * @param dummy Provided default which is return if input is not valid.
-   *
    * @return The input parsed to double or dummy value.
    */
 

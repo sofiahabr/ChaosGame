@@ -46,7 +46,6 @@ public class InitializePage extends View {
     topMenu.setUp();
     initPane.setTop(topMenu.getMenu());
 
-
     Rectangle box = new Rectangle(MainLogic.width * 0.6, MainLogic.height * 0.6);
     box.getStyleClass().add("rectangle");
 
@@ -65,7 +64,7 @@ public class InitializePage extends View {
 
     optionBox.setMinSize(180, 30);
 
-    Button startButton  = new Button("Start Game");
+    Button startButton = new Button("Start Game");
     startButton.setOnAction(e -> {
       if (optionBox.getValue() == null) {
         optionBox.setPromptText("Please choose a transform");
@@ -79,6 +78,7 @@ public class InitializePage extends View {
     infoArea.setAlignment(Pos.CENTER);
 
     StackPane infoBoxBackground = new StackPane();
+
     infoBoxBackground.getChildren().addAll(box, infoArea);
     infoBoxBackground.setAlignment(Pos.CENTER);
 

@@ -154,7 +154,6 @@ public class FactorialPage extends View {
     inputFieldStyle(inputSteps, "Ex. 500...", buttonHeight, buttonWidth);
 
 
-
     stepsErrorLabel = new Label();
     stepsErrorLabel.setMinHeight(buttonHeight * 1.3);
     stepsErrorLabel.getStyleClass().add("error");
@@ -218,12 +217,12 @@ public class FactorialPage extends View {
   }
 
   /**
-   *  Sets the style of the input field.
+   * Sets the style of the input field.
    *
    * @param inputField The input field to be styled.
    * @param promptText The prompt text of the input field.
-   * @param height The height of the input field.
-   * @param width The width of the input field.
+   * @param height     The height of the input field.
+   * @param width      The width of the input field.
    */
   public void inputFieldStyle(TextField inputField, String promptText, int height, int width) {
     inputField.setMinHeight(height);
@@ -235,8 +234,8 @@ public class FactorialPage extends View {
    * Adds style to a button.
    *
    * @param button The button to be styled.
-   * @param color The color of the button.
-   * @param width The width of the button.
+   * @param color  The color of the button.
+   * @param width  The width of the button.
    */
   public void addStyle(Button button, String color, int width) {
     String colorInit = "-fx-background-color: " + color + ";";
@@ -271,7 +270,7 @@ public class FactorialPage extends View {
    * Shows an error message.
    *
    * @param placement The placement of the error message.
-   * @param message The error message.
+   * @param message   The error message.
    */
   public void showError(String placement, String message) {
     errorMap.put(placement, message);
@@ -306,7 +305,7 @@ public class FactorialPage extends View {
 
   /**
    * Resets the canvas of the application.
-  */
+   */
   public void reset() {
     GraphicsContext gc = pixelCanvas.getGraphicsContext2D();
     gc.clearRect(0, 0, pixelCanvas.getWidth(), pixelCanvas.getHeight());

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Class for ChaosGameDescription, which represents all necessary information for the ChaosGame.
-  */
+ */
 public class ChaosGameDescription {
 
   private Vector2D minCoords;
@@ -16,11 +16,11 @@ public class ChaosGameDescription {
    * Constructs a ChaosGameDescription object with specified transformation and coordinate bounds.
    *
    * @param transforms List of Transform2D objects representing the transformations used.
-   * @param maxCoords Vector2D object representing the maximum coordinate bounds.
-   * @param minCoords Vector2D object representing the minimum coordinate bounds.
+   * @param maxCoords  Vector2D object representing the maximum coordinate bounds.
+   * @param minCoords  Vector2D object representing the minimum coordinate bounds.
    */
   public ChaosGameDescription(List<Transform2D> transforms, Vector2D minCoords,
-      Vector2D maxCoords) {
+                              Vector2D maxCoords) {
     this.transforms = transforms;
     this.minCoords = minCoords;
     this.maxCoords = maxCoords;
@@ -34,6 +34,7 @@ public class ChaosGameDescription {
   public List<Transform2D> getTransforms() {
     return transforms;
   }
+
   /**
    * Returns the maximum coordinate bounds.
    *
