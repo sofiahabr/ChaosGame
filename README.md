@@ -4,13 +4,14 @@ Student IDs:
 - Johanne Fixdal: 10020
 - Sofia Håbrekke: 10039
 
-## Description 
-
-When iterating through a list of transformations and mapping their end point, the results are sometimes geometrical figures that can be dispalyed on the screen. In this chaos game it is possible to map these figures on a screen, and make personal adjustments to the fractal displayed. 
-
 ## Background 
 
 This product is a result of the semester project given to the students in BIDATA at NTNU, for the course IDATT2003. The project involves developing an application with a graphical user interface using Java and javafx. 
+
+
+## Description 
+
+This application is a chaos game, a game that iterates through a list of transformtions to create geometrical figures. When mapping transformations' end point, the results are geometrical figures that can be dispalyed on the screen. In this chaos game it is possible to map these figures on a screen, and make personal adjustments to the fractal displayed. 
 
 ## Link to repository
 https://gitlab.stud.idi.ntnu.no/idatt2003.2024.group25/chaosgames
@@ -23,7 +24,7 @@ https://gitlab.stud.idi.ntnu.no/idatt2003.2024.group25/chaosgames
 
 ## To run the tests: 
 - Open the project in your IDE (ex. IntelliJ or Visual Studio Code)
-- In the terminal write the command: ¨
+- In the terminal write the command: 
 
     mvn test 
 
