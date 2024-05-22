@@ -18,15 +18,11 @@ https://gitlab.stud.idi.ntnu.no/idatt2003.2024.group25/chaosgames
 
 ## To run the project: 
 - Open the project in your IDE (ex. IntelliJ or Visual Studio Code)
-- In the terminal write the command: 
-
-    mvn javafx:run
+- In the terminal write the command: mvn javafx:run
 
 ## To run the tests: 
 - Open the project in your IDE (ex. IntelliJ or Visual Studio Code)
-- In the terminal write the command: 
-
-    mvn test 
+- In the terminal write the command: mvn test 
 
 ## Project Structure
 ### src: the package contaning the source code of the implementation. 
