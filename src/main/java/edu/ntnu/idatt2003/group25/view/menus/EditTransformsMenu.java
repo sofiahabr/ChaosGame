@@ -61,6 +61,10 @@ public class EditTransformsMenu extends Menu {
    * List of TextField objects representing the min/max input fields.
    */
   private final List<TextField> minMaxFields = new ArrayList<>();
+/**
+   * String used in method updateObserver to identify the input.
+   */
+  String vectorInputString = "vector input";
 
   /**
    * Constructs an EditTransformsMenu object with specified screenController and FactorialPage.
@@ -176,11 +180,10 @@ public class EditTransformsMenu extends Menu {
       inputFieldStyle(b, Double.toString(affine.getVector().getX1()), buttonHeight,
           buttonWidth / 2);
 
-
       b.setOnKeyTyped(
-          e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
+          e -> updateObserver(vectorInputString, a.getText() + ", " + b.getText()));
       a.setOnKeyTyped(
-          e -> updateObserver("vector input", a.getText() + ", " + b.getText()));
+          e -> updateObserver(vectorInputString, a.getText() + ", " + b.getText()));
 
       vectorTextFields.add(a);
       vectorTextFields.add(b);
@@ -200,9 +203,9 @@ public class EditTransformsMenu extends Menu {
       inputFieldStyle(c1, Double.toString(julia.getComplex().getX1()), buttonHeight,
           buttonWidth / 2 - 5);
 
-      c0.setOnKeyTyped(e -> updateObserver("vector input",
+      c0.setOnKeyTyped(e -> updateObserver(vectorInputString,
           c0.getText() + ", " + c1.getText()));
-      c1.setOnKeyTyped(e -> updateObserver("vector input",
+      c1.setOnKeyTyped(e -> updateObserver(vectorInputString,
           c0.getText() + ", " + c1.getText()));
 
       vectorTextFields.add(c0);
