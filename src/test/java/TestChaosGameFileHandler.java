@@ -12,15 +12,34 @@ import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+/**
+ * JUnit tests for the ChaosGameFileHandler class.
+
+ */
 class TestChaosGameFileHandler {
 
+  /**
+   * Path for test file containing Affine2D transformations values.
+   */
+
   private final String path = "src/test/java/TestAffine2D";
+  /**
+   * List of Affine2D transformations.
+   */
   private final List<Transform2D> transform2DList = new ArrayList<>();
+  /**
+   * Vector2D's for min and max coordinates.
+   */
   private final Vector2D vectorMin = new Vector2D(1,1);
   private final Vector2D vectorMax = new Vector2D(10,10);
-  private final ChaosGameDescription description = new ChaosGameDescription(transform2DList,vectorMin,vectorMax);
+  /**
+   * ChaosGameFileHandler object.
+   */
   ChaosGameFileHandler fileHandler = new ChaosGameFileHandler(transform2DList,vectorMin,vectorMax);
 
+  /**
+   * Test the readFromFile method returns correct values.
+   */
   @Test
   void testReadFromFileAddTransformation() {
     try {
@@ -32,13 +51,23 @@ class TestChaosGameFileHandler {
       throw new RuntimeException(e);
     }
   }
+  /**
+   * Test the readFromFile method throws FileNotFoundException when path is invalid.
+   */
   @Test
-  void testReadFromFileThrowsExceptions() throws FileNotFoundException {
+  void testReadFromFileThrowsExceptions() {
     String invalidFilePath = "invalid file path";
     assertThrows(FileNotFoundException.class, () -> {fileHandler.readFromFile( invalidFilePath);});
     }
+
+  /**
+   * Nested class for testing the instructionForFile method of ChaosGameFileHandler.
+   */
   @Nested
   class testInstructionsForFile {
+    /**
+     * Test the instructionForFile method returns correct values.
+     */
     @Test
     void testAffine2DValuesAreInArray() throws FileNotFoundException {
       ChaosGameDescription readDescription = fileHandler.readFromFile(path);

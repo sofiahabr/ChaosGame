@@ -21,14 +21,14 @@ public class TestVector2D {
      * Test for getX0 method.
      */
     @Test
-    public void testGetX0ReturnCorrect() {
+    void testGetX0ReturnCorrect() {
       assertEquals(1, testVector.getX0());
     }
     /**
      * Test for getX1 method.
      */
     @Test
-    public void testGetX1ReturnCorrect() {
+    void testGetX1ReturnCorrect() {
       assertEquals(2, testVector.getX1());
     }
   }
@@ -42,7 +42,7 @@ public class TestVector2D {
      * Test for setX0 method.
      */
     @Test
-    public void testSetX0ReturnCorrect() {
+    void testSetX0ReturnCorrect() {
       testVector.setX0(1);
       assertEquals(1, testVector.getX0());
     }
@@ -50,7 +50,7 @@ public class TestVector2D {
      * Test for setX1 method.
      */
     @Test
-    public void testSetX1ReturnCorrect() {
+    void testSetX1ReturnCorrect() {
       testVector.setX1(2);
       assertEquals(2, testVector.getX1());
     }
@@ -86,7 +86,7 @@ public class TestVector2D {
      * Test for subtract method.
      */
     @Test
-    public void testSubtract(){
+    void testSubtract(){
       assertEquals(-3.0, testVector.subtract(testVector2).getX0());
       assertEquals(1.0, testVector.subtract(testVector2).getX1());
     }
@@ -108,6 +108,10 @@ public class TestVector2D {
       assertEquals(2.0, testVector.scale(scale).getX0());
       assertEquals(4.0, testVector.scale(scale).getX1());
     }
+
+    /**
+     * Test that equals returns true when comparing two equal vectors.
+     */
     @Test
     void testEqualsReturnsTrue() {
       Vector2D vectorOriginal = new Vector2D(1,2);
@@ -115,6 +119,9 @@ public class TestVector2D {
       assertTrue(vectorOriginal.isEqual(duplicateVector));
     }
 
+    /**
+     * Test that equals returns false when comparing two different vectors.
+     */
     @Test
     void testEqualsReturnFalse() {
       Vector2D vectorOriginal = new Vector2D(1,2);
