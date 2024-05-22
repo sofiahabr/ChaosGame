@@ -1,9 +1,8 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model;
 
 /**
  * The Vector2D class represents a two-dimensional vector with components x0 and x1.
  * It provides methods for basic vector operations such as addition and subtraction.
- *
  */
 
 public class Vector2D {
@@ -23,7 +22,7 @@ public class Vector2D {
    * @param x0 The x0 component of the vector.
    * @param x1 The x1 component of the vector.
    */
-  public Vector2D(double x0, double x1){
+  public Vector2D(double x0, double x1) {
     this.x0 = x0;
     this.x1 = x1;
   }
@@ -33,15 +32,16 @@ public class Vector2D {
    *
    * @return The x0 component of the vector.
    */
-  public double getX0(){
+  public double getX0() {
     return x0;
   }
+
   /**
    * Gets the x1 component of the vector.
    *
    * @return The x1 component of the vector.
    */
-  public double getX1(){
+  public double getX1() {
     return x1;
   }
 
@@ -50,7 +50,7 @@ public class Vector2D {
    *
    * @param newX0 is the new value of the component
    */
-  public void setX0(double newX0){
+  public void setX0(double newX0) {
     this.x0 = newX0;
   }
 
@@ -70,19 +70,20 @@ public class Vector2D {
    * @param other The Vector2D to be added.
    * @return A new Vector2D representing the sum of this vector and the specified vector.
    */
-  public Vector2D add(Vector2D other){
+  public Vector2D add(Vector2D other) {
     double newX0 = x0 + other.getX0();
     double newX1 = x1 + other.getX1();
 
     return new Vector2D(newX0, newX1);
   }
+
   /**
    * Subtracts another Vector2D from this vector and returns the result as a new Vector2D.
    *
    * @param other The Vector2D to be subtracted.
-   * @return A new Vector2D representing the difference between this vector and the specified vector.
+   * @return A new Vector2D representing the difference between this vector and the specified vector
    */
-  public Vector2D subtract(Vector2D other){
+  public Vector2D subtract(Vector2D other) {
     double newX0 = x0 - other.getX0();
     double newX1 = x1 - other.getX1();
 
@@ -96,7 +97,7 @@ public class Vector2D {
    * @return A new Vector2D multiplied to scale.
    */
 
-  public Vector2D scale(double scale){
+  public Vector2D scale(double scale) {
     double newX0 = x0 * scale;
     double newX1 = x1 * scale;
 
@@ -117,14 +118,26 @@ public class Vector2D {
     double newX0 = Math.round(x0 * 1000);
     double newX1 = Math.round(x1 * 1000);
 
-    return new Vector2D(newX0/1000, newX1/1000);
+    return new Vector2D(newX0 / 1000, newX1 / 1000);
   }
+
+  /**
+   * Returns a string representation of the vector.
+   *
+   * @return A string representation of the vector.
+   */
 
   @Override
   public String toString() {
-    return "(" + x0 + ", " + x1 + ")";
+    return x0 + ", " + x1;
   }
 
+  /**
+   * Checks if two vectors are equal.
+   *
+   * @param vector2 The vector to be compared with.
+   * @return True if the vectors are equal, false if they are not.
+   */
   public boolean isEqual(Vector2D vector2) {
 
     double vector1X0 = this.getX0();

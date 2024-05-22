@@ -1,4 +1,7 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.model.transforms;
+
+import edu.ntnu.idatt2003.group25.model.Matrix2x2;
+import edu.ntnu.idatt2003.group25.model.Vector2D;
 
 /**
  * The type Affine transform 2 d.
@@ -44,9 +47,15 @@ public class AffineTransform2D implements Transform2D {
     return matrix.multiply(point).add(vector);
   }
 
+  /**
+   * ToString for affine 2 d.
+   *
+   * @return String with values of matrix and vector seperated with comma
+   */
   @Override
   public String toString() {
     return matrix.toString() + " , " + vector.getX0() + ", " + vector.getX1();
   }
+
 }
 

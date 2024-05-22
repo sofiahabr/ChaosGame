@@ -1,0 +1,5 @@
+Affine2D # Type of transform
+25.0, 25.0 # Lower left
+75.0, 125.0 # Upper right
+1.0, 0.0, 0.0, 1.0 , 1.0, 2.0 # 1 transform (a00, a01, a10, a11, b0, b1)
+2.0, 3.0, 4.0, 1.0 , 1.0, 2.0 # 2 transform (a00, a01, a10, a11, b0, b1)
