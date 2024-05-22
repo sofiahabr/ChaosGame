@@ -13,10 +13,11 @@ public abstract class View implements ChaosGameSubject {
   /**
    * The Observers, a list of observers that observes the view.
    */
-  private List<ChaosGameObserver> observers = new ArrayList<>();
+  private final List<ChaosGameObserver> observers = new ArrayList<>();
 
   /**
    * The method that adds an observer to the view.
+   *
    * @param observer the observer that is to be added.
    */
   @Override
