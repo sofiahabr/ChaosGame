@@ -40,7 +40,7 @@ public abstract class View implements ChaosGameSubject {
    * The method that updates the observers of the view.
    *
    * @param event the event that has happened.
-   * @param info the information that is to be sent to the observers
+   * @param info  the information that is to be sent to the observers
    */
 
   @Override

@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2003.group25.controller;
 
-import edu.ntnu.idatt2003.group25.model.ChaosGame;
 import edu.ntnu.idatt2003.group25.model.ChaosGameDescription;
 import edu.ntnu.idatt2003.group25.model.ChaosGameFileHandler;
 import edu.ntnu.idatt2003.group25.model.Complex;
@@ -75,7 +74,8 @@ public class FactorialPageController extends Controller {
 
   /**
    * The FactorialPageController takes in instances of ScreenController and FactorialPage.
-   * The FactorialPageController is responsible for handling the user input and updating the FactorialPage.
+   * The FactorialPageController is responsible for handling the user input
+   * and updating the FactorialPage.
    *
    * @param screenController the screen controller
    * @param factorialPage    the factorial page
@@ -91,7 +91,7 @@ public class FactorialPageController extends Controller {
    * The method is called when the user interacts with the view.
    *
    * @param event the action / event the user has done
-   * @param info the information linked to the event
+   * @param info  the information linked to the event
    */
 
   @Override
@@ -99,6 +99,7 @@ public class FactorialPageController extends Controller {
     switch (event) {
       case "button clicked" -> buttonClicked(info);
       case "register steps" -> steps = handleInputSteps(info);
+      default -> { }
     }
   }
 
@@ -117,6 +118,7 @@ public class FactorialPageController extends Controller {
       case "reset" -> resetAction();
       case "save" -> saveAction();
       case "edit" -> new EditTransformsMenu(screenController, factorialPage);
+      default -> { }
     }
   }
 

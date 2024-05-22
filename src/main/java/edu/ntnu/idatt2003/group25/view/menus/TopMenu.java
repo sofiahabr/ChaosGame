@@ -103,25 +103,25 @@ public class TopMenu extends Menu {
     infoText = new Text("""
         START GAME:
         Select a fractal and press the yellow start button
-        
+                
         TO PLAY:
         Choose nr of iterations and click the green play button
-        
+                
         TO SAVE:
         Click the save button and choose a file
-        
+                
         TO ADD TRANSFORMS:
         Press the add button and enter values in the text fields
-        
+                
         TO EDIT:
         Change values in the text fields and click the edit button
-        
+                
         TO RESET SCREEN:
         Click the reset canvas button
-        
+                
         TO CHANGE FRACTAL:
         Click the home button and choose new fractal
-        
+                
         TO EXIT:
         Click the X button""");
     return infoText;

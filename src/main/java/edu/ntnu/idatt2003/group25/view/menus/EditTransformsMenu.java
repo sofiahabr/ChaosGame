@@ -66,8 +66,8 @@ public class EditTransformsMenu extends Menu {
    * Constructs an EditTransformsMenu object with specified screenController and FactorialPage.
    *
    * @param screenController ScreenController object representing the controller for the page.
-   * @param factorialPage FactorialPage object representing the page where the transforms
-   *                      are edited.
+   * @param factorialPage    FactorialPage object representing the page where the transforms
+   *                         are edited.
    */
   public EditTransformsMenu(ScreenController screenController, FactorialPage factorialPage) {
     super(screenController);
@@ -148,11 +148,11 @@ public class EditTransformsMenu extends Menu {
     minBox.getChildren().addAll(minTitle, minArea);
     maxBox.getChildren().addAll(maxTitle, maxArea);
 
-    HBox hBox = new HBox(20);
-    hBox.getChildren().addAll(minBox, maxBox);
-    hBox.setAlignment(Pos.CENTER);
+    HBox minMaxBox = new HBox(20);
+    minMaxBox.getChildren().addAll(minBox, maxBox);
+    minMaxBox.setAlignment(Pos.CENTER);
 
-    return new VBox(hBox);
+    return new VBox(minMaxBox);
   }
 
   /**
@@ -297,7 +297,6 @@ public class EditTransformsMenu extends Menu {
     descriptions.getStyleClass().add("vbox");
 
 
-
     factorialPage.getDescription().getTransforms().forEach(transform -> {
       if (transform instanceof AffineTransform2D affine) {
 
@@ -306,7 +305,7 @@ public class EditTransformsMenu extends Menu {
 
 
         VBox affineArea = new VBox(5);
-        affineArea.getChildren().addAll(vector,  matrix);
+        affineArea.getChildren().addAll(vector, matrix);
         descriptions.getChildren().add(affineArea);
 
       }
@@ -391,8 +390,8 @@ public class EditTransformsMenu extends Menu {
   /**
    * Gets the input from the input fields and appends it to the StringBuilder objects.
    *
-   * @param vectors StringBuilder object representing the vector input.
-   * @param matrix StringBuilder object representing the matrix input.
+   * @param vectors          StringBuilder object representing the vector input.
+   * @param matrix           StringBuilder object representing the matrix input.
    * @param vectorTextFields List of TextField objects representing the vector input fields.
    * @param matrixTextFields List of TextField objects representing the matrix input fields.
    */
@@ -412,9 +411,9 @@ public class EditTransformsMenu extends Menu {
    * Sets the style of the input fields.
    *
    * @param inputField TextField object representing the input field.
-   * @param text String representing the text in the input field.
-   * @param height int representing the height of the input field.
-   * @param width int representing the width of the input field.
+   * @param text       String representing the text in the input field.
+   * @param height     int representing the height of the input field.
+   * @param width      int representing the width of the input field.
    */
   public void inputFieldStyle(TextField inputField, String text, int height, int width) {
     inputField.setMinHeight(height);
@@ -435,7 +434,7 @@ public class EditTransformsMenu extends Menu {
   /**
    * Updates the error label with the error message.
    *
-   * @param key String representing the placement of the error message.
+   * @param key   String representing the placement of the error message.
    * @param label Label object representing the error label.
    */
   private void updateErrorLabel(String key, Label label) {
@@ -447,7 +446,7 @@ public class EditTransformsMenu extends Menu {
    * Shows an error message in the error label.
    *
    * @param placement String representing the placement of the error message.
-   * @param message String representing the error message.
+   * @param message   String representing the error message.
    */
 
   public void showError(String placement, String message) {

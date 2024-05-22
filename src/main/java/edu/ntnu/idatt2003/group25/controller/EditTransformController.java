@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Edit transform controller, the controller that gets information from, and controls the edit transforms- menu.
+ * The type Edit transform controller, the controller that gets information from,
+ *  and controls the edit transforms menu.
  */
 public class EditTransformController extends Controller {
   /**
@@ -80,6 +81,7 @@ public class EditTransformController extends Controller {
       case "sign input" -> handleSignInput("InputSign", info, "Sign");
       case "matrix input" -> handleInputMatrix("InputMatrix", info, "Matrix's");
       case "vector input" -> handleInputVector("InputVector", info, "Vectors");
+      default -> { }
     }
   }
 
@@ -157,15 +159,15 @@ public class EditTransformController extends Controller {
         new Vector2D(Validation.verifyDouble(minMax[0], 0), Validation.verifyDouble(minMax[1], 0)),
         new Vector2D(Validation.verifyDouble(minMax[2], 0), Validation.verifyDouble(minMax[3], 0)));
 
-    if (factorialPage.getGameType().equals("Affine Transform") &&
-        matrixInDescription.size() == vectorsInDescription.size()) {
+    if (factorialPage.getGameType().equals("Affine Transform")
+        && matrixInDescription.size() == vectorsInDescription.size()) {
       for (int i = 0; i < matrixInDescription.size(); i++) {
         transforms.add(
             new AffineTransform2D(matrixInDescription.get(i), vectorsInDescription.get(i)));
       }
     }
-    if (factorialPage.getGameType().equals("Julia Transform") &&
-        vectorsInDescription.size() == signInput.size()) {
+    if (factorialPage.getGameType().equals("Julia Transform")
+        && vectorsInDescription.size() == signInput.size()) {
       for (int i = 0; i < vectorsInDescription.size(); i++) {
         transforms.add(new JuliaTransform(
             new Complex(vectorsInDescription.get(i).getX0(), vectorsInDescription.get(i).getX1()),
@@ -179,7 +181,8 @@ public class EditTransformController extends Controller {
   /**
    * The method for handling input in a vector text field.
    * The method splits the input string into 2 strings, the x0 and x1 values.
-   * The method checks if the input is a valid number, and if not, sends an error message to the view.
+   * The method checks if the input is a valid number, and if not,
+   *  it sends an error message to the view.
    *
    * @param key  the key for accessing the error message in the errorMap.
    * @param info the info the user has inputted.
@@ -199,9 +202,10 @@ public class EditTransformController extends Controller {
 
   /**
    * The method for handling input in a sign text field.
-   * The method checks if the input is a valid number, and if not, sends an error message to the view.
+   * The method checks if the input is a valid number, and if not,
+   *  sends an error message to the view.
    *
-   * @param key the key for accessing the error message in the errorMap.
+   * @param key  the key for accessing the error message in the errorMap.
    * @param info the info the user has inputted.
    * @param name the name of the input field.
    */
@@ -218,7 +222,8 @@ public class EditTransformController extends Controller {
   /**
    * The method for handling input in a matrix text field.
    * The method splits the input string into 4 strings, the a00, a01, a10 and a11 values.
-   * The method checks if the input is a valid number, and if not, sends an error message to the view.
+   * The method checks if the input is a valid number, and if not,
+   *  sends an error message to the view.
    *
    * @param key  the key for accessing the error message in the errorMap.
    * @param info the info the user has inputted.
@@ -232,8 +237,10 @@ public class EditTransformController extends Controller {
         Validation.verifyDouble(values[2], defaultValue),
         Validation.verifyDouble(values[3], defaultValue));
 
-    if (matrix2x2.getA00() == defaultValue || matrix2x2.getA01() == defaultValue ||
-        matrix2x2.getA10() == defaultValue || matrix2x2.getA11() == defaultValue) {
+    if (matrix2x2.getA00() == defaultValue
+        || matrix2x2.getA01() == defaultValue
+        || matrix2x2.getA10() == defaultValue
+        || matrix2x2.getA11() == defaultValue) {
       editTransformsMenu.showError(key, name + invalidNumber);
     } else {
       editTransformsMenu.showError(key, "");

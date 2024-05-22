@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2003.group25;
+package edu.ntnu.idatt2003.group25.view;
 
-import edu.ntnu.idatt2003.group25.view.MainLogic;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
